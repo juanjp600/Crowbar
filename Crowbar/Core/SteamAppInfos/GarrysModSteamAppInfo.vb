@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Web.Script.Serialization
+Imports BackwardsCompatibility
 Imports Steamworks
 
 Public Class GarrysModSteamAppInfo

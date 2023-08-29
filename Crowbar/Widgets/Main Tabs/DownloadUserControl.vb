@@ -7,6 +7,7 @@ Imports System.Net
 Imports System.Text
 Imports System.Web
 Imports System.Web.Script.Serialization
+Imports BackwardsCompatibility
 
 Public Class DownloadUserControl
 

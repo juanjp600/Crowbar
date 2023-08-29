@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Net
 Imports System.Web.Script.Serialization
 Imports System.Xml
+Imports BackwardsCompatibility
 
 Public Class Updater
 
