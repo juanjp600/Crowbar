@@ -21,13 +21,13 @@ Public Class PatchUserControl
 		Me.UpdateWidgets(False)
 
 		AddHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
-		AddHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+		AddHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 	End Sub
 
 	' Do not need Free() because this widget is destroyed only on program exit.
 	'Protected Overrides Sub Free()
 	'	RemoveHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
-	'	RemoveHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+	'	RemoveHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 
 	'	Me.MdlPathFileNameTextBox.DataBindings.Clear()
 	'End Sub

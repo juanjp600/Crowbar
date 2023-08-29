@@ -51,8 +51,8 @@ Public Class PackUserControl
 		AddHandler TheApp.Packer.ProgressChanged, AddressOf Me.PackerBackgroundWorker_ProgressChanged
 		AddHandler TheApp.Packer.RunWorkerCompleted, AddressOf Me.PackerBackgroundWorker_RunWorkerCompleted
 
-		AddHandler Me.InputPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePath
-		AddHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+		AddHandler Me.InputPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePath
+		AddHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 	End Sub
 
 	Private Sub InitOutputPathComboBox()
@@ -92,8 +92,8 @@ Public Class PackUserControl
 
 	' Do not need Free() because this widget is destroyed only on program exit.
 	'Protected Overrides Sub Free()
-	'	RemoveHandler Me.InputPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePath
-	'	RemoveHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+	'	RemoveHandler Me.InputPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePath
+	'	RemoveHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 	'	RemoveHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
 	'	RemoveHandler TheApp.Packer.ProgressChanged, AddressOf Me.PackerBackgroundWorker_ProgressChanged
 	'	RemoveHandler TheApp.Packer.RunWorkerCompleted, AddressOf Me.PackerBackgroundWorker_RunWorkerCompleted

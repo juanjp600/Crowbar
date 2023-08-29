@@ -1,6 +1,6 @@
 Imports System.ComponentModel
 
-Class PropertyComparer(Of TKey)
+Public Class PropertyComparer(Of TKey)
 	Inherits System.Collections.Generic.Comparer(Of TKey)
 
 	Private _property As PropertyDescriptor

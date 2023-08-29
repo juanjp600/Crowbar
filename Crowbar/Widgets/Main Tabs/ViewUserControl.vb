@@ -32,7 +32,7 @@ Public Class ViewUserControl
 
 		''RemoveHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf Me.ParsePathFileName
 		'If Me.MdlPathFileNameTextBox.DataBindings("Text") IsNot Nothing Then
-		'	RemoveHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+		'	RemoveHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 		'End If
 		'Me.MdlPathFileNameTextBox.DataBindings.Clear()
 
@@ -426,7 +426,7 @@ Public Class ViewUserControl
 
 		Me.MdlPathFileNameTextBox.DataBindings.Add("Text", TheApp.Settings, Me.NameOfAppSettingMdlPathFileName, False, DataSourceUpdateMode.OnValidation)
 		'AddHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf Me.ParsePathFileName
-		AddHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+		AddHandler Me.MdlPathFileNameTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 
 		'NOTE: Prevent changing this combobox's SelectedIndex when another combobox's (which also accesses "SelectedIndex" and TheApp.Settings) SelectedIndex changes.
 		Me.GameSetupComboBox.BindingContext = New BindingContext()

@@ -38,7 +38,7 @@ Public Class DownloadUserControl
 
 		Me.theBackgroundSteamPipe = New BackgroundSteamPipe()
 
-		AddHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+		AddHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 
 		AddHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
 	End Sub
@@ -51,7 +51,7 @@ Public Class DownloadUserControl
 			Me.theBackgroundSteamPipe.Kill()
 		End If
 
-		'RemoveHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+		'RemoveHandler Me.OutputPathTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 
 		'RemoveHandler TheApp.Settings.PropertyChanged, AddressOf AppSettings_PropertyChanged
 

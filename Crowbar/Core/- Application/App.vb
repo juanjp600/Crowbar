@@ -11,11 +11,6 @@ Public Class App
 	Public Sub New()
 		Me.IsDisposed = False
 
-		'NOTE: To use a particular culture's NumberFormat that doesn't change with user settings, 
-		'      must use this constructor with False as second param.
-		Me.theInternalCultureInfo = New CultureInfo("en-US", False)
-		Me.theInternalNumberFormat = Me.theInternalCultureInfo.NumberFormat
-
 		Me.theSmdFilesWritten = New List(Of String)()
 	End Sub
 
@@ -144,18 +139,6 @@ Public Class App
 	'		Me.theModelRelativePathFileName = value
 	'	End Set
 	'End Property
-
-	Public ReadOnly Property InternalCultureInfo() As CultureInfo
-		Get
-			Return Me.theInternalCultureInfo
-		End Get
-	End Property
-
-	Public ReadOnly Property InternalNumberFormat() As NumberFormatInfo
-		Get
-			Return Me.theInternalNumberFormat
-		End Get
-	End Property
 
 	Public Property SmdFileNames() As List(Of String)
 		Get
@@ -445,9 +428,6 @@ Public Class App
 #Region "Data"
 
 	Private IsDisposed As Boolean
-
-	Private theInternalCultureInfo As CultureInfo
-	Private theInternalNumberFormat As NumberFormatInfo
 
 	Private theSettings As AppSettings
 	'NOTE: Use slash at start to avoid confusing with a pathFileName that Windows Explorer might use with auto-open.

@@ -27,16 +27,16 @@ Public Class UpdateUserControl
 		Me.UpdateFolderTextBox.DataBindings.Add("Text", TheApp.Settings, "UpdateUpdateDownloadPath", False, DataSourceUpdateMode.OnValidation)
 		Me.UpdateCopySettingsCheckBox.DataBindings.Add("Checked", TheApp.Settings, "UpdateCopySettingsIsChecked", False, DataSourceUpdateMode.OnPropertyChanged)
 
-		AddHandler Me.DownloadFolderTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
-		AddHandler Me.UpdateFolderTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+		AddHandler Me.DownloadFolderTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
+		AddHandler Me.UpdateFolderTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 
 		Me.CurrentVersionLabel.Text = "Current Version: " + My.Application.Info.Version.ToString(2)
 	End Sub
 
 	' Do not need Free() because this widget is destroyed only on program exit.
 	'Protected Overrides Sub Free()
-	'	RemoveHandler Me.DownloadFolderTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
-	'	RemoveHandler Me.UpdateFolderTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
+	'	RemoveHandler Me.DownloadFolderTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
+	'	RemoveHandler Me.UpdateFolderTextBox.DataBindings("Text").Parse, AddressOf FileManagerEvents.ParsePathFileName
 
 	'	Me.DownloadFolderTextBox.DataBindings.Clear()
 
