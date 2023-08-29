@@ -4,11 +4,11 @@ Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Xml.Serialization
 
-Public Class FileManager
+Public Module FileManager
 
 #Region "Read Methods"
 
-	Public Shared Function ReadNullTerminatedString(ByVal inputFileReader As BinaryReader) As String
+	Public Function ReadNullTerminatedString(ByVal inputFileReader As BinaryReader) As String
 		Dim text As New StringBuilder()
 		text.Length = 0
 		While inputFileReader.PeekChar() > 0
@@ -19,7 +19,7 @@ Public Class FileManager
 		Return text.ToString()
 	End Function
 
-	Public Shared Function ReadNullTerminatedString(ByVal inputFileReader As BufferedBinaryReader) As String
+	Public Function ReadNullTerminatedString(ByVal inputFileReader As BufferedBinaryReader) As String
 		Dim text As New StringBuilder()
 		text.Length = 0
 		Dim aCharacter As Char
@@ -85,7 +85,7 @@ Public Class FileManager
 	'	Return False
 	'End Function
 
-	'Public Shared Function ReadKeyValueLine(ByVal inputFileReader As BinaryReader, ByRef oKey As String, ByRef oValue As String) As Boolean
+	'Public Function ReadKeyValueLine(ByVal inputFileReader As BinaryReader, ByRef oKey As String, ByRef oValue As String) As Boolean
 	'	Dim line As String
 	'	Dim delimiters As Char() = {""""c, " "c, CChar(vbTab)}
 	'	Dim tokens As String() = {""}
@@ -107,7 +107,7 @@ Public Class FileManager
 	'	Return False
 	'End Function
 
-	Public Shared Function ReadKeyValueLine(ByVal inputFileReader As BinaryReader, ByRef oKey As String, ByRef oValue As String) As Boolean
+	Public Function ReadKeyValueLine(ByVal inputFileReader As BinaryReader, ByRef oKey As String, ByRef oValue As String) As Boolean
 		Dim line As String
 		Dim delimiters As Char() = {""""c}
 		Dim tokens As String() = {""}
@@ -216,7 +216,7 @@ Public Class FileManager
 	'	s_pTokenBuf[ nCount ] = 0;
 	'	return s_pTokenBuf;
 	'}
-	Public Shared Function ReadKeyValueToken(ByRef buffer As String) As String
+	Public Function ReadKeyValueToken(ByRef buffer As String) As String
 		Dim token As String
 
 		Do
@@ -265,7 +265,7 @@ Public Class FileManager
 		Return token
 	End Function
 
-	Public Shared Function ReadTextLine(ByVal inputFileReader As BinaryReader) As String
+	Public Function ReadTextLine(ByVal inputFileReader As BinaryReader) As String
 		Dim line As New StringBuilder()
 		Dim aChar As Char = " "c
 		Try
@@ -289,7 +289,7 @@ Public Class FileManager
 
 #Region "Path"
 
-	Public Shared Function FilePathHasInvalidChars(ByVal path As String) As Boolean
+	Public Function FilePathHasInvalidChars(ByVal path As String) As Boolean
 		Dim ret As Boolean = False
 
 		If String.IsNullOrEmpty(path) Then
@@ -312,7 +312,7 @@ Public Class FileManager
 		Return ret
 	End Function
 
-	Public Shared Function GetPathFileNameWithoutExtension(ByVal pathFileName As String) As String
+	Public Function GetPathFileNameWithoutExtension(ByVal pathFileName As String) As String
 		Try
 			Return Path.Combine(FileManager.GetPath(pathFileName), Path.GetFileNameWithoutExtension(pathFileName))
 		Catch ex As Exception
@@ -321,7 +321,7 @@ Public Class FileManager
 	End Function
 
 	'NOTE: Replacement for Path.GetDirectoryName, because GetDirectoryName returns "Nothing" when something like "C:\" is the path.
-	Public Shared Function GetPath(ByVal pathFileName As String) As String
+	Public Function GetPath(ByVal pathFileName As String) As String
 		Try
 			pathFileName = FileManager.GetNormalizedPathFileName(pathFileName)
 			Dim length As Integer = pathFileName.LastIndexOf(Path.DirectorySeparatorChar)
@@ -339,7 +339,7 @@ Public Class FileManager
 		End Try
 	End Function
 
-	Public Shared Sub CreatePath(ByVal path As String)
+	Public Sub CreatePath(ByVal path As String)
 		Try
 			If Not Directory.Exists(path) Then
 				Directory.CreateDirectory(path)
@@ -349,7 +349,7 @@ Public Class FileManager
 		End Try
 	End Sub
 
-	Public Shared Function PathExistsAfterTryToCreate(ByVal aPath As String) As Boolean
+	Public Function PathExistsAfterTryToCreate(ByVal aPath As String) As Boolean
 		If Not Directory.Exists(aPath) Then
 			Try
 				Directory.CreateDirectory(aPath)
@@ -359,7 +359,7 @@ Public Class FileManager
 		Return Directory.Exists(aPath)
 	End Function
 
-	Private Shared Function GetFullPath(maybeRelativePath As String, baseDirectory As String) As String
+	Private Function GetFullPath(maybeRelativePath As String, baseDirectory As String) As String
 		If baseDirectory Is Nothing Then
 			baseDirectory = Environment.CurrentDirectory
 		End If
@@ -374,7 +374,7 @@ Public Class FileManager
 		Return maybeRelativePath
 	End Function
 
-	Public Shared Function GetRelativePathFileName(ByVal fromPath As String, ByVal toPath As String) As String
+	Public Function GetRelativePathFileName(ByVal fromPath As String, ByVal toPath As String) As String
 		Dim fromPathAbsolute As String
 		Dim toPathAbsolute As String
 
@@ -422,7 +422,7 @@ Public Class FileManager
 		Return cleanedPath
 	End Function
 
-	Public Shared Function GetCleanPath(ByVal givenPath As String, ByVal returnFullPath As Boolean) As String
+	Public Function GetCleanPath(ByVal givenPath As String, ByVal returnFullPath As Boolean) As String
 		Dim cleanPath As String
 		cleanPath = givenPath
 		For Each invalidChar As Char In Path.GetInvalidPathChars()
@@ -442,7 +442,7 @@ Public Class FileManager
 		Return cleanPath
 	End Function
 
-	Public Shared Function GetCleanPathFileName(ByVal givenPathFileName As String, ByVal returnFullPathFileName As Boolean) As String
+	Public Function GetCleanPathFileName(ByVal givenPathFileName As String, ByVal returnFullPathFileName As Boolean) As String
 		Dim cleanPathFileName As String
 
 		Dim cleanedPathGivenPathFileName As String
@@ -479,7 +479,7 @@ Public Class FileManager
 		Return cleanPathFileName
 	End Function
 
-	Public Shared Sub ParsePath(ByVal sender As Object, ByVal e As ConvertEventArgs)
+	Public Sub ParsePath(ByVal sender As Object, ByVal e As ConvertEventArgs)
 		If e.DesiredType IsNot GetType(String) Then
 			Exit Sub
 		End If
@@ -488,7 +488,7 @@ Public Class FileManager
 		End If
 	End Sub
 
-	Public Shared Sub ParsePathFileName(ByVal sender As Object, ByVal e As ConvertEventArgs)
+	Public Sub ParsePathFileName(ByVal sender As Object, ByVal e As ConvertEventArgs)
 		If e.DesiredType IsNot GetType(String) Then
 			Exit Sub
 		End If
@@ -497,7 +497,7 @@ Public Class FileManager
 		End If
 	End Sub
 
-	Public Shared Function GetNormalizedPathFileName(ByVal givenPathFileName As String) As String
+	Public Function GetNormalizedPathFileName(ByVal givenPathFileName As String) As String
 		Dim cleanPathFileName As String
 
 		cleanPathFileName = givenPathFileName
@@ -508,7 +508,7 @@ Public Class FileManager
 		Return cleanPathFileName
 	End Function
 
-	Public Shared Function GetTestedPathFileName(ByVal iPathFileName As String) As String
+	Public Function GetTestedPathFileName(ByVal iPathFileName As String) As String
 		Dim testedPathFileName As String = iPathFileName
 		Dim pathFileNameWithoutExtension As String = FileManager.GetPathFileNameWithoutExtension(iPathFileName)
 		Dim extension As String = Path.GetExtension(iPathFileName)
@@ -520,7 +520,7 @@ Public Class FileManager
 		Return testedPathFileName
 	End Function
 
-	Public Shared Function GetTestedPath(ByVal iPath As String) As String
+	Public Function GetTestedPath(ByVal iPath As String) As String
 		Dim testedPathFileName As String = iPath
 		Dim number As Integer = 1
 		While Directory.Exists(testedPathFileName)
@@ -530,7 +530,7 @@ Public Class FileManager
 		Return testedPathFileName
 	End Function
 
-	Public Shared Function GetLongestExtantPath(ByVal iPath As String, Optional ByRef topNonextantPath As String = "") As String
+	Public Function GetLongestExtantPath(ByVal iPath As String, Optional ByRef topNonextantPath As String = "") As String
 		If iPath <> "" AndAlso Not Directory.Exists(iPath) Then
 			topNonextantPath = iPath
 			Dim shorterPath As String
@@ -548,7 +548,7 @@ Public Class FileManager
 	' Example: "C:\folder\subfolder\temp" returns "C:\folder"
 	' Example: "subfolder\temp"           returns "subfolder"
 	' Example: "temp"                     returns ""
-	Public Shared Function GetTopFolderPath(ByVal iPathFileName As String) As String
+	Public Function GetTopFolderPath(ByVal iPathFileName As String) As String
 		Dim topFolderPath As String = ""
 		Dim fullPath As String
 		Dim splitPathArray As String()
@@ -573,7 +573,7 @@ Public Class FileManager
 	' Delete the path if all recursive subfolders are empty.
 	' Example: "C:\folder\subfolder\temp" where temp contains "subtemp\subsubtemp".
 	' Returns the top-most folder path that was deleted.
-	Public Shared Function DeleteEmptySubpath(ByVal fullPath As String) As String
+	Public Function DeleteEmptySubpath(ByVal fullPath As String) As String
 		Dim fullPathDeleted As String = ""
 
 		If Not String.IsNullOrEmpty(fullPath) Then
@@ -602,7 +602,7 @@ Public Class FileManager
 	'	return path;
 	'}
 
-	Private Shared Function GetPathAttribute(ByVal path As String) As Integer
+	Private Function GetPathAttribute(ByVal path As String) As Integer
 		Dim di As New DirectoryInfo(path)
 		If di.Exists Then
 			Return FILE_ATTRIBUTE_DIRECTORY
@@ -620,14 +620,14 @@ Public Class FileManager
 	Private Const FILE_ATTRIBUTE_NORMAL As Integer = &H80
 
 	<DllImport("shlwapi.dll", SetLastError:=True)>
-	Private Shared Function PathRelativePathTo(ByVal pszPath As StringBuilder, ByVal pszFrom As String, ByVal dwAttrFrom As Integer, ByVal pszTo As String, ByVal dwAttrTo As Integer) As Integer
+	Private Function PathRelativePathTo(ByVal pszPath As StringBuilder, ByVal pszFrom As String, ByVal dwAttrFrom As Integer, ByVal pszTo As String, ByVal dwAttrTo As Integer) As Integer
 	End Function
 
 #End Region
 
 #Region "Folder"
 
-	Public Shared Sub CopyFolder(ByVal source As String, ByVal destination As String, ByVal overwrite As Boolean)
+	Public Sub CopyFolder(ByVal source As String, ByVal destination As String, ByVal overwrite As Boolean)
 		' Create the destination folder if missing.
 		If Not Directory.Exists(destination) Then
 			Directory.CreateDirectory(destination)
@@ -646,7 +646,7 @@ Public Class FileManager
 		Next
 	End Sub
 
-	Public Shared Function GetFolderSize(ByVal aFolder As String) As ULong
+	Public Function GetFolderSize(ByVal aFolder As String) As ULong
 		Dim size As ULong
 		Dim aFolderInfo As DirectoryInfo = New IO.DirectoryInfo(aFolder)
 		Try
@@ -666,7 +666,7 @@ Public Class FileManager
 	'      https://docs.microsoft.com/en-us/dotnet/api/system.io.directory.getfiles?view=netframework-4.0
 	' If the specified extension is exactly three characters long, the method returns files with extensions that begin with the specified extension. 
 	'     For example, "*.xls" returns both "book.xls" and "book.xlsx".
-	Public Shared Function GetFolderFiles(ByVal givenPathFileName As String, ByVal pattern As String) As List(Of String)
+	Public Function GetFolderFiles(ByVal givenPathFileName As String, ByVal pattern As String) As List(Of String)
 		Dim pathFileNames As List(Of String)
 		Dim pathFileNamesEnumerable As IEnumerable(Of String)
 
@@ -693,7 +693,7 @@ Public Class FileManager
 	'Do not use the following reserved names for the name of a file:
 	'CON, PRN, AUX, NUL, COM0, COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, LPT0, LPT1, LPT2, LPT3, LPT4, LPT5, LPT6, LPT7, LPT8, and LPT9. 
 	'Also avoid these names followed immediately by an extension; for example, NUL.txt is not recommended.
-	Public Shared Function GetCleanFileNameWithoutExtension(ByVal fileName As String) As String
+	Public Function GetCleanFileNameWithoutExtension(ByVal fileName As String) As String
 		Dim ReservedWords() As String = {"con", "prn", "aux", "nul", "com0", "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9", "lpt0", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9"}
 
 		Try
@@ -713,12 +713,12 @@ Public Class FileManager
 
 #Region "XML Serialization"
 
-	Public Shared Function ReadXml(ByVal theType As Type, ByVal rootElementName As String, ByVal fileName As String) As Object
+	Public Function ReadXml(ByVal theType As Type, ByVal rootElementName As String, ByVal fileName As String) As Object
 		Dim x As New XmlSerializer(theType, New XmlRootAttribute(rootElementName))
 		Return ReadXml(x, fileName)
 	End Function
 
-	Public Shared Function ReadXml(ByVal theType As Type, ByVal fileName As String) As Object
+	Public Function ReadXml(ByVal theType As Type, ByVal fileName As String) As Object
 		Dim x As New XmlSerializer(theType)
 
 		'Dim objStreamReader As New StreamReader(fileName)
@@ -736,7 +736,7 @@ Public Class FileManager
 		Return ReadXml(x, fileName)
 	End Function
 
-	Public Shared Function ReadXml(ByVal x As XmlSerializer, ByVal fileName As String) As Object
+	Public Function ReadXml(ByVal x As XmlSerializer, ByVal fileName As String) As Object
 		Dim objStreamReader As New StreamReader(fileName)
 		Dim iObject As Object = Nothing
 		Dim thereWasReadError As Boolean = False
@@ -764,12 +764,12 @@ Public Class FileManager
 		Return iObject
 	End Function
 
-	Public Shared Sub WriteXml(ByVal iObject As Object, ByVal rootElementName As String, ByVal fileName As String)
+	Public Sub WriteXml(ByVal iObject As Object, ByVal rootElementName As String, ByVal fileName As String)
 		Dim x As New XmlSerializer(iObject.GetType(), New XmlRootAttribute(rootElementName))
 		WriteXml(iObject, x, fileName)
 	End Sub
 
-	Public Shared Sub WriteXml(ByVal iObject As Object, ByVal fileName As String)
+	Public Sub WriteXml(ByVal iObject As Object, ByVal fileName As String)
 		Dim x As New XmlSerializer(iObject.GetType())
 
 		'Dim objStreamWriter As New StreamWriter(fileName)
@@ -779,7 +779,7 @@ Public Class FileManager
 		WriteXml(iObject, x, fileName)
 	End Sub
 
-	Public Shared Sub WriteXml(ByVal iObject As Object, ByVal x As XmlSerializer, ByVal fileName As String)
+	Public Sub WriteXml(ByVal iObject As Object, ByVal x As XmlSerializer, ByVal fileName As String)
 		'Dim objStreamWriter As New StreamWriter(fileName)
 		'NOTE: Use Xml.XmlWriterSettings to preserve CRLF line endings used by multi-line textboxes.
 		Dim settings As Xml.XmlWriterSettings = New Xml.XmlWriterSettings()
@@ -796,7 +796,7 @@ Public Class FileManager
 
 #Region "Process"
 
-	Public Shared Sub OpenWindowsExplorer(ByVal pathFileName As String)
+	Public Sub OpenWindowsExplorer(ByVal pathFileName As String)
 		If File.Exists(pathFileName) Then
 			Process.Start("explorer.exe", "/select,""" + pathFileName + """")
 		ElseIf Directory.Exists(pathFileName) Then
@@ -812,4 +812,4 @@ Public Class FileManager
 
 #End Region
 
-End Class
+End Module
