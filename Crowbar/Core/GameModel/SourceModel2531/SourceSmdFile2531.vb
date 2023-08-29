@@ -43,11 +43,11 @@ Public Class SourceSmdFile2531
 			name = Me.theMdlFileData.theBones(boneIndex).theName
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(AppConstants.InternalNumberFormat)
 			line += " """
 			line += name
 			line += """ "
-			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(AppConstants.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -75,19 +75,19 @@ Public Class SourceSmdFile2531
 			rotation = MathModule.ToEulerAngles(Me.theMdlFileData.theBones(boneIndex).rotation)
 
 			line = "    "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(AppConstants.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += Me.theMdlFileData.theBones(boneIndex).position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).position.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += rotation.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += rotation.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += rotation.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -137,21 +137,21 @@ Public Class SourceSmdFile2531
 				rotation.z = aFrameLine.rotation.z
 
 				line = "    "
-				line += boneIndex.ToString(TheApp.InternalNumberFormat)
+				line += boneIndex.ToString(AppConstants.InternalNumberFormat)
 
 				line += " "
-				line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 
 				line += " "
-				line += rotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += rotation.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 
 				'If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
 				'	line += "   # "
@@ -301,20 +301,20 @@ Public Class SourceSmdFile2531
 								'aVectorTransformed = Me.TransformPhyVertex(aBone, phyVertex.vertex)
 
 								line = "    "
-								line += faceSection.theBoneIndex.ToString(TheApp.InternalNumberFormat)
+								line += faceSection.theBoneIndex.ToString(AppConstants.InternalNumberFormat)
 								line += " "
-								line += aVectorTransformed.x.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += aVectorTransformed.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 								line += " "
-								line += aVectorTransformed.y.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += aVectorTransformed.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 								line += " "
-								line += aVectorTransformed.z.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += aVectorTransformed.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 
 								line += " "
-								line += phyVertex.Normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += phyVertex.Normal.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 								line += " "
-								line += phyVertex.Normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += phyVertex.Normal.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 								line += " "
-								line += phyVertex.Normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+								line += phyVertex.Normal.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 
 								line += " 0 0"
 								Me.theOutputFileStreamWriter.WriteLine(line)
@@ -550,35 +550,35 @@ Public Class SourceSmdFile2531
 			End If
 
 			line = "  "
-			line += boneIndexes(0).ToString(TheApp.InternalNumberFormat)
+			line += boneIndexes(0).ToString(AppConstants.InternalNumberFormat)
 
 			line += " "
-			line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += position.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 
 			line += " "
-			line += normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += normal.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 
 			line += " "
-			line += texCoordU.ToString("0.000000", TheApp.InternalNumberFormat)
+			line += texCoordU.ToString("0.000000", AppConstants.InternalNumberFormat)
 			line += " "
-			line += (1 - texCoordV).ToString("0.000000", TheApp.InternalNumberFormat)
+			line += (1 - texCoordV).ToString("0.000000", AppConstants.InternalNumberFormat)
 
 			If aBodyModel.vertexListType = 0 Then
 				line += " "
-				line += boneIndexes.Count.ToString(TheApp.InternalNumberFormat)
+				line += boneIndexes.Count.ToString(AppConstants.InternalNumberFormat)
 				For i As Integer = 0 To boneIndexes.Count - 1
 					line += " "
-					line += boneIndexes(i).ToString(TheApp.InternalNumberFormat)
+					line += boneIndexes(i).ToString(AppConstants.InternalNumberFormat)
 					line += " "
-					line += weights(i).ToString("0.000000", TheApp.InternalNumberFormat)
+					line += weights(i).ToString("0.000000", AppConstants.InternalNumberFormat)
 				Next
 			End If
 		Catch ex As Exception

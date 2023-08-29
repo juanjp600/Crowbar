@@ -1,6 +1,6 @@
-Public Class StringClass
+Public Module StringClass
 
-	Public Shared Function ConvertFromNullTerminatedOrFullLengthString(ByVal input As String) As String
+	Public Function ConvertFromNullTerminatedOrFullLengthString(ByVal input As String) As String
 		Dim output As String
 		Dim positionOfFirstNullChar As Integer
 		positionOfFirstNullChar = input.IndexOf(Chr(0))
@@ -12,7 +12,7 @@ Public Class StringClass
 		Return output
 	End Function
 
-	Public Shared Function RemoveUptoAndIncludingFirstDotCharacterFromString(ByVal input As String) As String
+	Public Function RemoveUptoAndIncludingFirstDotCharacterFromString(ByVal input As String) As String
 		Dim output As String
 		Dim positionOfFirstDotChar As Integer
 		positionOfFirstDotChar = input.IndexOf(".")
@@ -24,4 +24,4 @@ Public Class StringClass
 		Return output
 	End Function
 
-End Class
+End Module

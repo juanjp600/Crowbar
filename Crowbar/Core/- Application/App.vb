@@ -69,6 +69,7 @@ Public Class App
 
 		Dim documentsPath As String
 		documentsPath = Path.Combine(Me.theAppPath, "Documents")
+		AppConstants.HeaderComment = GetHeaderComment()
 		AppConstants.HelpTutorialLink = Path.Combine(documentsPath, AppConstants.HelpTutorialLink)
 		AppConstants.HelpContentsLink = Path.Combine(documentsPath, AppConstants.HelpContentsLink)
 		AppConstants.HelpIndexLink = Path.Combine(documentsPath, AppConstants.HelpIndexLink)

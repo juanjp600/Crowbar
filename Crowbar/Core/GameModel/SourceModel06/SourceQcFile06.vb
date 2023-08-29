@@ -140,15 +140,15 @@ Public Class SourceQcFile06
 					Else
 						line = "$controller "
 					End If
-					line += boneControllerIndex.ToString(TheApp.InternalNumberFormat)
+					line += boneControllerIndex.ToString(AppConstants.InternalNumberFormat)
 					line += " """
 					line += Me.theMdlFileData.theBones(boneController.boneIndex).theName
 					line += """ "
 					line += SourceModule06.GetControlText(boneController.type)
 					line += " "
-					line += boneController.startAngleDegrees.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.startAngleDegrees.ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += boneController.endAngleDegrees.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.endAngleDegrees.ToString("0.######", AppConstants.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				Next
 			End If
@@ -312,9 +312,9 @@ Public Class SourceQcFile06
 		'		line += SourceModule06.GetControlText(aSequenceDesc.blendType(i))
 		'		line += """"
 		'		line += " "
-		'		line += aSequenceDesc.blendStart(i).ToString("0.######", TheApp.InternalNumberFormat)
+		'		line += aSequenceDesc.blendStart(i).ToString("0.######", AppConstants.InternalNumberFormat)
 		'		line += " "
-		'		line += aSequenceDesc.blendEnd(i).ToString("0.######", TheApp.InternalNumberFormat)
+		'		line += aSequenceDesc.blendEnd(i).ToString("0.######", AppConstants.InternalNumberFormat)
 		'		Me.theOutputFileStreamWriter.WriteLine(line)
 		'	End If
 		'Next
@@ -331,10 +331,10 @@ Public Class SourceQcFile06
 				line = vbTab
 				line += "{ "
 				line += "event "
-				'line += aSequenceDesc.theEvents(j).eventIndex.ToString(TheApp.InternalNumberFormat)
-				line += aSequenceDesc.theEvents(j).eventType.ToString(TheApp.InternalNumberFormat)
+				'line += aSequenceDesc.theEvents(j).eventIndex.ToString(AppConstants.InternalNumberFormat)
+				line += aSequenceDesc.theEvents(j).eventType.ToString(AppConstants.InternalNumberFormat)
 				line += " "
-				line += frameIndex.ToString(TheApp.InternalNumberFormat)
+				line += frameIndex.ToString(AppConstants.InternalNumberFormat)
 				'If aSequenceDesc.theEvents(j).theOptions <> "" Then
 				'	line += " """
 				'	line += aSequenceDesc.theEvents(j).theOptions
@@ -347,7 +347,7 @@ Public Class SourceQcFile06
 
 		line = vbTab
 		line += "fps "
-		line += aSequenceDesc.fps.ToString("0.######", TheApp.InternalNumberFormat)
+		line += aSequenceDesc.fps.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		If (aSequenceDesc.flags And SourceMdlSequenceDesc06.STUDIO_LOOPING) > 0 Then

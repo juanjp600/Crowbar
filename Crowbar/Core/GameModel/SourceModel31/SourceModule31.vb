@@ -6,7 +6,7 @@ Module SourceModule31
 	'	Dim bodyGroupSmdFileName As String
 
 	'	If bodyPartIndex = 0 AndAlso modelIndex = 0 AndAlso lodIndex = 0 AndAlso Not String.IsNullOrEmpty(sequenceGroupFileName) AndAlso Not FileManager.FilePathHasInvalidChars(sequenceGroupFileName) Then
-	'		bodyGroupSmdFileName = Path.GetFileName(sequenceGroupFileName.Trim(Chr(0))).ToLower(TheApp.InternalCultureInfo)
+	'		bodyGroupSmdFileName = Path.GetFileName(sequenceGroupFileName.Trim(Chr(0))).ToLower(AppConstants.InternalCultureInfo)
 	'		If Not bodyGroupSmdFileName.StartsWith(modelName) Then
 	'			bodyGroupSmdFileName = modelName + "_" + bodyGroupSmdFileName
 	'		End If

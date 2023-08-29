@@ -1,4 +1,4 @@
-Module MathModule
+Public Module MathModule
 
     Public Function UnixTimeStampToDateTime(ByVal unixTimeStamp As Long) As DateTime
 		Dim dtDateTime As System.DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)
@@ -54,7 +54,7 @@ Module MathModule
 		If suffix <> "" Then
 			suffix = " " + suffix
 		End If
-		Return value.ToString("0.##", TheApp.InternalCultureInfo) + suffix
+		Return value.ToString("0.##", AppConstants.InternalCultureInfo) + suffix
 	End Function
 
 	'Public Function DecimalByteUnitsConversion(ByVal iBytes As ULong) As String
@@ -72,7 +72,7 @@ Module MathModule
 	'		suffix = "KB"
 	'	End If
 
-	'	Return value.ToString("N2", TheApp.InternalCultureInfo) + " " + suffix
+	'	Return value.ToString("N2", AppConstants.InternalCultureInfo) + " " + suffix
 	'End Function
 
 	Public Function AlignLong(ByVal currentValue As Long, ByVal alignmentValue As Long) As Long

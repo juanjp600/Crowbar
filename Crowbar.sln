@@ -11,6 +11,10 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CrowbarSteamPipe", "Crowbar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackwardsCompatibility", "BackwardsCompatibility\BackwardsCompatibility.csproj", "{D105C7C6-479B-4D70-B1A9-B30C898DF994}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{0AA7DCA0-0146-4CD8-85EB-262CB1D825CE}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Crowbar.Core", "Libraries\Crowbar.Core\Crowbar.Core.vbproj", "{8B75BB6E-31E7-4326-978A-A934F51A0772}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,11 +55,22 @@ Global
 		{D105C7C6-479B-4D70-B1A9-B30C898DF994}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D105C7C6-479B-4D70-B1A9-B30C898DF994}.Release|x86.ActiveCfg = Release|Any CPU
 		{D105C7C6-479B-4D70-B1A9-B30C898DF994}.Release|x86.Build.0 = Release|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B75BB6E-31E7-4326-978A-A934F51A0772}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {554572F2-842E-44A4-9F56-F1684B016632}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B75BB6E-31E7-4326-978A-A934F51A0772} = {0AA7DCA0-0146-4CD8-85EB-262CB1D825CE}
 	EndGlobalSection
 EndGlobal

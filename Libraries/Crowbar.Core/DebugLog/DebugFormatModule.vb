@@ -43,7 +43,7 @@ Module DebugFormatModule
 		Dim line As String
 		line = name
 		line += ": "
-		line += value.ToString("N0", TheApp.InternalNumberFormat)
+		line += value.ToString("N0", AppConstants.InternalNumberFormat)
 		line += " (0x"
 		line += value.ToString("X16")
 		line += ")"
@@ -54,7 +54,7 @@ Module DebugFormatModule
 		Dim line As String
 		line = name
 		line += ": "
-		line += value.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.ToString("N6", AppConstants.InternalNumberFormat)
 		Return line
 	End Function
 
@@ -62,7 +62,7 @@ Module DebugFormatModule
 		Dim line As String
 		line = name
 		line += ": "
-		line += value.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.ToString("N6", AppConstants.InternalNumberFormat)
 		Return line
 	End Function
 
@@ -88,11 +88,11 @@ Module DebugFormatModule
 		Dim line As String
 		line = name
 		line += "[x,y,z]: ("
-		line += x.ToString("N6", TheApp.InternalNumberFormat)
+		line += x.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ", "
-		line += y.ToString("N6", TheApp.InternalNumberFormat)
+		line += y.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ", "
-		line += z.ToString("N6", TheApp.InternalNumberFormat)
+		line += z.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ")"
 		Return line
 	End Function
@@ -101,11 +101,11 @@ Module DebugFormatModule
 		Dim line As String
 		line = name
 		line += "[x,y,z]: ("
-		line += value.x.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.x.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ", "
-		line += value.y.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.y.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ", "
-		line += value.z.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.z.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ")"
 		Return line
 	End Function
@@ -114,13 +114,13 @@ Module DebugFormatModule
 		Dim line As String
 		line = name
 		line += "[x,y,z,w]: ("
-		line += value.x.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.x.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ", "
-		line += value.y.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.y.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ", "
-		line += value.z.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.z.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ", "
-		line += value.w.ToString("N6", TheApp.InternalNumberFormat)
+		line += value.w.ToString("N6", AppConstants.InternalNumberFormat)
 		line += ")"
 		Return line
 	End Function

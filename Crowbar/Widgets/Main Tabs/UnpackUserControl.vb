@@ -405,13 +405,13 @@ Public Class UnpackUserControl
 			If TheApp.Settings.UnpackByteUnitsOption = ByteUnitsOption.Binary Then
 				entrySize = MathModule.BinaryByteUnitsConversion(entry.Size)
 			Else
-				entrySize = entry.Size.ToString("N0", TheApp.InternalCultureInfo)
+				entrySize = entry.Size.ToString("N0", AppConstants.InternalCultureInfo)
 			End If
 
 			e.Item = New ListViewItem(entry.Name)
 			e.Item.Tag = entry
 			e.Item.SubItems.Add(entrySize)
-			e.Item.SubItems.Add(entry.Count.ToString("N0", TheApp.InternalCultureInfo))
+			e.Item.SubItems.Add(entry.Count.ToString("N0", AppConstants.InternalCultureInfo))
 			e.Item.SubItems.Add(entry.Type)
 			e.Item.SubItems.Add(entry.Extension)
 			e.Item.SubItems.Add(entry.PackageDataPathFileName)
@@ -620,12 +620,12 @@ Public Class UnpackUserControl
 
 	Private Sub SearchBackgroundWorker_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs)
 		If e.ProgressPercentage = 1 Then
-			Me.theResultsRootTreeNode.Text = "<Found> " + Me.theTextToFind + " (" + Me.theResultsCount.ToString("N0", TheApp.InternalCultureInfo) + ")"
+			Me.theResultsRootTreeNode.Text = "<Found> " + Me.theTextToFind + " (" + Me.theResultsCount.ToString("N0", AppConstants.InternalCultureInfo) + ")"
 		End If
 	End Sub
 
 	Private Sub SearchBackgroundWorker_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
-		Dim resultsText As String = "<Found> " + Me.theTextToFind + " (" + Me.theResultsCount.ToString("N0", TheApp.InternalCultureInfo) + ")"
+		Dim resultsText As String = "<Found> " + Me.theTextToFind + " (" + Me.theResultsCount.ToString("N0", AppConstants.InternalCultureInfo) + ")"
 		If e.Cancelled Then
 			resultsText += " <incomplete>"
 		End If
@@ -885,7 +885,7 @@ Public Class UnpackUserControl
 
 	Private Sub UpdateContentsGroupBox()
 		If Me.thePackageCount > 1 Then
-			Me.ContentsGroupBox.Text = "Contents of " + Me.thePackageCount.ToString("N0", TheApp.InternalCultureInfo) + " packages"
+			Me.ContentsGroupBox.Text = "Contents of " + Me.thePackageCount.ToString("N0", AppConstants.InternalCultureInfo) + " packages"
 		Else
 			Me.ContentsGroupBox.Text = "Contents of package"
 		End If
@@ -1114,13 +1114,13 @@ Public Class UnpackUserControl
 	'	If treeNode.Nodes.Count = 1 Then
 	'		folderCountText = "1 folder "
 	'	Else
-	'		folderCountText = treeNode.Nodes.Count.ToString("N0", TheApp.InternalCultureInfo) + " folders "
+	'		folderCountText = treeNode.Nodes.Count.ToString("N0", AppConstants.InternalCultureInfo) + " folders "
 	'	End If
 	'	Dim fileCountText As String
 	'	If fileCount = 1 Then
 	'		fileCountText = "1 file"
 	'	Else
-	'		fileCountText = fileCount.ToString("N0", TheApp.InternalCultureInfo) + " files"
+	'		fileCountText = fileCount.ToString("N0", AppConstants.InternalCultureInfo) + " files"
 	'	End If
 	'	treeNode.Text = treeNode.Name + " <" + folderCountText + fileCountText + ">"
 	'End Sub
@@ -1149,18 +1149,18 @@ Public Class UnpackUserControl
 	'				'Dim itemCountText As String
 	'				'treeNodeForFolder = selectedTreeNode.Nodes.Find(info.Name, False)(0)
 	'				'listForFolder = CType(treeNodeForFolder.Tag, List(Of PackageResourceFileNameInfo))
-	'				'itemCountText = listForFolder.Count.ToString("N0", TheApp.InternalCultureInfo)
+	'				'itemCountText = listForFolder.Count.ToString("N0", AppConstants.InternalCultureInfo)
 	'				''If listForFolder.Count = 1 Then
 	'				''	itemCountText += " item"
 	'				''Else
 	'				''	itemCountText += " items"
 	'				''End If
 	'				'item.SubItems.Add(itemCountText)
-	'				item.SubItems.Add(info.Size.ToString("N0", TheApp.InternalCultureInfo))
-	'				item.SubItems.Add(info.Count.ToString("N0", TheApp.InternalCultureInfo))
+	'				item.SubItems.Add(info.Size.ToString("N0", AppConstants.InternalCultureInfo))
+	'				item.SubItems.Add(info.Count.ToString("N0", AppConstants.InternalCultureInfo))
 	'			Else
-	'				item.SubItems.Add(info.Size.ToString("N0", TheApp.InternalCultureInfo))
-	'				item.SubItems.Add(info.Count.ToString("N0", TheApp.InternalCultureInfo))
+	'				item.SubItems.Add(info.Size.ToString("N0", AppConstants.InternalCultureInfo))
+	'				item.SubItems.Add(info.Count.ToString("N0", AppConstants.InternalCultureInfo))
 	'			End If
 	'			item.SubItems.Add(info.Type)
 	'			item.SubItems.Add(info.Extension)
@@ -1229,7 +1229,7 @@ Public Class UnpackUserControl
 			Me.theResultsFileCount = 0
 			Me.theResultsFolderCount = 0
 			Me.theResultsCount = 0
-			Dim resultsRootTreeNodeText As String = "<Found> " + Me.theTextToFind + " (" + Me.theResultsCount.ToString("N0", TheApp.InternalCultureInfo) + ") <searching>"
+			Dim resultsRootTreeNodeText As String = "<Found> " + Me.theTextToFind + " (" + Me.theResultsCount.ToString("N0", AppConstants.InternalCultureInfo) + ") <searching>"
 			Me.theResultsRootTreeNode = New TreeNode(resultsRootTreeNodeText)
 
 			Dim resultsFoldersTreeNodeText As String = "<Folders found> (0)"
@@ -1295,7 +1295,7 @@ Public Class UnpackUserControl
 						Me.theResultsFolderCount += 1
 
 						'If Not Me.theResultsFoldersTreeNode.Nodes.ContainsKey(info.Name) Then
-						Me.theResultsFoldersTreeNode.Text = "<Folders found> (" + Me.theResultsFolderCount.ToString("N0", TheApp.InternalCultureInfo) + ")"
+						Me.theResultsFoldersTreeNode.Text = "<Folders found> (" + Me.theResultsFolderCount.ToString("N0", AppConstants.InternalCultureInfo) + ")"
 
 						'TODO: Add a special Tag to above node that allows double-clicking on it to go to real folder.
 						'End If
@@ -1409,12 +1409,12 @@ Public Class UnpackUserControl
 			End If
 		End If
 
-		Me.FilesSelectedCountToolStripLabel.Text = selectedFileCount.ToString("N0", TheApp.InternalCultureInfo) + " / " + totalFileCount.ToString("N0", TheApp.InternalCultureInfo)
+		Me.FilesSelectedCountToolStripLabel.Text = selectedFileCount.ToString("N0", AppConstants.InternalCultureInfo) + " / " + totalFileCount.ToString("N0", AppConstants.InternalCultureInfo)
 
 		If TheApp.Settings.UnpackByteUnitsOption = ByteUnitsOption.Binary Then
 			Me.SizeSelectedTotalToolStripLabel.Text = MathModule.BinaryByteUnitsConversion(Me.theSelectedByteCount)
 		Else
-			Me.SizeSelectedTotalToolStripLabel.Text = Me.theSelectedByteCount.ToString("N0", TheApp.InternalCultureInfo)
+			Me.SizeSelectedTotalToolStripLabel.Text = Me.theSelectedByteCount.ToString("N0", AppConstants.InternalCultureInfo)
 		End If
 
 		'IMPORTANT: Update the toolstrip so the items are resized properly. Needed because of the 'springing' textbox.
@@ -1424,7 +1424,7 @@ Public Class UnpackUserControl
 	Private Sub ToggleSizeUnits()
 		If TheApp.Settings.UnpackByteUnitsOption = ByteUnitsOption.Binary Then
 			TheApp.Settings.UnpackByteUnitsOption = ByteUnitsOption.Bytes
-			Me.SizeSelectedTotalToolStripLabel.Text = Me.theSelectedByteCount.ToString("N0", TheApp.InternalCultureInfo)
+			Me.SizeSelectedTotalToolStripLabel.Text = Me.theSelectedByteCount.ToString("N0", AppConstants.InternalCultureInfo)
 		Else
 			TheApp.Settings.UnpackByteUnitsOption = ByteUnitsOption.Binary
 			Me.SizeSelectedTotalToolStripLabel.Text = MathModule.BinaryByteUnitsConversion(Me.theSelectedByteCount)

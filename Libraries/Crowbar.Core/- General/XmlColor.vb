@@ -1,4 +1,5 @@
-﻿Imports System.Xml.Serialization
+﻿Imports System.Drawing
+Imports System.Xml.Serialization
 
 ' This class, along with XmlElement(Type) tag, allows XML serializing/deserializing 
 '     of the System.Drawing.Color object into a readable color name.

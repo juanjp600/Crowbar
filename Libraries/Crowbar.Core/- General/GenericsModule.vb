@@ -1,4 +1,4 @@
-﻿Module GenericsModule
+﻿Public Module GenericsModule
 
 	Public Function ListsAreEqual(ByVal list1 As List(Of Double), ByVal list2 As List(Of Double)) As Boolean
 		Dim theListsAreEqual As Boolean

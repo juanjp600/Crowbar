@@ -21,7 +21,7 @@ Module SourceFileNamesModule
 		'		bodyModelFileName += "_model"
 		'		bodyModelFileName += CStr(modelIndex)
 		'	Else
-		'		bodyModelFileName = Path.GetFileName(bodyModelName.Trim(Chr(0))).ToLower(TheApp.InternalCultureInfo)
+		'		bodyModelFileName = Path.GetFileName(bodyModelName.Trim(Chr(0))).ToLower(AppConstants.InternalCultureInfo)
 		'	End If
 		'	bodyModelFileNameWithoutExtension = Path.GetFileNameWithoutExtension(bodyModelFileName)
 
@@ -38,7 +38,7 @@ Module SourceFileNamesModule
 		'======
 		'bodyModelNameTrimmed = bodyModelName.Trim(Chr(0))
 		'Try
-		'	bodyModelFileName = Path.GetFileName(bodyModelNameTrimmed).ToLower(TheApp.InternalCultureInfo)
+		'	bodyModelFileName = Path.GetFileName(bodyModelNameTrimmed).ToLower(AppConstants.InternalCultureInfo)
 		'	If FileManager.FilePathHasInvalidChars(bodyModelFileName) Then
 		'		bodyModelFileName = "body"
 		'		bodyModelFileName += CStr(bodyPartIndex)
@@ -69,7 +69,7 @@ Module SourceFileNamesModule
 		'Dim bodyGroupSmdFileName As String
 
 		'If bodyPartIndex = 0 AndAlso modelIndex = 0 AndAlso lodIndex = 0 AndAlso Not String.IsNullOrEmpty(sequenceGroupFileName) AndAlso Not FileManager.FilePathHasInvalidChars(sequenceGroupFileName) Then
-		'	bodyGroupSmdFileName = Path.GetFileName(sequenceGroupFileName.Trim(Chr(0))).ToLower(TheApp.InternalCultureInfo)
+		'	bodyGroupSmdFileName = Path.GetFileName(sequenceGroupFileName.Trim(Chr(0))).ToLower(AppConstants.InternalCultureInfo)
 		'	If Not bodyGroupSmdFileName.StartsWith(modelName) Then
 		'		bodyGroupSmdFileName = modelName + "_" + bodyGroupSmdFileName
 		'	End If
@@ -125,7 +125,7 @@ Module SourceFileNamesModule
 			End Try
 			bodyModelFileNameWithoutExtension = Path.GetFileNameWithoutExtension(bodyModelFileName)
 
-			If TheApp.Settings.DecompilePrefixFileNamesWithModelNameIsChecked AndAlso Not bodyModelFileName.ToLower(TheApp.InternalCultureInfo).StartsWith(modelName.ToLower(TheApp.InternalCultureInfo)) Then
+			If TheApp.Settings.DecompilePrefixFileNamesWithModelNameIsChecked AndAlso Not bodyModelFileName.ToLower(AppConstants.InternalCultureInfo).StartsWith(modelName.ToLower(AppConstants.InternalCultureInfo)) Then
 				bodyGroupSmdFileName += modelName + "_"
 			End If
 			bodyGroupSmdFileName += bodyModelFileNameWithoutExtension
@@ -376,12 +376,12 @@ Module SourceFileNamesModule
 
 		'NOTE: Starting this at 1 means the first file name will not have a number and the second name will have a 2.
 		Dim nameNumber As Integer = 1
-		While TheApp.SmdFileNames.Contains(smdFileName.ToLower(TheApp.InternalCultureInfo))
+		While TheApp.SmdFileNames.Contains(smdFileName.ToLower(AppConstants.InternalCultureInfo))
 			nameNumber += 1
 			smdFileName = givenSmdFileName + "_" + nameNumber.ToString()
 		End While
 
-		TheApp.SmdFileNames.Add(smdFileName.ToLower(TheApp.InternalCultureInfo))
+		TheApp.SmdFileNames.Add(smdFileName.ToLower(AppConstants.InternalCultureInfo))
 		Return smdFileName
 	End Function
 

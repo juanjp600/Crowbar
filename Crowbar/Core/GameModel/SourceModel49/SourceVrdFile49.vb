@@ -105,49 +105,49 @@ Public Class SourceVrdFile49
 							line = "<trigger>"
 							line += " "
 							'pAxis->tolerance[j] = DEG2RAD( tolerance );
-							line += MathModule.RadiansToDegrees(1 / aTrigger.inverseToleranceAngle).ToString("0.######", TheApp.InternalNumberFormat)
+							line += MathModule.RadiansToDegrees(1 / aTrigger.inverseToleranceAngle).ToString("0.######", AppConstants.InternalNumberFormat)
 
 							'trigger.x = DEG2RAD( trigger.x );
 							'trigger.y = DEG2RAD( trigger.y );
 							'trigger.z = DEG2RAD( trigger.z );
 							'AngleQuaternion( trigger, pAxis->trigger[j] );
 							line += " "
-							line += MathModule.RadiansToDegrees(aTriggerTrigger.x).ToString("0.######", TheApp.InternalNumberFormat)
+							line += MathModule.RadiansToDegrees(aTriggerTrigger.x).ToString("0.######", AppConstants.InternalNumberFormat)
 							line += " "
-							line += MathModule.RadiansToDegrees(aTriggerTrigger.y).ToString("0.######", TheApp.InternalNumberFormat)
+							line += MathModule.RadiansToDegrees(aTriggerTrigger.y).ToString("0.######", AppConstants.InternalNumberFormat)
 							line += " "
-							line += MathModule.RadiansToDegrees(aTriggerTrigger.z).ToString("0.######", TheApp.InternalNumberFormat)
+							line += MathModule.RadiansToDegrees(aTriggerTrigger.z).ToString("0.######", AppConstants.InternalNumberFormat)
 							'line += " "
-							'line += MathModule.RadiansToDegrees(aTriggerTrigger.z).ToString("0.######", TheApp.InternalNumberFormat)
+							'line += MathModule.RadiansToDegrees(aTriggerTrigger.z).ToString("0.######", AppConstants.InternalNumberFormat)
 							'line += " "
-							'line += MathModule.RadiansToDegrees(aTriggerTrigger.y).ToString("0.######", TheApp.InternalNumberFormat)
+							'line += MathModule.RadiansToDegrees(aTriggerTrigger.y).ToString("0.######", AppConstants.InternalNumberFormat)
 							'line += " "
-							'line += MathModule.RadiansToDegrees(aTriggerTrigger.x).ToString("0.######", TheApp.InternalNumberFormat)
+							'line += MathModule.RadiansToDegrees(aTriggerTrigger.x).ToString("0.######", AppConstants.InternalNumberFormat)
 
 							'ang.x = DEG2RAD( ang.x );
 							'ang.y = DEG2RAD( ang.y );
 							'ang.z = DEG2RAD( ang.z );
 							'AngleQuaternion( ang, pAxis->quat[j] );
 							line += " "
-							line += MathModule.RadiansToDegrees(aTriggerQuat.x).ToString("0.######", TheApp.InternalNumberFormat)
+							line += MathModule.RadiansToDegrees(aTriggerQuat.x).ToString("0.######", AppConstants.InternalNumberFormat)
 							line += " "
-							line += MathModule.RadiansToDegrees(aTriggerQuat.y).ToString("0.######", TheApp.InternalNumberFormat)
+							line += MathModule.RadiansToDegrees(aTriggerQuat.y).ToString("0.######", AppConstants.InternalNumberFormat)
 							line += " "
-							line += MathModule.RadiansToDegrees(aTriggerQuat.z).ToString("0.######", TheApp.InternalNumberFormat)
+							line += MathModule.RadiansToDegrees(aTriggerQuat.z).ToString("0.######", AppConstants.InternalNumberFormat)
 							'line += " "
-							'line += MathModule.RadiansToDegrees(aTriggerQuat.z).ToString("0.######", TheApp.InternalNumberFormat)
+							'line += MathModule.RadiansToDegrees(aTriggerQuat.z).ToString("0.######", AppConstants.InternalNumberFormat)
 							'line += " "
-							'line += MathModule.RadiansToDegrees(aTriggerQuat.y).ToString("0.######", TheApp.InternalNumberFormat)
+							'line += MathModule.RadiansToDegrees(aTriggerQuat.y).ToString("0.######", AppConstants.InternalNumberFormat)
 							'line += " "
-							'line += MathModule.RadiansToDegrees(aTriggerQuat.x).ToString("0.######", TheApp.InternalNumberFormat)
+							'line += MathModule.RadiansToDegrees(aTriggerQuat.x).ToString("0.######", AppConstants.InternalNumberFormat)
 
 							'VectorAdd( basepos, pos, pAxis->pos[j] );
 							line += " "
-							line += aTrigger.pos.x.ToString("0.######", TheApp.InternalNumberFormat)
+							line += aTrigger.pos.x.ToString("0.######", AppConstants.InternalNumberFormat)
 							line += " "
-							line += aTrigger.pos.y.ToString("0.######", TheApp.InternalNumberFormat)
+							line += aTrigger.pos.y.ToString("0.######", AppConstants.InternalNumberFormat)
 							line += " "
-							line += aTrigger.pos.z.ToString("0.######", TheApp.InternalNumberFormat)
+							line += aTrigger.pos.z.ToString("0.######", AppConstants.InternalNumberFormat)
 							Me.theOutputFileStreamWriter.WriteLine(line)
 						Next
 					ElseIf aBone.proceduralRuleType = SourceMdlBone.STUDIO_PROC_AIMATBONE OrElse aBone.proceduralRuleType = SourceMdlBone.STUDIO_PROC_AIMATATTACH Then
@@ -178,29 +178,29 @@ Public Class SourceVrdFile49
 
 						line = "<aimvector>"
 						line += " "
-						line += aBone.theAimAtBone.aim.x.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.aim.x.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
-						line += aBone.theAimAtBone.aim.y.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.aim.y.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
-						line += aBone.theAimAtBone.aim.z.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.aim.z.ToString("0.######", AppConstants.InternalNumberFormat)
 						Me.theOutputFileStreamWriter.WriteLine(line)
 
 						line = "<upvector>"
 						line += " "
-						line += aBone.theAimAtBone.up.x.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.up.x.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
-						line += aBone.theAimAtBone.up.y.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.up.y.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
-						line += aBone.theAimAtBone.up.z.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.up.z.ToString("0.######", AppConstants.InternalNumberFormat)
 						Me.theOutputFileStreamWriter.WriteLine(line)
 
 						line = "<basepos>"
 						line += " "
-						line += aBone.theAimAtBone.basePos.x.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.basePos.x.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
-						line += aBone.theAimAtBone.basePos.y.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.basePos.y.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
-						line += aBone.theAimAtBone.basePos.z.ToString("0.######", TheApp.InternalNumberFormat)
+						line += aBone.theAimAtBone.basePos.z.ToString("0.######", AppConstants.InternalNumberFormat)
 						Me.theOutputFileStreamWriter.WriteLine(line)
 					End If
 				End If

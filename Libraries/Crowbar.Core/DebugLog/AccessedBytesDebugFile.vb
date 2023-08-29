@@ -16,7 +16,7 @@ Public Class AccessedBytesDebugFile
 		Dim line As String = ""
 
 		line = "// "
-		line += TheApp.GetHeaderComment()
+		line += AppConstants.HeaderComment
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 

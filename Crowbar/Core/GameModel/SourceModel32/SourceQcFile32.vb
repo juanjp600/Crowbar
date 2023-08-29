@@ -336,7 +336,7 @@ Public Class SourceQcFile32
 						ElseIf eyeballIndex = 1 AndAlso angle < 0 Then
 							eyeballNames.Add("eye_left")
 						Else
-							eyeballNames.Add("eye_" + eyeballIndex.ToString(TheApp.InternalNumberFormat))
+							eyeballNames.Add("eye_" + eyeballIndex.ToString(AppConstants.InternalNumberFormat))
 						End If
 
 						If anEyeball.theTextureIndex = -1 Then
@@ -352,22 +352,22 @@ Public Class SourceQcFile32
 						line += """ """
 						line += Me.theMdlFileData.theBones(anEyeball.boneIndex).theName
 						line += """ "
-						line += eyeballPosition.x.ToString("0.000000", TheApp.InternalNumberFormat)
+						line += eyeballPosition.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 						line += " "
-						line += eyeballPosition.y.ToString("0.000000", TheApp.InternalNumberFormat)
+						line += eyeballPosition.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 						line += " "
-						line += eyeballPosition.z.ToString("0.000000", TheApp.InternalNumberFormat)
+						line += eyeballPosition.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 						line += " """
 						line += eyeballTextureName
 						line += """ "
-						line += diameter.ToString("0.######", TheApp.InternalNumberFormat)
+						line += diameter.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
-						line += angle.ToString("0.######", TheApp.InternalNumberFormat)
+						line += angle.ToString("0.######", AppConstants.InternalNumberFormat)
 						line += " "
 						'Unused in later Source Engine versions.
 						line += """iris_unused"""
 						line += " "
-						line += Math.Round(irisScale, 6).ToString("0.######", TheApp.InternalNumberFormat)
+						line += Math.Round(irisScale, 6).ToString("0.######", AppConstants.InternalNumberFormat)
 						Me.theOutputFileStreamWriter.WriteLine(line)
 
 						'NOTE: Used to write frame indexes for eyelid lines and prevent eyelid flexes from being written in flex list in qc file.
@@ -442,25 +442,25 @@ Public Class SourceQcFile32
 						'TEST:
 						'line += anEyeball.upperFlexDesc(0).ToString()
 						'TEST:
-						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(TheApp.InternalNumberFormat)
+						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(AppConstants.InternalNumberFormat)
 						frameIndex += 1
 						line += " "
-						line += anEyeball.upperTarget(0).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.upperTarget(0).ToString("0.##", AppConstants.InternalNumberFormat)
 						line += " "
 						line += "neutral 0"
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.upperFlexDesc(1)).theVtaFrameIndex.ToString()
 						line += " "
-						line += anEyeball.upperTarget(1).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.upperTarget(1).ToString("0.##", AppConstants.InternalNumberFormat)
 						line += " "
 						line += "raiser "
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.upperFlexDesc(2)).theVtaFrameIndex.ToString()
 						'TEST:
 						'line += anEyeball.upperFlexDesc(2).ToString()
 						'TEST:
-						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(TheApp.InternalNumberFormat)
+						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(AppConstants.InternalNumberFormat)
 						frameIndex += 1
 						line += " "
-						line += anEyeball.upperTarget(2).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.upperTarget(2).ToString("0.##", AppConstants.InternalNumberFormat)
 						line += " "
 						line += "split "
 						'TODO: simplify.cpp RemapVertexAnimations(); probably should call SourceMdlFile.GetSplit()?
@@ -491,25 +491,25 @@ Public Class SourceQcFile32
 						'TEST:
 						'line += anEyeball.lowerFlexDesc(0).ToString()
 						'TEST:
-						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(TheApp.InternalNumberFormat)
+						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(AppConstants.InternalNumberFormat)
 						frameIndex += 1
 						line += " "
-						line += anEyeball.lowerTarget(0).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.lowerTarget(0).ToString("0.##", AppConstants.InternalNumberFormat)
 						line += " "
 						line += "neutral 0"
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.lowerFlexDesc(1)).theVtaFrameIndex.ToString()
 						line += " "
-						line += anEyeball.lowerTarget(1).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.lowerTarget(1).ToString("0.##", AppConstants.InternalNumberFormat)
 						line += " "
 						line += "raiser "
 						'line += theSourceEngineModel.theMdlFileHeader.theFlexDescs(anEyeball.lowerFlexDesc(2)).theVtaFrameIndex.ToString()
 						'TEST:
 						'line += anEyeball.lowerFlexDesc(2).ToString()
 						'TEST:
-						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(TheApp.InternalNumberFormat)
+						line += Me.theMdlFileData.theEyelidFlexFrameIndexes(frameIndex).ToString(AppConstants.InternalNumberFormat)
 						frameIndex += 1
 						line += " "
-						line += anEyeball.lowerTarget(2).ToString("0.##", TheApp.InternalNumberFormat)
+						line += anEyeball.lowerTarget(2).ToString("0.##", AppConstants.InternalNumberFormat)
 						line += " "
 						line += "split "
 						'TODO: simplify.cpp RemapVertexAnimations(); probably should call SourceMdlFile.GetSplit()?
@@ -561,17 +561,17 @@ Public Class SourceQcFile32
 
 				line = vbTab
 				line += "mouth "
-				line += i.ToString(TheApp.InternalNumberFormat)
+				line += i.ToString(AppConstants.InternalNumberFormat)
 				line += " """
 				line += Me.theMdlFileData.theFlexDescs(aMouth.flexDescIndex).theName
 				line += """ """
 				line += Me.theMdlFileData.theBones(aMouth.boneIndex).theName
 				line += """ "
-				line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetX.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetY.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetZ.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 
 				Me.theMdlFileData.theFlexDescs(aMouth.flexDescIndex).theDescIsUsedByFlex = True
@@ -631,7 +631,7 @@ Public Class SourceQcFile32
 				line += """"
 				If aFlexFrame.flexHasPartner Then
 					line += " "
-					line += aFlexFrame.flexSplit.ToString("0.######", TheApp.InternalNumberFormat)
+					line += aFlexFrame.flexSplit.ToString("0.######", AppConstants.InternalNumberFormat)
 				End If
 				line += " frame "
 				line += CStr(frameIndex)
@@ -691,7 +691,7 @@ Public Class SourceQcFile32
 			'								line += flexName.Remove(flexName.Length - 1, 1)
 			'								line += """"
 			'								line += " "
-			'								line += Me.GetSplit(aFlex, meshVertexIndexStart).ToString("0.######", TheApp.InternalNumberFormat)
+			'								line += Me.GetSplit(aFlex, meshVertexIndexStart).ToString("0.######", AppConstants.InternalNumberFormat)
 
 			'								theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescIndex).theDescIsUsedByFlex = True
 			'								theSourceEngineModel.theMdlFileHeader.theFlexDescs(aFlex.flexDescPartnerIndex).theDescIsUsedByFlex = True
@@ -740,9 +740,9 @@ Public Class SourceQcFile32
 				line += aFlexController.theType
 				line += " "
 				line += "range "
-				line += aFlexController.min.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFlexController.min.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aFlexController.max.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFlexController.max.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " """
 				line += aFlexController.theName
 				line += """"
@@ -831,7 +831,7 @@ Public Class SourceQcFile32
 			For i As Integer = 0 To aFlexRule.theFlexOps.Count - 1
 				aFlexOp = aFlexRule.theFlexOps(i)
 				If aFlexOp.op = SourceMdlFlexOp.STUDIO_CONST Then
-					stack.Push(New IntermediateExpression(Math.Round(aFlexOp.value, 6).ToString("0.######", TheApp.InternalNumberFormat), 10))
+					stack.Push(New IntermediateExpression(Math.Round(aFlexOp.value, 6).ToString("0.######", AppConstants.InternalNumberFormat), 10))
 				ElseIf aFlexOp.op = SourceMdlFlexOp.STUDIO_FETCH1 Then
 					'int m = pFlexcontroller( (LocalFlexController_t)pops->d.index)->localToGlobal;
 					'stack[k] = src[m];
@@ -1093,7 +1093,7 @@ Public Class SourceQcFile32
 			'Else
 			'	line += "$lod "
 			'End If
-			'		line += switchPoint.ToString("0.######", TheApp.InternalNumberFormat)
+			'		line += switchPoint.ToString("0.######", AppConstants.InternalNumberFormat)
 			'	End If
 			'	Me.theOutputFileStreamWriter.WriteLine(line)
 
@@ -1193,7 +1193,7 @@ Public Class SourceQcFile32
 				Else
 					line = "$lod "
 				End If
-				line += switchPoint.ToString("0.######", TheApp.InternalNumberFormat)
+				line += switchPoint.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 
 				line = "{"
@@ -1303,11 +1303,11 @@ Public Class SourceQcFile32
 				End If
 				line += aPoseParamDesc.theName
 				line += """ "
-				line += aPoseParamDesc.startingValue.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aPoseParamDesc.startingValue.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aPoseParamDesc.endingValue.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aPoseParamDesc.endingValue.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " loop "
-				line += aPoseParamDesc.loopingRange.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aPoseParamDesc.loopingRange.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		End If
@@ -1534,7 +1534,7 @@ Public Class SourceQcFile32
 					line = "$attachment "
 				End If
 				If anAttachment.theName = "" Then
-					line += i.ToString(TheApp.InternalNumberFormat)
+					line += i.ToString(AppConstants.InternalNumberFormat)
 				Else
 					line += """"
 					line += anAttachment.theName
@@ -1554,11 +1554,11 @@ Public Class SourceQcFile32
 				angleX = Math.Round(angleX, 2)
 				angleY = Math.Round(angleY, 2)
 				angleZ = Math.Round(angleZ, 2)
-				line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetX.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetY.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+				line += offsetZ.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " rotate "
 				''NOTE: Intentionally z,y,x order.
 				'line += angleZ.ToString()
@@ -1567,11 +1567,11 @@ Public Class SourceQcFile32
 				'line += " "
 				'line += angleX.ToString()
 				'NOTE: Intentionally in strange order.
-				line += angleY.ToString("0.######", TheApp.InternalNumberFormat)
+				line += angleY.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += (-angleZ).ToString("0.######", TheApp.InternalNumberFormat)
+				line += (-angleZ).ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += (-angleX).ToString("0.######", TheApp.InternalNumberFormat)
+				line += (-angleX).ToString("0.######", AppConstants.InternalNumberFormat)
 
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
@@ -1819,11 +1819,11 @@ Public Class SourceQcFile32
 		Else
 			line = "$eyeposition "
 		End If
-		line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetX.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetY.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetZ.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -1846,11 +1846,11 @@ Public Class SourceQcFile32
 		Else
 			line += "$illumposition "
 		End If
-		line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetX.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetY.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += offsetZ.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -1952,7 +1952,7 @@ Public Class SourceQcFile32
 		'				line += " """
 		'				line += Me.theSourceEngineModel.MdlFileHeader.theBones(boneWeightIndex).theName
 		'				line += """ "
-		'				line += aSeqDesc.theBoneWeights(boneWeightIndex).ToString("0.######", TheApp.InternalNumberFormat)
+		'				line += aSeqDesc.theBoneWeights(boneWeightIndex).ToString("0.######", AppConstants.InternalNumberFormat)
 		'				Me.theOutputFileStreamWriter.WriteLine(commentTag + line)
 		'			Next
 
@@ -1981,7 +1981,7 @@ Public Class SourceQcFile32
 				line += " """
 				line += Me.theMdlFileData.theBones(boneWeightIndex).theName
 				line += """ "
-				line += aWeightList.theWeights(boneWeightIndex).ToString("0.######", TheApp.InternalNumberFormat)
+				line += aWeightList.theWeights(boneWeightIndex).ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(commentTag + line)
 			Next
 
@@ -2195,7 +2195,7 @@ Public Class SourceQcFile32
 			line += """"
 			line += aSequenceDesc.theActivityName
 			line += """ "
-			line += aSequenceDesc.activityWeight.ToString(TheApp.InternalNumberFormat)
+			line += aSequenceDesc.activityWeight.ToString(AppConstants.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		End If
 
@@ -2210,7 +2210,7 @@ Public Class SourceQcFile32
 		'If aSequenceDesc.groupSize(0) <> aSequenceDesc.groupSize(1) Then
 		'	line = vbTab
 		'	line += "blendwidth "
-		'	line += aSequenceDesc.groupSize(0).ToString(TheApp.InternalNumberFormat)
+		'	line += aSequenceDesc.groupSize(0).ToString(AppConstants.InternalNumberFormat)
 		'	Me.theOutputFileStreamWriter.WriteLine(line)
 		'End If
 
@@ -2229,9 +2229,9 @@ Public Class SourceQcFile32
 		'		line = vbTab
 		'		line += "{ "
 		'		line += "event "
-		'		line += aSequenceDesc.theEvents(j).eventIndex.ToString(TheApp.InternalNumberFormat)
+		'		line += aSequenceDesc.theEvents(j).eventIndex.ToString(AppConstants.InternalNumberFormat)
 		'		line += " "
-		'		line += frameIndex.ToString(TheApp.InternalNumberFormat)
+		'		line += frameIndex.ToString(AppConstants.InternalNumberFormat)
 		'		If aSequenceDesc.theEvents(j).options <> "" Then
 		'			line += " """
 		'			line += CStr(aSequenceDesc.theEvents(j).options).Trim(Chr(0))
@@ -2242,13 +2242,13 @@ Public Class SourceQcFile32
 		'	Next
 		'End If
 
-		valueString = aSequenceDesc.fadeInTime.ToString("0.######", TheApp.InternalNumberFormat)
+		valueString = aSequenceDesc.fadeInTime.ToString("0.######", AppConstants.InternalNumberFormat)
 		line = vbTab
 		line += "fadein "
 		line += valueString
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
-		valueString = aSequenceDesc.fadeOutTime.ToString("0.######", TheApp.InternalNumberFormat)
+		valueString = aSequenceDesc.fadeOutTime.ToString("0.######", AppConstants.InternalNumberFormat)
 		line = vbTab
 		line += "fadeout "
 		line += valueString
@@ -2277,9 +2277,9 @@ Public Class SourceQcFile32
 				line += Me.theMdlFileData.theIkChains(ikLock.chainIndex).theName
 				line += """"
 				line += " "
-				line += ikLock.posWeight.ToString("0.######", TheApp.InternalNumberFormat)
+				line += ikLock.posWeight.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += ikLock.localQWeight.ToString("0.######", TheApp.InternalNumberFormat)
+				line += ikLock.localQWeight.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		End If
@@ -2349,7 +2349,7 @@ Public Class SourceQcFile32
 
 		line = vbTab
 		line += "fps "
-		line += anAnimationDesc.fps.ToString("0.######", TheApp.InternalNumberFormat)
+		line += anAnimationDesc.fps.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		If aSequenceDesc Is Nothing Then
@@ -2478,9 +2478,9 @@ Public Class SourceQcFile32
 					line += Me.theMdlFileData.thePoseParamDescs(aSeqDesc.paramIndex(i)).theName
 					line += """"
 					line += " "
-					line += aSeqDesc.paramStart(i).ToString("0.######", TheApp.InternalNumberFormat)
+					line += aSeqDesc.paramStart(i).ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += aSeqDesc.paramEnd(i).ToString("0.######", TheApp.InternalNumberFormat)
+					line += aSeqDesc.paramEnd(i).ToString("0.######", AppConstants.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				End If
 			Next
@@ -2532,13 +2532,13 @@ Public Class SourceQcFile32
 					line += """"
 
 					line += " "
-					line += layer.influenceStart.ToString("0.######", TheApp.InternalNumberFormat)
+					line += layer.influenceStart.ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += layer.influencePeak.ToString("0.######", TheApp.InternalNumberFormat)
+					line += layer.influencePeak.ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += layer.influenceTail.ToString("0.######", TheApp.InternalNumberFormat)
+					line += layer.influenceTail.ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += layer.influenceEnd.ToString("0.######", TheApp.InternalNumberFormat)
+					line += layer.influenceEnd.ToString("0.######", AppConstants.InternalNumberFormat)
 
 					If (layer.flags And SourceMdlAutoLayer.STUDIO_AL_XFADE) > 0 Then
 						line += " xfade"
@@ -2628,11 +2628,11 @@ Public Class SourceQcFile32
 					line += """"
 
 					'line += " knee "
-					'line += offsetX.ToString("0.######", TheApp.InternalNumberFormat)
+					'line += offsetX.ToString("0.######", AppConstants.InternalNumberFormat)
 					'line += " "
-					'line += offsetY.ToString("0.######", TheApp.InternalNumberFormat)
+					'line += offsetY.ToString("0.######", AppConstants.InternalNumberFormat)
 					'line += " "
-					'line += offsetZ.ToString("0.######", TheApp.InternalNumberFormat)
+					'line += offsetZ.ToString("0.######", AppConstants.InternalNumberFormat)
 					'------
 					'		GetToken(false);
 					'
@@ -2689,9 +2689,9 @@ Public Class SourceQcFile32
 					line += Me.theMdlFileData.theIkChains(ikLock.chainIndex).theName
 					line += """"
 					line += " "
-					line += ikLock.posWeight.ToString("0.######", TheApp.InternalNumberFormat)
+					line += ikLock.posWeight.ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += ikLock.localQWeight.ToString("0.######", TheApp.InternalNumberFormat)
+					line += ikLock.localQWeight.ToString("0.######", AppConstants.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				Next
 			End If
@@ -2892,19 +2892,19 @@ Public Class SourceQcFile32
 
 		line = vbTab
 		line += "$mass "
-		line += Me.thePhyFileData.theSourcePhyEditParamsSection.totalMass.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.thePhyFileData.theSourcePhyEditParamsSection.totalMass.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		line = vbTab
 		line += "$inertia "
-		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theInertia.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theInertia.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		line = vbTab
 		line += "$damping "
-		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theDamping.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theDamping.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		line = vbTab
 		line += "$rotdamping "
-		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theRotDamping.ToString("0.######", TheApp.InternalNumberFormat)
+		line += Me.thePhyFileData.theSourcePhyPhysCollisionModelMostUsedValues.theRotDamping.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 		If Me.thePhyFileData.theSourcePhyEditParamsSection.rootName <> "" Then
 			line = vbTab
@@ -2944,7 +2944,7 @@ Public Class SourceQcFile32
 				line += "$jointmassbias """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theMassBias.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theMassBias.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -2953,7 +2953,7 @@ Public Class SourceQcFile32
 				line += "$jointdamping """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theDamping.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theDamping.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -2962,7 +2962,7 @@ Public Class SourceQcFile32
 				line += "$jointinertia """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theInertia.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theInertia.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -2971,7 +2971,7 @@ Public Class SourceQcFile32
 				line += "$jointrotdamping """
 				line += aSourcePhysCollisionModel.theName
 				line += """ "
-				line += aSourcePhysCollisionModel.theRotDamping.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aSourcePhysCollisionModel.theRotDamping.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 
@@ -2982,31 +2982,31 @@ Public Class SourceQcFile32
 				line += "$jointconstrain """
 				line += aSourcePhysCollisionModel.theName
 				line += """ x limit "
-				line += aConstraint.theXMin.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theXMin.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theXMax.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theXMax.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theXFriction.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theXFriction.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 				line = vbTab
 				line += "$jointconstrain """
 				line += aSourcePhysCollisionModel.theName
 				line += """ y limit "
-				line += aConstraint.theYMin.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theYMin.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theYMax.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theYMax.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theYFriction.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theYFriction.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 				line = vbTab
 				line += "$jointconstrain """
 				line += aSourcePhysCollisionModel.theName
 				line += """ z limit "
-				line += aConstraint.theZMin.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theZMin.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theZMax.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theZMax.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aConstraint.theZFriction.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aConstraint.theZFriction.ToString("0.######", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			End If
 		Next
@@ -3113,21 +3113,21 @@ Public Class SourceQcFile32
 				line += """"
 
 				line += " "
-				line += aBone.position.x.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aBone.position.x.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aBone.position.y.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aBone.position.y.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aBone.position.z.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aBone.position.z.ToString("0.######", AppConstants.InternalNumberFormat)
 
 				If Me.theMdlFileData.version = 2531 Then
 					line += " 0.000000 0.000000 0.000000"
 				Else
 					line += " "
-					line += MathModule.RadiansToDegrees(aBone.rotation.y).ToString("0.######", TheApp.InternalNumberFormat)
+					line += MathModule.RadiansToDegrees(aBone.rotation.y).ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += MathModule.RadiansToDegrees(aBone.rotation.z).ToString("0.######", TheApp.InternalNumberFormat)
+					line += MathModule.RadiansToDegrees(aBone.rotation.z).ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += MathModule.RadiansToDegrees(aBone.rotation.x).ToString("0.######", TheApp.InternalNumberFormat)
+					line += MathModule.RadiansToDegrees(aBone.rotation.x).ToString("0.######", AppConstants.InternalNumberFormat)
 				End If
 
 				'TODO: These fixups are all zeroes for now.
@@ -3169,18 +3169,18 @@ Public Class SourceQcFile32
 				'}
 
 				line += " "
-				line += aFixupPosition.x.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupPosition.x.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aFixupPosition.y.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupPosition.y.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aFixupPosition.z.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupPosition.z.ToString("0.######", AppConstants.InternalNumberFormat)
 
 				line += " "
-				line += aFixupRotation.x.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupRotation.x.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aFixupRotation.y.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupRotation.y.ToString("0.######", AppConstants.InternalNumberFormat)
 				line += " "
-				line += aFixupRotation.z.ToString("0.######", TheApp.InternalNumberFormat)
+				line += aFixupRotation.z.ToString("0.######", AppConstants.InternalNumberFormat)
 
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
@@ -3281,17 +3281,17 @@ Public Class SourceQcFile32
 		Else
 			line = "$cbox "
 		End If
-		line += minX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minX.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += minY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minY.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += minZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minZ.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += maxX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxX.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += maxY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxY.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += maxZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxZ.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -3327,17 +3327,17 @@ Public Class SourceQcFile32
 		Else
 			line += "$bbox "
 		End If
-		line += minX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minX.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += minY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minY.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += minZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += minZ.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += maxX.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxX.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += maxY.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxY.ToString("0.######", AppConstants.InternalNumberFormat)
 		line += " "
-		line += maxZ.ToString("0.######", TheApp.InternalNumberFormat)
+		line += maxZ.ToString("0.######", AppConstants.InternalNumberFormat)
 		Me.theOutputFileStreamWriter.WriteLine(line)
 	End Sub
 
@@ -3433,23 +3433,23 @@ Public Class SourceQcFile32
 			Else
 				line = "$hbox "
 			End If
-			line += aHitbox.groupIndex.ToString(TheApp.InternalNumberFormat)
+			line += aHitbox.groupIndex.ToString(AppConstants.InternalNumberFormat)
 			line += " "
 			line += """"
 			line += Me.theMdlFileData.theBones(aHitbox.boneIndex).theName
 			line += """"
 			line += " "
-			line += aHitbox.boundingBoxMin.x.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMin.x.ToString("0.######", AppConstants.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMin.y.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMin.y.ToString("0.######", AppConstants.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMin.z.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMin.z.ToString("0.######", AppConstants.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMax.x.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMax.x.ToString("0.######", AppConstants.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMax.y.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMax.y.ToString("0.######", AppConstants.InternalNumberFormat)
 			line += " "
-			line += aHitbox.boundingBoxMax.z.ToString("0.######", TheApp.InternalNumberFormat)
+			line += aHitbox.boundingBoxMax.z.ToString("0.######", AppConstants.InternalNumberFormat)
 			line += " "
 			line += """"
 			line += aHitbox.theName
@@ -3561,15 +3561,15 @@ Public Class SourceQcFile32
 					Else
 						line = "$controller "
 					End If
-					line += boneController.inputField.ToString(TheApp.InternalNumberFormat)
+					line += boneController.inputField.ToString(AppConstants.InternalNumberFormat)
 					line += " """
 					line += Me.theMdlFileData.theBones(boneController.boneIndex).theName
 					line += """ "
 					line += boneController.TypeName
 					line += " "
-					line += boneController.startBlah.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.startBlah.ToString("0.######", AppConstants.InternalNumberFormat)
 					line += " "
-					line += boneController.endBlah.ToString("0.######", TheApp.InternalNumberFormat)
+					line += boneController.endBlah.ToString("0.######", AppConstants.InternalNumberFormat)
 					Me.theOutputFileStreamWriter.WriteLine(line)
 				Next
 			End If

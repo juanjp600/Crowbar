@@ -397,25 +397,25 @@ Public Class SourcePhyFile
 					thereIsAValue = FileManager.ReadKeyValueLine(Me.theInputFileReader, key, value)
 					If thereIsAValue Then
 						If key = "index" Then
-							aSourcePhysCollisionModel.theIndex = Integer.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theIndex = Integer.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "name" Then
 							aSourcePhysCollisionModel.theName = value
 						ElseIf key = "parent" Then
 							aSourcePhysCollisionModel.theParentIsValid = True
 							aSourcePhysCollisionModel.theParentName = value
 						ElseIf key = "mass" Then
-							aSourcePhysCollisionModel.theMass = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theMass = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "surfaceprop" Then
 							aSourcePhysCollisionModel.theSurfaceProp = value
 						ElseIf key = "damping" Then
-							aSourcePhysCollisionModel.theDamping = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theDamping = Single.Parse(value, AppConstants.InternalNumberFormat)
 							If Me.theDampingToCountMap.ContainsKey(aSourcePhysCollisionModel.theDamping) Then
 								Me.theDampingToCountMap(aSourcePhysCollisionModel.theDamping) += 1
 							Else
 								Me.theDampingToCountMap.Add(aSourcePhysCollisionModel.theDamping, 1)
 							End If
 						ElseIf key = "rotdamping" Then
-							aSourcePhysCollisionModel.theRotDamping = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theRotDamping = Single.Parse(value, AppConstants.InternalNumberFormat)
 							If Me.theRotDampingToCountMap.ContainsKey(aSourcePhysCollisionModel.theRotDamping) Then
 								Me.theRotDampingToCountMap(aSourcePhysCollisionModel.theRotDamping) += 1
 							Else
@@ -423,22 +423,22 @@ Public Class SourcePhyFile
 							End If
 						ElseIf key = "drag" Then
 							aSourcePhysCollisionModel.theDragCoefficientIsValid = True
-							aSourcePhysCollisionModel.theDragCoefficient = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theDragCoefficient = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "rollingDrag" Then
 							aSourcePhysCollisionModel.theRollingDragCoefficientIsValid = True
-							aSourcePhysCollisionModel.theRollingDragCoefficient = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theRollingDragCoefficient = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "inertia" Then
-							aSourcePhysCollisionModel.theInertia = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theInertia = Single.Parse(value, AppConstants.InternalNumberFormat)
 							If Me.theInertiaToCountMap.ContainsKey(aSourcePhysCollisionModel.theInertia) Then
 								Me.theInertiaToCountMap(aSourcePhysCollisionModel.theInertia) += 1
 							Else
 								Me.theInertiaToCountMap.Add(aSourcePhysCollisionModel.theInertia, 1)
 							End If
 						ElseIf key = "volume" Then
-							aSourcePhysCollisionModel.theVolume = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theVolume = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "massbias" Then
 							aSourcePhysCollisionModel.theMassBiasIsValid = True
-							aSourcePhysCollisionModel.theMassBias = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourcePhysCollisionModel.theMassBias = Single.Parse(value, AppConstants.InternalNumberFormat)
 						End If
 					End If
 				End While
@@ -514,27 +514,27 @@ Public Class SourcePhyFile
 					thereIsAValue = FileManager.ReadKeyValueLine(Me.theInputFileReader, key, value)
 					If thereIsAValue Then
 						If key = "parent" Then
-							aSourceRagdollConstraintDesc.theParentIndex = Integer.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theParentIndex = Integer.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "child" Then
-							aSourceRagdollConstraintDesc.theChildIndex = Integer.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theChildIndex = Integer.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "xmin" Then
-							aSourceRagdollConstraintDesc.theXMin = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theXMin = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "xmax" Then
-							aSourceRagdollConstraintDesc.theXMax = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theXMax = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "xfriction" Then
-							aSourceRagdollConstraintDesc.theXFriction = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theXFriction = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "ymin" Then
-							aSourceRagdollConstraintDesc.theYMin = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theYMin = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "ymax" Then
-							aSourceRagdollConstraintDesc.theYMax = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theYMax = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "yfriction" Then
-							aSourceRagdollConstraintDesc.theYFriction = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theYFriction = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "zmin" Then
-							aSourceRagdollConstraintDesc.theZMin = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theZMin = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "zmax" Then
-							aSourceRagdollConstraintDesc.theZMax = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theZMax = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "zfriction" Then
-							aSourceRagdollConstraintDesc.theZFriction = Single.Parse(value, TheApp.InternalNumberFormat)
+							aSourceRagdollConstraintDesc.theZFriction = Single.Parse(value, AppConstants.InternalNumberFormat)
 						End If
 					End If
 				End While
@@ -588,8 +588,8 @@ Public Class SourcePhyFile
 							tokens = value.Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
 							If tokens.Length = 2 Then
 								aSourcePhyCollisionPair = New SourcePhyCollisionPair()
-								aSourcePhyCollisionPair.obj0 = Integer.Parse(tokens(0), TheApp.InternalNumberFormat)
-								aSourcePhyCollisionPair.obj1 = Integer.Parse(tokens(1), TheApp.InternalNumberFormat)
+								aSourcePhyCollisionPair.obj0 = Integer.Parse(tokens(0), AppConstants.InternalNumberFormat)
+								aSourcePhyCollisionPair.obj1 = Integer.Parse(tokens(1), AppConstants.InternalNumberFormat)
 								Me.thePhyFileData.theSourcePhyCollisionPairs.Add(aSourcePhyCollisionPair)
 							End If
 						ElseIf key = "selfcollisions" Then
@@ -640,15 +640,15 @@ Public Class SourcePhyFile
 					thereIsAValue = FileManager.ReadKeyValueLine(Me.theInputFileReader, key, value)
 					If thereIsAValue Then
 						If key = "animfrictionmin" Then
-							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionMin = Single.Parse(value, TheApp.InternalNumberFormat)
+							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionMin = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "animfrictionmax" Then
-							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionMax = Single.Parse(value, TheApp.InternalNumberFormat)
+							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionMax = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "animfrictiontimein" Then
-							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionTimeIn = Single.Parse(value, TheApp.InternalNumberFormat)
+							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionTimeIn = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "animfrictiontimeout" Then
-							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionTimeOut = Single.Parse(value, TheApp.InternalNumberFormat)
+							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionTimeOut = Single.Parse(value, AppConstants.InternalNumberFormat)
 						ElseIf key = "animfrictiontimehold" Then
-							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionTimeHold = Single.Parse(value, TheApp.InternalNumberFormat)
+							Me.thePhyFileData.theSourcePhyAnimatedFrictionSection.animFrictionTimeHold = Single.Parse(value, AppConstants.InternalNumberFormat)
 						End If
 					End If
 				End While
@@ -706,7 +706,7 @@ Public Class SourcePhyFile
 						If key = "concave" Then
 							Me.thePhyFileData.theSourcePhyEditParamsSection.concave = value
 						ElseIf key = "totalmass" Then
-							Me.thePhyFileData.theSourcePhyEditParamsSection.totalMass = Single.Parse(value, TheApp.InternalNumberFormat)
+							Me.thePhyFileData.theSourcePhyEditParamsSection.totalMass = Single.Parse(value, AppConstants.InternalNumberFormat)
 						End If
 					End If
 				End While

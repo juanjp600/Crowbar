@@ -45,7 +45,7 @@ Module Common
 			For i As Integer = 0 To flexRule.theFlexOps.Count - 1
 				aFlexOp = flexRule.theFlexOps(i)
 				If aFlexOp.op = SourceMdlFlexOp.STUDIO_CONST Then
-					stack.Push(New IntermediateExpression(Math.Round(aFlexOp.value, 6).ToString("0.######", TheApp.InternalNumberFormat), 10))
+					stack.Push(New IntermediateExpression(Math.Round(aFlexOp.value, 6).ToString("0.######", AppConstants.InternalNumberFormat), 10))
 				ElseIf aFlexOp.op = SourceMdlFlexOp.STUDIO_FETCH1 Then
 					'int m = pFlexcontroller( (LocalFlexController_t)pops->d.index)->localToGlobal;
 					'stack[k] = src[m];
@@ -296,16 +296,16 @@ Module Common
 					Dim pCloseLidV As SourceMdlFlexController
 					pCloseLidV = flexControllers(aFlexOp.index)
 					Dim flCloseLidV As String
-					Dim flCloseLidVMin As String = Math.Round(pCloseLidV.min, 6).ToString("0.######", TheApp.InternalNumberFormat)
-					Dim flCloseLidVMax As String = Math.Round(pCloseLidV.max, 6).ToString("0.######", TheApp.InternalNumberFormat)
+					Dim flCloseLidVMin As String = Math.Round(pCloseLidV.min, 6).ToString("0.######", AppConstants.InternalNumberFormat)
+					Dim flCloseLidVMax As String = Math.Round(pCloseLidV.max, 6).ToString("0.######", AppConstants.InternalNumberFormat)
 					flCloseLidV = "(min(max((" + pCloseLidV.theName + " - " + flCloseLidVMin + ") / (" + flCloseLidVMax + " - " + flCloseLidVMin + "), 0), 1))"
 
 					Dim closeLidIndex As IntermediateExpression = stack.Pop()
 					Dim pCloseLid As SourceMdlFlexController
 					pCloseLid = flexControllers(CInt(closeLidIndex.theExpression))
 					Dim flCloseLid As String
-					Dim flCloseLidMin As String = Math.Round(pCloseLid.min, 6).ToString("0.######", TheApp.InternalNumberFormat)
-					Dim flCloseLidMax As String = Math.Round(pCloseLid.max, 6).ToString("0.######", TheApp.InternalNumberFormat)
+					Dim flCloseLidMin As String = Math.Round(pCloseLid.min, 6).ToString("0.######", AppConstants.InternalNumberFormat)
+					Dim flCloseLidMax As String = Math.Round(pCloseLid.max, 6).ToString("0.######", AppConstants.InternalNumberFormat)
 					flCloseLid = "(min(max((" + pCloseLid.theName + " - " + flCloseLidMin + ") / (" + flCloseLidMax + " - " + flCloseLidMin + "), 0), 1))"
 
 					' Unused, but need to pop it off the stack.
@@ -315,8 +315,8 @@ Module Common
 					Dim pEyeUpDown As SourceMdlFlexController
 					pEyeUpDown = flexControllers(CInt(eyeUpDownIndex.theExpression))
 					Dim flEyeUpDown As String
-					Dim flEyeUpDownMin As String = Math.Round(pEyeUpDown.min, 6).ToString("0.######", TheApp.InternalNumberFormat)
-					Dim flEyeUpDownMax As String = Math.Round(pEyeUpDown.max, 6).ToString("0.######", TheApp.InternalNumberFormat)
+					Dim flEyeUpDownMin As String = Math.Round(pEyeUpDown.min, 6).ToString("0.######", AppConstants.InternalNumberFormat)
+					Dim flEyeUpDownMax As String = Math.Round(pEyeUpDown.max, 6).ToString("0.######", AppConstants.InternalNumberFormat)
 					flEyeUpDown = "(-1 + 2 * (min(max((" + pEyeUpDown.theName + " - " + flEyeUpDownMin + ") / (" + flEyeUpDownMax + " - " + flEyeUpDownMin + "), 0), 1)))"
 
 					Dim newExpression As String
@@ -327,16 +327,16 @@ Module Common
 					Dim pCloseLidV As SourceMdlFlexController
 					pCloseLidV = flexControllers(aFlexOp.index)
 					Dim flCloseLidV As String
-					Dim flCloseLidVMin As String = Math.Round(pCloseLidV.min, 6).ToString("0.######", TheApp.InternalNumberFormat)
-					Dim flCloseLidVMax As String = Math.Round(pCloseLidV.max, 6).ToString("0.######", TheApp.InternalNumberFormat)
+					Dim flCloseLidVMin As String = Math.Round(pCloseLidV.min, 6).ToString("0.######", AppConstants.InternalNumberFormat)
+					Dim flCloseLidVMax As String = Math.Round(pCloseLidV.max, 6).ToString("0.######", AppConstants.InternalNumberFormat)
 					flCloseLidV = "(min(max((" + pCloseLidV.theName + " - " + flCloseLidVMin + ") / (" + flCloseLidVMax + " - " + flCloseLidVMin + "), 0), 1))"
 
 					Dim closeLidIndex As IntermediateExpression = stack.Pop()
 					Dim pCloseLid As SourceMdlFlexController
 					pCloseLid = flexControllers(CInt(closeLidIndex.theExpression))
 					Dim flCloseLid As String
-					Dim flCloseLidMin As String = Math.Round(pCloseLid.min, 6).ToString("0.######", TheApp.InternalNumberFormat)
-					Dim flCloseLidMax As String = Math.Round(pCloseLid.max, 6).ToString("0.######", TheApp.InternalNumberFormat)
+					Dim flCloseLidMin As String = Math.Round(pCloseLid.min, 6).ToString("0.######", AppConstants.InternalNumberFormat)
+					Dim flCloseLidMax As String = Math.Round(pCloseLid.max, 6).ToString("0.######", AppConstants.InternalNumberFormat)
 					flCloseLid = "(min(max((" + pCloseLid.theName + " - " + flCloseLidMin + ") / (" + flCloseLidMax + " - " + flCloseLidMin + "), 0), 1))"
 
 					' Unused, but need to pop it off the stack.
@@ -346,8 +346,8 @@ Module Common
 					Dim pEyeUpDown As SourceMdlFlexController
 					pEyeUpDown = flexControllers(CInt(eyeUpDownIndex.theExpression))
 					Dim flEyeUpDown As String
-					Dim flEyeUpDownMin As String = Math.Round(pEyeUpDown.min, 6).ToString("0.######", TheApp.InternalNumberFormat)
-					Dim flEyeUpDownMax As String = Math.Round(pEyeUpDown.max, 6).ToString("0.######", TheApp.InternalNumberFormat)
+					Dim flEyeUpDownMin As String = Math.Round(pEyeUpDown.min, 6).ToString("0.######", AppConstants.InternalNumberFormat)
+					Dim flEyeUpDownMax As String = Math.Round(pEyeUpDown.max, 6).ToString("0.######", AppConstants.InternalNumberFormat)
 					flEyeUpDown = "(-1 + 2 * (min(max((" + pEyeUpDown.theName + " - " + flEyeUpDownMin + ") / (" + flEyeUpDownMax + " - " + flEyeUpDownMin + "), 0), 1)))"
 
 					Dim newExpression As String

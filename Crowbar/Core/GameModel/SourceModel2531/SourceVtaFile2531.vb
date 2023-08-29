@@ -37,11 +37,11 @@ Public Class SourceVtaFile2531
 			name = Me.theMdlFileData.theBones(boneIndex).theName
 
 			line = "  "
-			line += boneIndex.ToString(TheApp.InternalNumberFormat)
+			line += boneIndex.ToString(AppConstants.InternalNumberFormat)
 			line += " """
 			line += name
 			line += """ "
-			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(TheApp.InternalNumberFormat)
+			line += Me.theMdlFileData.theBones(boneIndex).parentBoneIndex.ToString(AppConstants.InternalNumberFormat)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 		Next
 
@@ -77,7 +77,7 @@ Public Class SourceVtaFile2531
 			Else
 				line = "  time "
 			End If
-			line += timeIndex.ToString(TheApp.InternalNumberFormat)
+			line += timeIndex.ToString(AppConstants.InternalNumberFormat)
 			line += " # "
 			line += aFlexFrame.flexDescription
 			Me.theOutputFileStreamWriter.WriteLine(line)
@@ -145,19 +145,19 @@ Public Class SourceVtaFile2531
 				End If
 
 				line = "    "
-				line += vertexIndex.ToString(TheApp.InternalNumberFormat)
+				line += vertexIndex.ToString(AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		Catch ex As Exception
@@ -179,7 +179,7 @@ Public Class SourceVtaFile2531
 				Else
 					line = "  time "
 				End If
-				line += timeIndex.ToString(TheApp.InternalNumberFormat)
+				line += timeIndex.ToString(AppConstants.InternalNumberFormat)
 				line += " # "
 				line += aFlexFrame.flexDescription
 				Me.theOutputFileStreamWriter.WriteLine(line)
@@ -396,19 +396,19 @@ Public Class SourceVtaFile2531
 				'normal.z = 1
 
 				line = "    "
-				line += vertexIndex.ToString(TheApp.InternalNumberFormat)
+				line += vertexIndex.ToString(AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += position.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += position.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += normal.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.x.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += normal.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.y.ToString("0.000000", AppConstants.InternalNumberFormat)
 				line += " "
-				line += normal.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				line += normal.z.ToString("0.000000", AppConstants.InternalNumberFormat)
 				Me.theOutputFileStreamWriter.WriteLine(line)
 			Next
 		Catch ex As Exception

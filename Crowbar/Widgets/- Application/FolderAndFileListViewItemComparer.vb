@@ -28,7 +28,7 @@ Public Class FolderAndFileListViewItemComparer
 			returnVal = 1
 		Else
 			If Me.col = 1 AndAlso xItem.SubItems(4).Text <> "<Folder>" Then
-				If Int32.Parse(xItem.SubItems(Me.col).Text, NumberStyles.Integer Or NumberStyles.AllowThousands, TheApp.InternalCultureInfo) < Int32.Parse(yItem.SubItems(Me.col).Text, NumberStyles.Integer Or NumberStyles.AllowThousands, TheApp.InternalCultureInfo) Then
+				If Int32.Parse(xItem.SubItems(Me.col).Text, NumberStyles.Integer Or NumberStyles.AllowThousands, AppConstants.InternalCultureInfo) < Int32.Parse(yItem.SubItems(Me.col).Text, NumberStyles.Integer Or NumberStyles.AllowThousands, AppConstants.InternalCultureInfo) Then
 					returnVal = -1
 				Else
 					returnVal = 1
