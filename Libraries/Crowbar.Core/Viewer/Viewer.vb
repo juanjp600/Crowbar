@@ -138,7 +138,7 @@ Public Class Viewer
 		Me.theInputMdlPathFileName = info.mdlPathFileName
 		Me.theViewAsReplacementExtraSubfolder = info.viewAsReplacementExtraSubfolder
 		Me.theInputMdlIsViewedAsReplacement = info.viewAsReplacement
-		Me.theGameSetup = TheApp.Settings.GameSetups(info.gameSetupSelectedIndex)
+		Me.theGameSetup = AppSettings.Instance.GameSetups(info.gameSetupSelectedIndex)
 
 		If ViewerInputsAreOkay(info.viewerAction) Then
 			If info.viewerAction = ViewerInfo.ViewerActionType.GetData Then
@@ -185,7 +185,7 @@ Public Class Viewer
 			If Not File.Exists(modelViewerPathFileName) Then
 				inputsAreValid = False
 				Me.WriteErrorMessage("The model viewer, """ + modelViewerPathFileName + """, does not exist.")
-				Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
+				Me.UpdateProgress(1, ResourceStrings.GetString(ResourceStrings.Entry.ErrorMessageSDKMissingCause))
 			End If
 		End If
 
@@ -514,7 +514,7 @@ Public Class Viewer
 			'Me.theGameMaterialsFolder.CopyFolder(inputMaterialsPath, gameMaterialsPath)
 			Try
 				If FileManager.PathExistsAfterTryToCreate(gameMaterialsPath) Then
-					My.Computer.FileSystem.CopyDirectory(inputMaterialsPath, gameMaterialsPath)
+					FileManager.CopyFolder(inputMaterialsPath, gameMaterialsPath, false)
 					Me.theGameMaterialsFolder = gameMaterialsPath
 				Else
 					'errorMessage = "Crowbar tried to create """ + gameMaterialsPath + """, but it failed."
