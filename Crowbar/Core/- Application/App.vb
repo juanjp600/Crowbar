@@ -1,6 +1,8 @@
 Imports System.Collections.ObjectModel
 Imports System.Globalization
 Imports System.IO
+Imports System.Reflection
+Imports System.Resources
 Imports System.Text
 
 Public Class App
@@ -10,8 +12,6 @@ Public Class App
 
 	Public Sub New()
 		Me.IsDisposed = False
-
-		Me.theSmdFilesWritten = New List(Of String)()
 	End Sub
 
 #Region "IDisposable Support"
@@ -48,6 +48,13 @@ Public Class App
 		Me.theAppPath = Application.StartupPath
 		'NOTE: Needed for using DLLs placed in folder separate from main EXE file.
 		Environment.SetEnvironmentVariable("path", Paths.GetCustomDataPath(), EnvironmentVariableTarget.Process)
+
+		Dim resourceManager = new ResourceManager("Crowbar.Resources", AppConstants.EntryAssembly)
+		For Each entry In [Enum].GetValues(Of ResourceStrings.Entry)()
+			Dim a = resourceManager.GetString(entry.ToString())
+			ResourceStrings.Values(entry) = a
+		Next
+
 		Me.WriteRequiredFiles()
 		Me.LoadAppSettings()
 
@@ -140,13 +147,10 @@ Public Class App
 	'	End Set
 	'End Property
 
-	Public Property SmdFileNames() As List(Of String)
+	Public ReadOnly Property SmdFileNames() As List(Of String)
 		Get
-			Return Me.theSmdFilesWritten
+			Return SourceFileNamesModule.SmdFileNames
 		End Get
-		Set(ByVal value As List(Of String))
-			Me.theSmdFilesWritten = value
-		End Set
 	End Property
 
 #End Region
@@ -313,26 +317,6 @@ Public Class App
 		Finally
 		End Try
 	End Sub
-
-	Public Function GetHeaderComment() As String
-		Dim line As String
-
-		line = "Created by "
-		line += Me.GetProductNameAndVersion()
-
-		Return line
-	End Function
-
-	Public Function GetProductNameAndVersion() As String
-		Dim result As String
-
-		result = My.Application.Info.ProductName
-		result += " "
-		result += My.Application.Info.Version.ToString(2)
-
-		Return result
-	End Function
-
 #End Region
 
 #Region "Data"
@@ -352,8 +336,6 @@ Public Class App
 	Private thePacker As Packer
 	'Private theModelViewer As Viewer
 	'Private theModelRelativePathFileName As String
-
-	Private theSmdFilesWritten As List(Of String)
 
 #End Region
 

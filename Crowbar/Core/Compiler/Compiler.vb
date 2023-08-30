@@ -265,7 +265,7 @@ Public Class Compiler
 		End If
 
 		Dim progressDescriptionText As String
-		progressDescriptionText = "Compiling " + defineBonesText + "with " + TheApp.GetProductNameAndVersion() + ": "
+		progressDescriptionText = "Compiling " + defineBonesText + "with " + AppConstants.GetProductNameAndVersion() + ": "
 
 		Try
 			If TheApp.Settings.CompileMode = InputOptions.FolderRecursion Then
@@ -848,7 +848,7 @@ Public Class Compiler
 					Me.theCompiledLogFiles.Add(FileManager.GetRelativePathFileName(Me.theOutputPath, logPathFileName))
 				End If
 
-				Me.theLogFileStream.WriteLine("// " + TheApp.GetHeaderComment())
+				Me.theLogFileStream.WriteLine("// " + AppConstants.GetHeaderComment())
 				Me.theLogFileStream.Flush()
 			Catch ex As Exception
 				Me.UpdateProgress()

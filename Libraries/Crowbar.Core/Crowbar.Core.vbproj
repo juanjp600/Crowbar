@@ -17,4 +17,16 @@
       <ProjectReference Include="..\TodoRemove\TodoRemove.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="GameModel\CompiledFiles\AniFile\AniFile44\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="GameModel\CompiledFiles\AniFile\AniFile44\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="GameModel\CompiledFiles\AniFile\AniFile44\**" />
+    </ItemGroup>
+
 </Project>

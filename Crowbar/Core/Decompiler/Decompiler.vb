@@ -178,7 +178,7 @@ Public Class Decompiler
 		End If
 
 		Dim progressDescriptionText As String
-		progressDescriptionText = "Decompiling with " + TheApp.GetProductNameAndVersion() + ": "
+		progressDescriptionText = "Decompiling with " + AppConstants.GetProductNameAndVersion() + ": "
 
 		Try
 			If Me.theInputMdlPathName = "" Then
@@ -498,7 +498,7 @@ Public Class Decompiler
 					Me.theDecompiledLogFiles.Add(FileManager.GetRelativePathFileName(Me.theOutputPath, logPathFileName))
 				End If
 
-				Me.theLogFileStream.WriteLine("// " + TheApp.GetHeaderComment())
+				Me.theLogFileStream.WriteLine("// " + AppConstants.GetHeaderComment())
 				Me.theLogFileStream.Flush()
 			Catch ex As Exception
 				Me.UpdateProgress()

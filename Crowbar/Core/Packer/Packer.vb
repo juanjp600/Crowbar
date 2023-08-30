@@ -171,7 +171,7 @@ Public Class Packer
 		inputPath = TheApp.Settings.PackInputPath
 
 		Dim progressDescriptionText As String
-		progressDescriptionText = "Packing with " + TheApp.GetProductNameAndVersion() + ": "
+		progressDescriptionText = "Packing with " + AppConstants.GetProductNameAndVersion() + ": "
 
 		Try
 			If TheApp.Settings.PackMode = PackInputOptions.ParentFolder Then
@@ -636,7 +636,7 @@ Public Class Packer
 					Me.thePackedLogFiles.Add(FileManager.GetRelativePathFileName(Me.theOutputPath, logPathFileName))
 				End If
 
-				Me.theLogFileStream.WriteLine("// " + TheApp.GetHeaderComment())
+				Me.theLogFileStream.WriteLine("// " + AppConstants.GetHeaderComment())
 				Me.theLogFileStream.Flush()
 			Catch ex As Exception
 				Me.UpdateProgress()

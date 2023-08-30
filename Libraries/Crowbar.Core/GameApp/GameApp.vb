@@ -125,7 +125,7 @@ Public Class GameApp
 		If Not File.Exists(gameAppPathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage("The game's executable, """ + gameAppPathFileName + """, does not exist.")
-			Me.UpdateProgress(1, Localization.GetString(Localization.Entry.ErrorMessageSDKMissingCause))
+			Me.UpdateProgress(1, ResourceStrings.GetString(ResourceStrings.Entry.ErrorMessageSDKMissingCause))
 		End If
 
 		Return inputsAreValid

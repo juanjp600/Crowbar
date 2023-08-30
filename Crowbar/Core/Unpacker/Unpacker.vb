@@ -393,7 +393,7 @@ Public Class Unpacker
 					Me.theLogFiles.Add(FileManager.GetRelativePathFileName(Me.theOutputPath, logPathFileName))
 				End If
 
-				Me.theLogFileStream.WriteLine("// " + TheApp.GetHeaderComment())
+				Me.theLogFileStream.WriteLine("// " + AppConstants.GetHeaderComment())
 				Me.theLogFileStream.Flush()
 			Catch ex As Exception
 				Me.UpdateProgress()
@@ -605,7 +605,7 @@ Public Class Unpacker
 		Me.theOutputPath = Me.GetOutputPath()
 
 		Dim progressDescriptionText As String
-		progressDescriptionText = "Unpacking with " + TheApp.GetProductNameAndVersion() + ": "
+		progressDescriptionText = "Unpacking with " + AppConstants.GetProductNameAndVersion() + ": "
 
 		Dim packageRelativePathFileName As String = Nothing
 		Try

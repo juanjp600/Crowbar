@@ -19,4 +19,24 @@ Public Module AppConstants
 	Public ReadOnly EntryAssembly As Assembly = Assembly.GetEntryAssembly()
 
 	Public Const CrowbarSteamPipeFileName As String = "CrowbarSteamPipe.exe"
+	
+	
+	Public Function GetHeaderComment() As String
+		Dim line As String
+
+		line = "Created by "
+		line += GetProductNameAndVersion()
+
+		Return line
+	End Function
+
+	Public Function GetProductNameAndVersion() As String
+		Dim result As String
+
+		result = EntryAssembly.GetName().Name
+		result += " "
+		result += EntryAssembly.GetName().Version.ToString(2)
+
+		Return result
+	End Function
 End Module
