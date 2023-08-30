@@ -148,7 +148,7 @@ Public Class SourcePackageVpk
 			Me.theVpkFile = New VpkFile(Me.thePackageDirFileReader, Me.thePackageFileReader, Me.theVpkFileData)
 
 			Dim outputPathStart As String
-			If TheApp.Settings.UnpackFolderForEachPackageIsChecked Then
+			If AppSettings.Instance.UnpackFolderForEachPackageIsChecked Then
 				Dim targetFolder As String = Path.GetFileNameWithoutExtension(Me.thePackagePathFileName)
 				outputPathStart = Path.Combine(Me.theOutputPath, targetFolder)
 			Else
@@ -159,7 +159,7 @@ Public Class SourcePackageVpk
 				Dim entryPathFileName As String = entry.DisplayPathFileName
 
 				Dim outputPathFileName As String
-				If TheApp.Settings.UnpackKeepFullPathIsChecked Then
+				If AppSettings.Instance.UnpackKeepFullPathIsChecked Then
 					outputPathFileName = Path.Combine(outputPathStart, entryPathFileName)
 				Else
 					Dim entryRelativePathFileName As String = FileManager.GetRelativePathFileName(Me.theSelectedRelativeOutputPath, entryPathFileName)

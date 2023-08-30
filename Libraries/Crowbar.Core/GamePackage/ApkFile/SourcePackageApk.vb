@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 
-Public Class SourcePackageGma
+Public Class SourcePackageApk
 	Inherits SourcePackage
 
 #Region "Creation and Destruction"
@@ -18,37 +18,37 @@ Public Class SourcePackageGma
 #Region "Private Methods"
 
 	Protected Overrides Sub GetEntries_Internal()
-		If Me.theGmaFileData Is Nothing Then
-			Me.theGmaFileData = New GmaFileData()
+		If Me.theApkFileData Is Nothing Then
+			Me.theApkFileData = New ApkFileData()
 		End If
 
-		Dim packageFile As New GmaFile(Me.thePackageFileReader, Me.theGmaFileData)
+		Dim packageFile As New ApkFile(Me.thePackageFileReader, Me.theApkFileData)
 
 		packageFile.ReadHeader()
-		If Me.theGmaFileData IsNot Nothing AndAlso Me.theGmaFileData.IsSourcePackage Then
+		If Me.theApkFileData IsNot Nothing AndAlso Me.theApkFileData.IsSourcePackage Then
 			packageFile.ReadEntries()
 			Me.ProcessEntries()
 		End If
 
-		Me.theEntries = Me.theGmaFileData.theEntries
+		Me.theEntries = Me.theApkFileData.theEntries
 	End Sub
 
 	Private Sub ProcessEntries()
-		For Each entry As SourcePackageDirectoryEntry In Me.theGmaFileData.theEntries
+		For Each entry As SourcePackageDirectoryEntry In Me.theApkFileData.theEntries
 			entry.PackageDataPathFileName = Me.thePackagePathFileName
 			entry.PackageDataPathFileNameExists = File.Exists(entry.PackageDataPathFileName)
 		Next
 	End Sub
 
 	Protected Overrides Sub UnpackEntryDatasToFiles_Internal()
-		If Me.theGmaFileData Is Nothing Then
-			Me.theGmaFileData = New GmaFileData()
+		If Me.theApkFileData Is Nothing Then
+			Me.theApkFileData = New ApkFileData()
 		End If
 
-		Dim packageFile As New GmaFile(Me.thePackageFileReader, Me.theGmaFileData)
+		Dim packageFile As New ApkFile(Me.thePackageFileReader, Me.theApkFileData)
 
 		Dim outputPathStart As String
-		If TheApp.Settings.UnpackFolderForEachPackageIsChecked Then
+		If AppSettings.Instance.UnpackFolderForEachPackageIsChecked Then
 			Dim targetFolder As String = Path.GetFileNameWithoutExtension(Me.thePackagePathFileName)
 			outputPathStart = Path.Combine(Me.theOutputPath, targetFolder)
 		Else
@@ -56,15 +56,10 @@ Public Class SourcePackageGma
 		End If
 
 		For Each entry As SourcePackageDirectoryEntry In Me.theEntries
-			Dim entryPathFileName As String
-			If entry.DisplayPathFileName.StartsWith("<") Then
-				entryPathFileName = entry.PathFileName
-			Else
-				entryPathFileName = entry.DisplayPathFileName
-			End If
+			Dim entryPathFileName As String = entry.DisplayPathFileName
 
 			Dim outputPathFileName As String
-			If TheApp.Settings.UnpackKeepFullPathIsChecked Then
+			If AppSettings.Instance.UnpackKeepFullPathIsChecked Then
 				outputPathFileName = Path.Combine(outputPathStart, entryPathFileName)
 			Else
 				Dim entryRelativePathFileName As String = FileManager.GetRelativePathFileName(Me.theSelectedRelativeOutputPath, entryPathFileName)
@@ -84,7 +79,7 @@ Public Class SourcePackageGma
 
 #Region "Data"
 
-	Private theGmaFileData As GmaFileData
+	Private theApkFileData As ApkFileData
 
 #End Region
 

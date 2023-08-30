@@ -19,6 +19,8 @@
 
     <ItemGroup>
       <Compile Remove="GameModel\CompiledFiles\AniFile\AniFile44\**" />
+      <Compile Remove="GamePackage\- Base\SourcePackageEventArgs.vb" />
+      <Compile Remove="GamePackage\SourcePackageEventArgs.vb" />
     </ItemGroup>
 
     <ItemGroup>
