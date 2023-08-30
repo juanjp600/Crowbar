@@ -119,13 +119,13 @@ Public Class MappingTool
 
 		Dim gameSetup As GameSetup
 		Dim mappingToolPathFileName As String
-		gameSetup = TheApp.Settings.GameSetups(Me.theGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(Me.theGameSetupSelectedIndex)
 		mappingToolPathFileName = gameSetup.MappingToolPathFileName
 
 		If Not File.Exists(mappingToolPathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage("The mapping tool, """ + mappingToolPathFileName + """, does not exist.")
-			Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
+			Me.UpdateProgress(1, ResourceStrings.GetString(ResourceStrings.Entry.ErrorMessageSDKMissingCause))
 		End If
 
 		Return inputsAreValid
@@ -141,7 +141,7 @@ Public Class MappingTool
 		'Dim currentFolder As String
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(Me.theGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(Me.theGameSetupSelectedIndex)
 		gamePath = FileManager.GetPath(gameSetup.GamePathFileName)
 		'gameFileName = Path.GetFileName(gameSetup.GamePathFileName)
 		mappingToolPathFileName = gameSetup.MappingToolPathFileName

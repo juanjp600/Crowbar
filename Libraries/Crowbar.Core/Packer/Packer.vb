@@ -75,7 +75,7 @@ Public Class Packer
 		Dim gamePackerPathFileName As String
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.PackGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.PackGameSetupSelectedIndex)
 		gamePackerPathFileName = gameSetup.PackerPathFileName
 
 		Return gamePackerPathFileName
@@ -85,7 +85,7 @@ Public Class Packer
 		Dim gamePath As String
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.PackGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.PackGameSetupSelectedIndex)
 		gamePath = FileManager.GetPath(gameSetup.GamePathFileName)
 
 		Return gamePath
@@ -94,10 +94,10 @@ Public Class Packer
 	Private Function GetOutputPath() As String
 		Dim outputPath As String
 
-		If TheApp.Settings.PackOutputFolderOption = PackOutputPathOptions.ParentFolder Then
-			outputPath = TheApp.Settings.PackOutputParentPath
+		If AppSettings.Instance.PackOutputFolderOption = PackOutputPathOptions.ParentFolder Then
+			outputPath = AppSettings.Instance.PackOutputParentPath
 		Else
-			outputPath = TheApp.Settings.PackOutputPath
+			outputPath = AppSettings.Instance.PackOutputPath
 		End If
 
 		'This will change a relative path to an absolute path.
@@ -112,27 +112,27 @@ Public Class Packer
 		gamePackerPathFileName = Me.GetGamePackerPathFileName()
 		Dim gameSetup As GameSetup
 		Dim gamePathFileName As String
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.PackGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.PackGameSetupSelectedIndex)
 		gamePathFileName = gameSetup.GamePathFileName
 
 		If Not File.Exists(gamePackerPathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage(1, "The model packer, """ + gamePackerPathFileName + """, does not exist.")
-			Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
+			Me.UpdateProgress(1, ResourceStrings.GetString(ResourceStrings.Entry.ErrorMessageSDKMissingCause))
 		End If
 		If Not File.Exists(gamePathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage(1, "The game's """ + gamePathFileName + """ file does not exist.")
-			Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
+			Me.UpdateProgress(1, ResourceStrings.GetString(ResourceStrings.Entry.ErrorMessageSDKMissingCause))
 		End If
-		If String.IsNullOrEmpty(TheApp.Settings.PackInputPath) Then
+		If String.IsNullOrEmpty(AppSettings.Instance.PackInputPath) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage(1, "Input Folder has not been selected.")
-		ElseIf Not Directory.Exists(TheApp.Settings.PackInputPath) Then
+		ElseIf Not Directory.Exists(AppSettings.Instance.PackInputPath) Then
 			inputsAreValid = False
-			Me.WriteErrorMessage(1, "The Input Folder, """ + TheApp.Settings.PackInputPath + """, does not exist.")
+			Me.WriteErrorMessage(1, "The Input Folder, """ + AppSettings.Instance.PackInputPath + """, does not exist.")
 		End If
-		If TheApp.Settings.PackOutputFolderOption = PackOutputPathOptions.WorkFolder Then
+		If AppSettings.Instance.PackOutputFolderOption = PackOutputPathOptions.WorkFolder Then
 			If Not FileManager.PathExistsAfterTryToCreate(Me.theOutputPath) Then
 				inputsAreValid = False
 				Me.WriteErrorMessage(1, "The Output Folder, """ + Me.theOutputPath + """ could not be created.")
@@ -148,11 +148,11 @@ Public Class Packer
 		packResultInfo.theStatus = status
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.PackGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.PackGameSetupSelectedIndex)
 
 		If Me.thePackedFiles.Count > 0 Then
 			packResultInfo.thePackedRelativePathFileNames = Me.thePackedFiles
-		ElseIf TheApp.Settings.PackLogFileIsChecked Then
+		ElseIf AppSettings.Instance.PackLogFileIsChecked Then
 			packResultInfo.thePackedRelativePathFileNames = Me.thePackedLogFiles
 		End If
 
@@ -168,13 +168,13 @@ Public Class Packer
 		Me.thePackedFiles.Clear()
 
 		Dim inputPath As String
-		inputPath = TheApp.Settings.PackInputPath
+		inputPath = AppSettings.Instance.PackInputPath
 
 		Dim progressDescriptionText As String
 		progressDescriptionText = "Packing with " + AppConstants.GetProductNameAndVersion() + ": "
 
 		Try
-			If TheApp.Settings.PackMode = PackInputOptions.ParentFolder Then
+			If AppSettings.Instance.PackMode = PackInputOptions.ParentFolder Then
 				progressDescriptionText += """" + inputPath + """ (parent folder)"
 				Me.UpdateProgressStart(progressDescriptionText + " ...")
 
@@ -221,7 +221,7 @@ Public Class Packer
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
 		Try
-			If TheApp.Settings.PackMode = PackInputOptions.Folder Then
+			If AppSettings.Instance.PackMode = PackInputOptions.Folder Then
 				status = Me.CreateLogTextFile(Nothing, inputPath)
 			End If
 
@@ -269,12 +269,12 @@ Public Class Packer
 		If gamePackerFileName = "gmad.exe" Then
 			If Directory.Exists(inputPath) Then
 				Dim garrysModAppInfo As GarrysModSteamAppInfo = New GarrysModSteamAppInfo()
-				Dim addonJsonPathFileName As String = garrysModAppInfo.CreateAddonJsonFile(inputPath, TheApp.Settings.PackGmaTitle, TheApp.Settings.PackGmaItemTags)
+				Dim addonJsonPathFileName As String = garrysModAppInfo.CreateAddonJsonFile(inputPath, AppSettings.Instance.PackGmaTitle, AppSettings.Instance.PackGmaItemTags)
 				If Not File.Exists(addonJsonPathFileName) Then
 					result = "error"
 				End If
 			End If
-		ElseIf TheApp.Settings.PackOptionMultiFileVpkIsChecked Then
+		ElseIf AppSettings.Instance.PackOptionMultiFileVpkIsChecked Then
 			Try
 				Me.theInputPath = inputPath
 				Dim parentPath As String = FileManager.GetPath(inputPath)
@@ -337,13 +337,13 @@ Public Class Packer
 		Dim arguments As String = ""
 		'NOTE: Vpk.exe expects extra options before the input folder option.
 		'      Gmad.exe has only one extra option: warninvalid.
-		If TheApp.Settings.PackOptionsText <> "" Then
-			arguments += TheApp.Settings.PackOptionsText
+		If AppSettings.Instance.PackOptionsText <> "" Then
+			arguments += AppSettings.Instance.PackOptionsText
 			arguments += " "
 		End If
 		If gamePackerFileName = "gmad.exe" Then
 			arguments += "create -folder "
-		ElseIf TheApp.Settings.PackOptionMultiFileVpkIsChecked Then
+		ElseIf AppSettings.Instance.PackOptionMultiFileVpkIsChecked Then
 			'IMPORTANT: Must be in same folder as the files to be packed so that the package will store the correct folder structure.
 			Directory.SetCurrentDirectory(inputPath)
 			'IMPORTANT: Must use "-v" for verbose mode to have an output message and avoid Crowbar complaining about no status message.
@@ -352,9 +352,9 @@ Public Class Packer
 		arguments += """"
 		arguments += inputFolder
 		arguments += """"
-		If gamePackerFileName = "gmad.exe" AndAlso TheApp.Settings.PackOptionIgnoreWhitelistWarningsIsChecked Then
+		If gamePackerFileName = "gmad.exe" AndAlso AppSettings.Instance.PackOptionIgnoreWhitelistWarningsIsChecked Then
 			arguments += " -warninvalid"
-		ElseIf TheApp.Settings.PackOptionMultiFileVpkIsChecked Then
+		ElseIf AppSettings.Instance.PackOptionMultiFileVpkIsChecked Then
 			arguments += " @..\"
 			arguments += Path.GetFileName(Me.theVpkMultiFileListFileName)
 		End If
@@ -388,7 +388,7 @@ Public Class Packer
 	End Sub
 
 	Private Sub ProcessPackage(ByVal inputPath As String)
-		Dim gameSetup As GameSetup = TheApp.Settings.GameSetups(TheApp.Settings.PackGameSetupSelectedIndex)
+		Dim gameSetup As GameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.PackGameSetupSelectedIndex)
 		Dim gamePackerFileName As String = Path.GetFileName(gameSetup.PackerPathFileName)
 		Dim sourcePathFileName As String = inputPath
 		If gamePackerFileName = "gmad.exe" Then
@@ -397,7 +397,7 @@ Public Class Packer
 			'    so use the file name shown in the log from Gmad.
 			sourcePathFileName = Path.GetDirectoryName(sourcePathFileName)
 			sourcePathFileName = Path.Combine(sourcePathFileName, Me.theGmadResultFileName)
-		ElseIf TheApp.Settings.PackOptionMultiFileVpkIsChecked AndAlso File.Exists(Me.theVpkMultiFileListFileName) Then
+		ElseIf AppSettings.Instance.PackOptionMultiFileVpkIsChecked AndAlso File.Exists(Me.theVpkMultiFileListFileName) Then
 			File.Delete(Me.theVpkMultiFileListFileName)
 			Dim inputFolder As String = Path.GetFileName(inputPath)
 			sourcePathFileName = Path.Combine(inputPath, inputFolder)
@@ -408,7 +408,7 @@ Public Class Packer
 		If File.Exists(sourcePathFileName) Then
 			Dim targetFileName As String = Path.GetFileName(sourcePathFileName)
 
-			If Not gamePackerFileName = "gmad.exe" AndAlso TheApp.Settings.PackOptionMultiFileVpkIsChecked Then
+			If Not gamePackerFileName = "gmad.exe" AndAlso AppSettings.Instance.PackOptionMultiFileVpkIsChecked Then
 				Me.MoveMultiFileVPK()
 			Else
 				Dim targetPathFileName As String = Path.Combine(Me.theOutputPath, targetFileName)
@@ -568,7 +568,7 @@ Public Class Packer
 		Dim listFileName As String
 		Dim listPathFileName As String
 
-		If Directory.Exists(TheApp.Settings.PackInputPath) Then
+		If Directory.Exists(AppSettings.Instance.PackInputPath) Then
 			Try
 				' Create a folder in the Windows Temp path, to prevent potential file collisions and to provide user a more obvious folder name.
 				Dim guid As Guid
@@ -609,9 +609,9 @@ Public Class Packer
 	Private Function CreateLogTextFile(ByVal inputParentPath As String, ByVal inputPath As String) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.PackGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.PackGameSetupSelectedIndex)
 
-		If TheApp.Settings.PackLogFileIsChecked Then
+		If AppSettings.Instance.PackLogFileIsChecked Then
 			Dim inputFolderName As String
 			Dim logPath As String
 			Dim logFileName As String

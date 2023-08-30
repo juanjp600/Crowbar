@@ -30,7 +30,7 @@ Public Class Unpacker
 	Private Sub Init()
 		Me.InitUnpackModes()
 
-		AddHandler TheApp.Settings.GameSetups.ListChanged, AddressOf Me.GameSetups_ListChanged
+		AddHandler AppSettings.Instance.GameSetups.ListChanged, AddressOf Me.GameSetups_ListChanged
 		AddHandler Me.DoWork, AddressOf Me.Unpacker_DoWork
 	End Sub
 
@@ -41,14 +41,14 @@ Public Class Unpacker
 
 		Me.theUnpackModes.Add("------")
 
-		For Each aGameSetup As GameSetup In TheApp.Settings.GameSetups
+		For Each aGameSetup As GameSetup In AppSettings.Instance.GameSetups
 			Me.theUnpackModes.Add(aGameSetup.GameName)
 		Next
 	End Sub
 
 	' Do not need Free() because this object is destroyed only on program exit.
 	'Private Sub Free()
-	'	RemoveHandler TheApp.Settings.GameSetups.ListChanged, AddressOf Me.GameSetups_ListChanged
+	'	RemoveHandler AppSettings.Instance.GameSetups.ListChanged, AddressOf Me.GameSetups_ListChanged
 	'	RemoveHandler Me.DoWork, AddressOf Me.Unpacker_DoWork
 	'End Sub
 
@@ -74,14 +74,14 @@ Public Class Unpacker
 		Dim gameSetupsOffset As Integer = Me.theUnpackModes.IndexOf("------") + 1
 
 		If e.ListChangedType = ListChangedType.ItemAdded Then
-			Dim aGameSetup As GameSetup = TheApp.Settings.GameSetups(e.NewIndex)
+			Dim aGameSetup As GameSetup = AppSettings.Instance.GameSetups(e.NewIndex)
 			Me.theUnpackModes.Insert(gameSetupsOffset + e.NewIndex, aGameSetup.GameName)
 		ElseIf e.ListChangedType = ListChangedType.ItemDeleted AndAlso e.OldIndex = -2 Then
 			Me.theUnpackModes.RemoveAt(gameSetupsOffset + e.NewIndex)
 		ElseIf e.ListChangedType = ListChangedType.ItemChanged Then
 			If e.PropertyDescriptor IsNot Nothing Then
 				If e.PropertyDescriptor.Name = "GameName" Then
-					Dim aGameSetup As GameSetup = TheApp.Settings.GameSetups(e.NewIndex)
+					Dim aGameSetup As GameSetup = AppSettings.Instance.GameSetups(e.NewIndex)
 					Me.theUnpackModes.RemoveAt(Me.theUnpackModes.IndexOf("------") + 1 + e.NewIndex)
 					Me.theUnpackModes.Insert(gameSetupsOffset + e.NewIndex, aGameSetup.GameName)
 				End If
@@ -94,10 +94,10 @@ Public Class Unpacker
 #Region "Methods"
 
 	Public Sub RefreshUnpackModes()
-		If TheApp.Unpacker.UnpackModes(0) <> "File" Then
+		If UnpackModes(0) <> "File" Then
 			Me.theUnpackModes.Insert(0, "File")
 		End If
-		If TheApp.Unpacker.UnpackModes(1) <> "Folder" Then
+		If UnpackModes(1) <> "Folder" Then
 			Me.theUnpackModes.Insert(1, "Folder")
 		End If
 		'Me.theUnpackModes.Add("Folder and subfolders")
@@ -250,18 +250,18 @@ Public Class Unpacker
 	Private Function GetOutputPath() As String
 		Dim outputPath As String
 
-		If TheApp.Settings.UnpackOutputFolderOption = UnpackOutputPathOptions.SameFolder Then
-			outputPath = TheApp.Settings.UnpackOutputSamePath
-		ElseIf TheApp.Settings.UnpackOutputFolderOption = UnpackOutputPathOptions.Subfolder Then
-			If File.Exists(TheApp.Settings.UnpackPackagePathFolderOrFileName) Then
-				outputPath = Path.Combine(FileManager.GetPath(TheApp.Settings.UnpackPackagePathFolderOrFileName), TheApp.Settings.UnpackOutputSubfolderName)
-			ElseIf Directory.Exists(TheApp.Settings.UnpackPackagePathFolderOrFileName) Then
-				outputPath = Path.Combine(TheApp.Settings.UnpackPackagePathFolderOrFileName, TheApp.Settings.UnpackOutputSubfolderName)
+		If AppSettings.Instance.UnpackOutputFolderOption = UnpackOutputPathOptions.SameFolder Then
+			outputPath = AppSettings.Instance.UnpackOutputSamePath
+		ElseIf AppSettings.Instance.UnpackOutputFolderOption = UnpackOutputPathOptions.Subfolder Then
+			If File.Exists(AppSettings.Instance.UnpackPackagePathFolderOrFileName) Then
+				outputPath = Path.Combine(FileManager.GetPath(AppSettings.Instance.UnpackPackagePathFolderOrFileName), AppSettings.Instance.UnpackOutputSubfolderName)
+			ElseIf Directory.Exists(AppSettings.Instance.UnpackPackagePathFolderOrFileName) Then
+				outputPath = Path.Combine(AppSettings.Instance.UnpackPackagePathFolderOrFileName, AppSettings.Instance.UnpackOutputSubfolderName)
 			Else
 				outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 			End If
 		Else
-			outputPath = TheApp.Settings.UnpackOutputFullPath
+			outputPath = AppSettings.Instance.UnpackOutputFullPath
 		End If
 
 		'This will change a relative path to an absolute path.
@@ -272,12 +272,12 @@ Public Class Unpacker
 	Private Function UnpackerInputsAreValid() As Boolean
 		Dim inputsAreValid As Boolean = True
 
-		If String.IsNullOrEmpty(TheApp.Settings.UnpackPackagePathFolderOrFileName) Then
+		If String.IsNullOrEmpty(AppSettings.Instance.UnpackPackagePathFolderOrFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage(1, "Package file or folder has not been selected.")
-		ElseIf TheApp.Settings.UnpackModeIndex = TheApp.Unpacker.UnpackModes.IndexOf("File") AndAlso Not File.Exists(TheApp.Settings.UnpackPackagePathFolderOrFileName) Then
+		ElseIf AppSettings.Instance.UnpackModeIndex = UnpackModes.IndexOf("File") AndAlso Not File.Exists(AppSettings.Instance.UnpackPackagePathFolderOrFileName) Then
 			inputsAreValid = False
-			Me.WriteErrorMessage(1, "The package file, """ + TheApp.Settings.UnpackPackagePathFolderOrFileName + """, does not exist.")
+			Me.WriteErrorMessage(1, "The package file, """ + AppSettings.Instance.UnpackPackagePathFolderOrFileName + """, does not exist.")
 		End If
 
 		Return inputsAreValid
@@ -292,7 +292,7 @@ Public Class Unpacker
 			unpackResultInfo.theUnpackedRelativePathFileNames = Me.theUnpackedMdlFiles
 		ElseIf Me.theUnpackedRelativePathsAndFileNames.Count > 0 Then
 			unpackResultInfo.theUnpackedRelativePathFileNames = Me.theUnpackedRelativePathsAndFileNames
-		ElseIf TheApp.Settings.UnpackLogFileIsChecked Then
+		ElseIf AppSettings.Instance.UnpackLogFileIsChecked Then
 			unpackResultInfo.theUnpackedRelativePathFileNames = Me.theLogFiles
 		Else
 			unpackResultInfo.theUnpackedRelativePathFileNames = Nothing
@@ -375,14 +375,14 @@ Public Class Unpacker
 	Private Function CreateLogTextFile() As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.UnpackLogFileIsChecked Then
+		If AppSettings.Instance.UnpackLogFileIsChecked Then
 			Dim logPath As String
 			Dim logFileName As String
 			Dim logPathFileName As String
 
 			Try
 				logPath = Me.theOutputPath
-				logFileName = My.Resources.Unpack_LogFileNameSuffix
+				logFileName = ResourceStrings.GetString(ResourceStrings.Entry.Unpack_LogFileNameSuffix)
 				FileManager.CreatePath(logPath)
 				logPathFileName = Path.Combine(logPath, logFileName)
 
@@ -516,7 +516,7 @@ Public Class Unpacker
 
 		Dim packagePathFileName As String
 		Dim packagePath As String = ""
-		packagePathFileName = TheApp.Settings.UnpackPackagePathFolderOrFileName
+		packagePathFileName = AppSettings.Instance.UnpackPackagePathFolderOrFileName
 		If File.Exists(packagePathFileName) Then
 			packagePath = FileManager.GetPath(packagePathFileName)
 		ElseIf Directory.Exists(packagePathFileName) Then
@@ -530,9 +530,9 @@ Public Class Unpacker
 		Try
 			Me.thePackageDirectoryPathFileNamesAlreadyProcessed = New SortedSet(Of String)()
 
-			If TheApp.Settings.UnpackModeIndex = TheApp.Unpacker.UnpackModes.IndexOf("Folder and subfolders") Then
+			If AppSettings.Instance.UnpackModeIndex = UnpackModes.IndexOf("Folder and subfolders") Then
 				Me.ListPackagesInFolderRecursively(packagePath)
-			ElseIf TheApp.Settings.UnpackModeIndex = TheApp.Unpacker.UnpackModes.IndexOf("Folder") OrElse TheApp.Settings.UnpackModeIndex > TheApp.Unpacker.UnpackModes.IndexOf("------") Then
+			ElseIf AppSettings.Instance.UnpackModeIndex = UnpackModes.IndexOf("Folder") OrElse AppSettings.Instance.UnpackModeIndex > UnpackModes.IndexOf("------") Then
 				Me.ListPackagesInFolder(packagePath)
 			Else
 				Me.ListPackage(packagePathFileName)
@@ -610,7 +610,7 @@ Public Class Unpacker
 		Dim packageRelativePathFileName As String = Nothing
 		Try
 			Dim packagePathFileName As String
-			packagePathFileName = TheApp.Settings.UnpackPackagePathFolderOrFileName
+			packagePathFileName = AppSettings.Instance.UnpackPackagePathFolderOrFileName
 
 			progressDescriptionText += """" + packagePathFileName + """"
 			Me.UpdateProgressStart(progressDescriptionText + " ...")

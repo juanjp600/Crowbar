@@ -19,17 +19,17 @@ Module VersionModule
 			Dim backupSettingsFileName As String
 
 			'NOTE: "ChangeDirectory" to settings folder to avoid problems with longer filenames.
-			currentFolder = My.Computer.FileSystem.CurrentDirectory
-			My.Computer.FileSystem.CurrentDirectory = Path.GetDirectoryName(appSettingsPathFileName)
+			currentFolder = Directory.GetCurrentDirectory()
+			Directory.SetCurrentDirectory(Path.GetDirectoryName(appSettingsPathFileName))
 
 			settingsFileName = Path.GetFileName(appSettingsPathFileName)
 			backupSettingsFileName = Path.GetFileNameWithoutExtension(appSettingsPathFileName) + " [backup " + DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "]" + Path.GetExtension(appSettingsPathFileName)
 
 			If Not File.Exists(backupSettingsFileName) Then
-				My.Computer.FileSystem.CopyFile(settingsFileName, backupSettingsFileName, False)
+				File.Copy(settingsFileName, backupSettingsFileName, False)
 			End If
 
-			My.Computer.FileSystem.CurrentDirectory = currentFolder
+			Directory.SetCurrentDirectory(currentFolder)
 
 			xmlDoc.Save(appSettingsPathFileName)
 		End If
