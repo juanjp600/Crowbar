@@ -1,7 +1,7 @@
 Imports System.IO
 Imports System.Xml
 
-Module VersionModule
+Public Module VersionModule
 
 	Public Sub ConvertSettingsFile(ByVal appSettingsPathFileName As String)
 		Dim xmlDoc As XmlDocument
