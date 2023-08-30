@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Crowbar", "Crowbar\Crowbar.vbproj", "{4D38CC05-8BDE-4A02-8FE9-3261938CE30A}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CrowbarLauncher", "CrowbarLauncher\CrowbarLauncher.vbproj", "{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CrowbarSteamPipe", "CrowbarSteamPipe\CrowbarSteamPipe.vbproj", "{729BCD31-F9F3-4947-ABEE-8F09CEF104FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{0AA7DCA0-0146-4CD8-85EB-262CB1D825CE}"
@@ -31,14 +29,6 @@ Global
 		{4D38CC05-8BDE-4A02-8FE9-3261938CE30A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D38CC05-8BDE-4A02-8FE9-3261938CE30A}.Release|x86.ActiveCfg = Release|Any CPU
 		{4D38CC05-8BDE-4A02-8FE9-3261938CE30A}.Release|x86.Build.0 = Release|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Debug|x86.Build.0 = Debug|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Release|x86.ActiveCfg = Release|Any CPU
-		{0A4880D3-CD4D-4EDF-AADE-3F342751FEB7}.Release|x86.Build.0 = Release|Any CPU
 		{729BCD31-F9F3-4947-ABEE-8F09CEF104FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{729BCD31-F9F3-4947-ABEE-8F09CEF104FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729BCD31-F9F3-4947-ABEE-8F09CEF104FF}.Debug|x86.ActiveCfg = Debug|Any CPU

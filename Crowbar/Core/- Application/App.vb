@@ -162,17 +162,6 @@ Public Class App
 	End Function
 
 	Public Sub WriteRequiredFiles()
-		Me.WriteResourceToFileIfDifferent(My.Resources.steam_api, Paths.SteamAPIDLLFilePath)
-
-		'NOTE: Although Crowbar itself does not need the DLL file extracted, CrowbarSteamPipe needs it extracted.
-		Me.WriteResourceToFileIfDifferent(My.Resources.Steamworks_NET, Paths.SteamworksDotNetFilePath)
-
-		Me.WriteResourceToFileIfDifferent(My.Resources.CrowbarSteamPipe, Paths.CrowbarSteamPipeFilePath)
-
-		Me.WriteResourceToFileIfDifferent(My.Resources.lzma, Paths.LzmaExeFilePath)
-
-		Me.WriteResourceToFileIfDifferent(My.Resources.lzham_x86, Paths.LzhamAPIDLLFilePath)
-
 		'NOTE: Only write settings file if it does not exist.
 		Try
 			If Not File.Exists(Paths.AppSettingsFilePath) Then
@@ -183,30 +172,6 @@ Public Class App
 			'Throw New Exception(ex.Message, ex.InnerException)
 			Exit Sub
 		Finally
-		End Try
-	End Sub
-
-	Public Sub WriteUpdaterFiles()
-		Me.WriteResourceToFileIfDifferent(My.Resources.SevenZr, Paths.SevenZrExeFilePath)
-
-		Me.WriteResourceToFileIfDifferent(My.Resources.CrowbarLauncher, Paths.CrowbarLauncherExeFilePath)
-	End Sub
-
-	Public Sub DeleteUpdaterFiles()
-		Try
-			If File.Exists(Paths.SevenZrExeFilePath) Then
-				File.Delete(Paths.SevenZrExeFilePath)
-			End If
-		Catch ex As Exception
-			Dim debug As Integer = 4242
-		End Try
-
-		Try
-			If File.Exists(Paths.CrowbarLauncherExeFilePath) Then
-				File.Delete(Paths.CrowbarLauncherExeFilePath)
-			End If
-		Catch ex As Exception
-			Dim debug As Integer = 4242
 		End Try
 	End Sub
 

@@ -232,8 +232,6 @@ Public Class Updater
 
 	'NOTE: This is run in a background thread.
 	Private Sub Update_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
-		TheApp.WriteUpdaterFiles()
-
 		Dim currentFolder As String
 		currentFolder = Directory.GetCurrentDirectory()
 		Directory.SetCurrentDirectory(Me.theLocalPath)
@@ -242,8 +240,6 @@ Public Class Updater
 		Me.OpenNewVersion()
 
 		Directory.SetCurrentDirectory(currentFolder)
-
-		TheApp.DeleteUpdaterFiles()
 	End Sub
 
 	'NOTE: This is run in a background thread.

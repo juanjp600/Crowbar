@@ -40,6 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CrowbarSteamPipe\CrowbarSteamPipe.vbproj" />
       <ProjectReference Include="..\Libraries\TodoRemove\TodoRemove.csproj" />
       <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
     </ItemGroup>
