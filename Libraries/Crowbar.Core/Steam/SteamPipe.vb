@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.IO.Pipes
+Imports System.Threading
 Imports BackwardsCompatibility
 
 Public Class SteamPipe
@@ -51,7 +52,15 @@ Public Class SteamPipe
 
 		Me.theCrowbarSteamPipeServer = New NamedPipeServerStream("CrowbarSteamPipe" + pipeNameSuffix, PipeDirection.InOut, 1)
 		Console.WriteLine("Waiting for client to connect to pipe ...")
-		Me.theCrowbarSteamPipeServer.WaitForConnection()
+		While Not Me.theCrowbarSteamPipeServer.IsConnected()
+			Thread.Sleep(200)
+			If Me.theCrowbarSteamPipeProcess Is Nothing Then
+				Throw New Exception("CrowbarSteamPipe process is null")
+			End If
+			If Me.theCrowbarSteamPipeProcess.HasExited Then
+				Throw New Exception("CrowbarSteamPipe process exited with code " + Me.theCrowbarSteamPipeProcess.ExitCode.ToString() + " before pipe could be connected")
+			End If
+		End While
 		Console.WriteLine("... Client connected to pipe.")
 
 		Me.theStreamWriter = New StreamWriter(Me.theCrowbarSteamPipeServer)
