@@ -54,27 +54,13 @@ Public Class GarrysModSteamAppInfo
 			processedPathFileName = Path.ChangeExtension(processedGivenPathFileName, ".gma")
 
 			bw.ReportProgress(0, "Decompressing downloaded Garry's Mod workshop file into a GMA file." + vbCrLf)
-			Dim lzmaExeProcess As New Process()
 			Try
-				lzmaExeProcess.StartInfo.UseShellExecute = False
-				'NOTE: From Microsoft website: 
-				'      On Windows Vista and earlier versions of the Windows operating system, 
-				'      the length of the arguments added to the length of the full path to the process must be less than 2080. 
-				'      On Windows 7 and later versions, the length must be less than 32699. 
-				'FROM BAT file: lzma.exe d %1 "%~n1.gma"
-				lzmaExeProcess.StartInfo.FileName = Paths.LzmaExeFilePath
-				lzmaExeProcess.StartInfo.Arguments = "d """ + processedGivenPathFileName + """ """ + processedPathFileName + """"
-#If DEBUG Then
-				lzmaExeProcess.StartInfo.CreateNoWindow = False
-#Else
-				lzmaExeProcess.StartInfo.CreateNoWindow = True
-#End If
-				lzmaExeProcess.Start()
-				lzmaExeProcess.WaitForExit()
+				Using archive As New SevenZipExtractor.ArchiveFile(processedGivenPathFileName)
+					archive.Extract(processedPathFileName, True)
+				End Using
 			Catch ex As Exception
 				Throw New System.Exception("Crowbar tried to decompress the file """ + processedGivenPathFileName + """ to """ + processedPathFileName + """ but Windows gave this message: " + ex.Message)
 			Finally
-				lzmaExeProcess.Close()
 				bw.ReportProgress(0, "Decompress done." + vbCrLf)
 			End Try
 
@@ -412,54 +398,5 @@ Public Class GarrysModSteamAppInfo
 
 	Private theBackgroundWorker As BackgroundWorkerEx
 	Private theTempCrowbarPath As String
-
-#Region "Notes about other attempts at compressing GMA file"
-
-	'NOTE: C# library was too slow to compress.
-	'If Me.ID = GarrysModAppID Then
-	'	Using gmaStream As FileStream = New FileStream(givenPathFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None)
-	'		Dim ms As MemoryStream = Nothing
-	'		Try
-	'			ms = CType(LZMA.LZMAEncodeStream.CompressStreamLZMA(gmaStream), MemoryStream)
-
-	'			processedPathFileName = Path.ChangeExtension(givenPathFileName, ".lzma")
-	'			Using outStream As FileStream = New FileStream(processedPathFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None)
-	'				ms.WriteTo(outStream)
-	'			End Using
-	'		Catch ex As Exception
-	'			Dim debug As Integer = 4242
-	'		Finally
-	'			If ms IsNot Nothing Then
-	'				ms.Close()
-	'			End If
-	'		End Try
-	'	End Using
-	'End If
-	'======
-	'NOTE: SevenZipCompressor requires library files to be in same folder as Crowbar.exe, but want to put them in user "%appdata%" folder.
-	'If Me.ID = GarrysModAppID Then
-	'	Using gmaStream As FileStream = New FileStream(givenPathFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None)
-	'		Try
-	'			processedPathFileName = Path.ChangeExtension(givenPathFileName, ".lzma")
-	'			Using outStream As FileStream = New FileStream(processedPathFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None)
-	'				'TODO: This line raises exception if SevenZipSharp.dll is not beside Crowbar.exe.
-	'				SevenZip.SevenZipCompressor.SetLibraryPath(TheApp.SevenZDLLPathFileName)
-	'				'SevenZip.SevenZipCompressor.SetLibraryPath("")
-	'				'SevenZip.SevenZipCompressor.SetLibraryPath("C:\Program Files\7-Zip\7z.dll")
-	'				Dim compress As SevenZip.SevenZipCompressor = New SevenZip.SevenZipCompressor()
-	'				compress.ArchiveFormat = SevenZip.OutArchiveFormat.Zip
-	'				compress.CompressionMethod = SevenZip.CompressionMethod.Lzma
-	'				compress.CompressionLevel = SevenZip.CompressionLevel.High
-	'				compress.CompressStream(gmaStream, outStream)
-	'				'compressor.CompressFiles(compressedFile, new string[] { sourceFile })
-	'			End Using
-	'		Catch ex As Exception
-	'			Dim debug As Integer = 4242
-	'		Finally
-	'		End Try
-	'	End Using
-	'End If
-
-#End Region
 
 End Class

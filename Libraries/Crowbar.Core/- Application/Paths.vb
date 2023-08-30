@@ -4,58 +4,10 @@ Public Module Paths
 
     Private Const PreviewsRelativePath As String = "previews"
     Private Const theAppSettingsFileName As String = "Crowbar Settings.xml"
-    Private Const theSteamAPIDLLFileName As String = "steam_api.dll"
-    Private Const theSteamworksDotNetDLLFileName As String = "Steamworks.NET.dll"
-    Private Const theSevenZrEXEFileName As String = "7zr.exe"
-    Private Const theCrowbarLauncherEXEFileName As String = "CrowbarLauncher.exe"
-    Private Const theLzmaExeFileName As String = "lzma.exe"
-    Private Const theLzhamDLLFileName As String = "lzham_x86.dll"
 
-    Public ReadOnly Property SteamAPIDLLFilePath() As String
-        Get
-            Return Path.Combine(GetCustomDataPath(), theSteamAPIDLLFileName)
-        End Get
-    End Property
-    
-    Public ReadOnly Property SteamworksDotNetFilePath() As String
-        Get
-            Return Path.Combine(GetCustomDataPath(), theSteamworksDotNetDLLFileName)
-        End Get
-    End Property
-
-    Public ReadOnly Property CrowbarSteamPipeFilePath() As String
-        Get
-            Return Path.Combine(GetCustomDataPath(), AppConstants.CrowbarSteamPipeFileName)
-        End Get
-    End Property
-    
-    Public ReadOnly Property LzmaExeFilePath() As String
-        Get
-            Return Path.Combine(GetCustomDataPath(), theLzmaExeFileName)
-        End Get
-    End Property
-
-    Public ReadOnly Property LzhamAPIDLLFilePath() As String
-        Get
-            Return Path.Combine(GetCustomDataPath(), theLzhamDLLFileName)
-        End Get
-    End Property
-    
     Public ReadOnly Property AppSettingsFilePath() As String
         Get
             Return Path.Combine(GetCustomDataPath(), theAppSettingsFileName)
-        End Get
-    End Property
-
-    Public ReadOnly Property SevenZrExeFilePath() As String
-        Get
-            Return Path.Combine(GetCustomDataPath(), theSevenZrEXEFileName)
-        End Get
-    End Property
-
-    Public ReadOnly Property CrowbarLauncherExeFilePath() As String
-        Get
-            Return Path.Combine(GetCustomDataPath(), theCrowbarLauncherEXEFileName)
         End Get
     End Property
 
