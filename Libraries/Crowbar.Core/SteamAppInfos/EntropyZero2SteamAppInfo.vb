@@ -13,7 +13,6 @@ Public Class EntropyZero2SteamAppInfo
 		Me.UsesSteamUGC = True
 		Me.CanUseContentFolderOrFile = False
 		'Me.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files")
-		Me.TagsControlType = GetType(EntropyZero2TagsUserControl)
 	End Sub
 
 End Class

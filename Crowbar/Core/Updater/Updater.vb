@@ -255,7 +255,7 @@ Public Class Updater
 			'      On Windows Vista and earlier versions of the Windows operating system, 
 			'      the length of the arguments added to the length of the full path to the process must be less than 2080. 
 			'      On Windows 7 and later versions, the length must be less than 32699. 
-			sevenZrExeProcess.StartInfo.FileName = TheApp.SevenZrExePathFileName
+			sevenZrExeProcess.StartInfo.FileName = Paths.SevenZrExeFilePath
 			sevenZrExeProcess.StartInfo.Arguments = "x """ + Me.theLocalFileName + """"
 #If DEBUG Then
 			sevenZrExeProcess.StartInfo.CreateNoWindow = False
@@ -303,11 +303,11 @@ Public Class Updater
 					'End If
 					crowbarOrLauncherExeProcess.StartInfo.Arguments = ""
 				Else
-					crowbarOrLauncherExeProcess.StartInfo.FileName = TheApp.CrowbarLauncherExePathFileName
+					crowbarOrLauncherExeProcess.StartInfo.FileName = Paths.CrowbarLauncherExeFilePath
 					crowbarOrLauncherExeProcess.StartInfo.Arguments = Process.GetCurrentProcess().Id.ToString() + " """ + currentCrowbarExePathFileName + """"
 				End If
 				If TheApp.Settings.UpdateCopySettingsIsChecked Then
-					crowbarOrLauncherExeProcess.StartInfo.Arguments += " " + App.SettingsParameter + """" + TheApp.GetAppSettingsPathFileName() + """"
+					crowbarOrLauncherExeProcess.StartInfo.Arguments += " " + App.SettingsParameter + """" + Paths.GetAppSettingsFilePath() + """"
 				End If
 #If DEBUG Then
 				crowbarOrLauncherExeProcess.StartInfo.CreateNoWindow = False

@@ -1,4 +1,5 @@
 Imports System.Globalization
+Imports System.Reflection
 
 Public Module AppConstants
 
@@ -14,4 +15,8 @@ Public Module AppConstants
 
 	Public Readonly InternalCultureInfo As CultureInfo = CultureInfo.InvariantCulture
 	Public Readonly InternalNumberFormat As NumberFormatInfo = NumberFormatInfo.InvariantInfo
+
+	Public ReadOnly EntryAssembly As Assembly = Assembly.GetEntryAssembly()
+
+	Public Const CrowbarSteamPipeFileName As String = "CrowbarSteamPipe.exe"
 End Module

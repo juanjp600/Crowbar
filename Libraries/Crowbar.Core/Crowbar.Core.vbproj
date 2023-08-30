@@ -5,9 +5,16 @@
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+        <Import Include="System.Drawing"/>
+    </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="GameModel\" />
+      <PackageReference Include="Steamworks.NET" Version="20.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\TodoRemove\TodoRemove.csproj" />
     </ItemGroup>
 
 </Project>

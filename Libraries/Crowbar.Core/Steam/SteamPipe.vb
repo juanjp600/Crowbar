@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.IO.Pipes
+Imports BackwardsCompatibility
 
 Public Class SteamPipe
 
@@ -35,7 +36,7 @@ Public Class SteamPipe
 		Me.theCrowbarSteamPipeProcess = New Process()
 		Try
 			Me.theCrowbarSteamPipeProcess.StartInfo.UseShellExecute = False
-			Me.theCrowbarSteamPipeProcess.StartInfo.FileName = App.CrowbarSteamPipeFileName
+			Me.theCrowbarSteamPipeProcess.StartInfo.FileName = AppConstants.CrowbarSteamPipeFileName
 			Me.theCrowbarSteamPipeProcess.StartInfo.Arguments = pipeNameSuffix
 #If DEBUG Then
 			Me.theCrowbarSteamPipeProcess.StartInfo.CreateNoWindow = False
@@ -245,7 +246,8 @@ Public Class SteamPipe
 					End If
 
 					Dim pictureBytes As New MemoryStream(data)
-					Me.theBackgroundWorker.ReportProgress(1, Image.FromStream(pictureBytes))
+					Throw New CursedException("TODO: replace System.Drawing.Image")
+					'Me.theBackgroundWorker.ReportProgress(1, Image.FromStream(pictureBytes))
 				Catch ex As Exception
 					Me.theBackgroundWorker.ReportProgress(0, "WARNING: Unable to get preview image." + vbCrLf)
 				End Try

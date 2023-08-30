@@ -153,7 +153,7 @@ Module SourceFileNamesModule
 
 		path = ""
 		If TheApp.Settings.DecompileBoneAnimationPlaceInSubfolderIsChecked Then
-			path = modelName + "_" + App.AnimsSubFolderName
+			path = modelName + "_" + Paths.AnimsSubFolderName
 		End If
 
 		Return path

@@ -81,6 +81,14 @@ Public Class SteamAppInfoBase
 		Return steamAppInfos
 	End Function
 
+	Public Shared SteamAppInfos As List(Of SteamAppInfoBase)
+
+	Public Shared Sub InitAppInfo()
+		If SteamAppInfos Is Nothing Then
+			SteamAppInfos = GetSteamAppInfos()
+		End If
+	End Sub
+
 #End Region
 
 	Public Sub New()
@@ -111,7 +119,6 @@ Public Class SteamAppInfoBase
 	Public Property UsesSteamUGC As Boolean
 	Public Property CanUseContentFolderOrFile As Boolean
 	Public Property ContentFileExtensionsAndDescriptions As SortedList(Of String, String)
-	Public Property TagsControlType As Type
 
 #End Region
 

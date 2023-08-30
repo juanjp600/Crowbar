@@ -58,7 +58,7 @@ Public Class BackgroundSteamPipe
 
 		If inputInfo.AppID = 0 Then
 			'NOTE: Use appID for "Source SDK" when item's appID is unknown.
-			TheApp.SetSteamAppId(CType(211, UInteger))
+			EnvVars.SetSteamAppId(CUInt(211))
 
 			Dim steamPipeToGetAppID As New SteamPipe()
 			Me.theActiveSteamPipes.Add(steamPipeToGetAppID)
@@ -95,7 +95,7 @@ Public Class BackgroundSteamPipe
 			Me.theActiveSteamPipes.Remove(steamPipeToGetAppID)
 
 			If appID_text <> "" Then
-				TheApp.SetSteamAppId(CUInt(appID_text))
+				EnvVars.SetSteamAppId(CUInt(appID_text))
 			Else
 				'NOTE: Error message is stored in publishedItem.Title.
 				bw.ReportProgress(0, "ERROR: " + publishedItem.Title + vbCrLf)
@@ -105,7 +105,7 @@ Public Class BackgroundSteamPipe
 				Exit Sub
 			End If
 		Else
-			TheApp.SetSteamAppId(inputInfo.AppID)
+			EnvVars.SetSteamAppId(inputInfo.AppID)
 		End If
 		outputInfo.AppID = inputInfo.AppID
 
@@ -152,7 +152,7 @@ Public Class BackgroundSteamPipe
 		Dim inputInfo As DownloadItemInputInfo = CType(e.Argument, DownloadItemInputInfo)
 		Dim outputInfo As New BackgroundSteamPipe.DownloadItemOutputInfo()
 
-		TheApp.SetSteamAppId(inputInfo.AppID)
+		EnvVars.SetSteamAppId(inputInfo.AppID)
 
 		Dim steamPipe As New SteamPipe()
 		Me.theActiveSteamPipes.Add(steamPipe)
@@ -372,7 +372,7 @@ Public Class BackgroundSteamPipe
 		End If
 
 		result = "failed"
-		If TheApp.SteamAppInfos(TheApp.Settings.PublishGameSelectedIndex).UsesSteamUGC Then
+		If SteamAppInfoBase.SteamAppInfos(AppSettings.Instance.PublishGameSelectedIndex).UsesSteamUGC Then
 			result = steamPipe.SteamUGC_DeleteItem(itemID_text)
 		Else
 			result = steamPipe.SteamRemoteStorage_DeletePublishedFile(itemID_text)
@@ -457,9 +457,9 @@ Public Class BackgroundSteamPipe
 		End If
 
 		If inputInfo.Item.CreatorAppID = "0" Then
-			TheApp.SetSteamAppId(inputInfo.AppInfo.ID.m_AppId)
+			EnvVars.SetSteamAppId(inputInfo.AppInfo.ID.m_AppId)
 		Else
-			TheApp.SetSteamAppId(inputInfo.Item.CreatorAppID)
+			EnvVars.SetSteamAppId(inputInfo.Item.CreatorAppID)
 		End If
 
 		Dim steamPipe As New SteamPipe()

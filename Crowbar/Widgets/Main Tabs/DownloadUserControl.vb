@@ -24,7 +24,7 @@ Public Class DownloadUserControl
 #Region "Init and Free"
 
 	Protected Overrides Sub Init()
-		TheApp.InitAppInfo()
+		SteamAppInfoBase.InitAppInfo()
 
 		Me.ItemIdTextBox.DataBindings.Add("Text", TheApp.Settings, "DownloadItemIdOrLink", False, DataSourceUpdateMode.OnValidation)
 

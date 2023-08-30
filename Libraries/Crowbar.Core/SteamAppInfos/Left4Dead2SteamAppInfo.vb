@@ -13,7 +13,6 @@ Public Class Left4Dead2SteamAppInfo
 		Me.UsesSteamUGC = False
 		Me.CanUseContentFolderOrFile = False
 		Me.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files")
-		Me.TagsControlType = GetType(Left4Dead2TagsUserControl)
 	End Sub
 
 End Class

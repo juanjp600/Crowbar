@@ -325,7 +325,7 @@ Public Class UpdateUserControl
 		If TheApp.Settings.UpdateUpdateToNewPathIsChecked Then
 			localPath = TheApp.Settings.UpdateUpdateDownloadPath
 		Else
-			localPath = TheApp.GetCustomDataPath()
+			localPath = Paths.GetCustomDataPath()
 		End If
 		Me.theUpdater.Update(AddressOf CheckForUpdate_ProgressChanged, AddressOf CheckForUpdate_RunWorkerCompleted, AddressOf Download_DownloadProgressChanged, AddressOf Download_DownloadFileCompleted, localPath, AddressOf Update_ProgressChanged, AddressOf Update_RunWorkerCompleted)
 	End Sub

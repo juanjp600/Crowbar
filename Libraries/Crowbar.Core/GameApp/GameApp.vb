@@ -119,13 +119,13 @@ Public Class GameApp
 
 		Dim gameSetup As GameSetup
 		Dim gameAppPathFileName As String
-		gameSetup = TheApp.Settings.GameSetups(Me.theGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(Me.theGameSetupSelectedIndex)
 		gameAppPathFileName = gameSetup.GameAppPathFileName
 
 		If Not File.Exists(gameAppPathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage("The game's executable, """ + gameAppPathFileName + """, does not exist.")
-			Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
+			Me.UpdateProgress(1, Localization.GetString(Localization.Entry.ErrorMessageSDKMissingCause))
 		End If
 
 		Return inputsAreValid
@@ -141,7 +141,7 @@ Public Class GameApp
 		'Dim currentFolder As String
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(Me.theGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(Me.theGameSetupSelectedIndex)
 		gamePath = FileManager.GetPath(gameSetup.GamePathFileName)
 		gameFileName = Path.GetFileName(gameSetup.GamePathFileName)
 		gameAppPathFileName = gameSetup.GameAppPathFileName

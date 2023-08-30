@@ -87,7 +87,7 @@ Public Class AppExceptionHandler
 	End Sub
 
 	Private Sub WriteToErrorFile(ByVal errorReportText As String)
-		Using sw As StreamWriter = New StreamWriter(TheApp.ErrorPathFileName, True)
+		Using sw As StreamWriter = New StreamWriter(Paths.ErrorPathFileName, True)
 			sw.Write(errorReportText)
 			sw.Close()
 		End Using

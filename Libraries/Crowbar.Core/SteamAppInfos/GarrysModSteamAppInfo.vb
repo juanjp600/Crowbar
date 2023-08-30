@@ -15,7 +15,6 @@ Public Class GarrysModSteamAppInfo
 		Me.UsesSteamUGC = True
 		Me.CanUseContentFolderOrFile = True
 		Me.ContentFileExtensionsAndDescriptions.Add("gma", "Garry's Mod GMA Files")
-		Me.TagsControlType = GetType(GarrysModTagsUserControl)
 	End Sub
 
 	Public Overrides Function ProcessFileAfterDownload(ByVal givenPathFileName As String, ByVal bw As BackgroundWorkerEx) As String
@@ -63,7 +62,7 @@ Public Class GarrysModSteamAppInfo
 				'      the length of the arguments added to the length of the full path to the process must be less than 2080. 
 				'      On Windows 7 and later versions, the length must be less than 32699. 
 				'FROM BAT file: lzma.exe d %1 "%~n1.gma"
-				lzmaExeProcess.StartInfo.FileName = TheApp.LzmaExePathFileName
+				lzmaExeProcess.StartInfo.FileName = Paths.LzmaExeFilePath
 				lzmaExeProcess.StartInfo.Arguments = "d """ + processedGivenPathFileName + """ """ + processedPathFileName + """"
 #If DEBUG Then
 				lzmaExeProcess.StartInfo.CreateNoWindow = False

@@ -39,7 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BackwardsCompatibility\BackwardsCompatibility.csproj" />
+      <ProjectReference Include="..\TodoRemove\TodoRemove.csproj" />
       <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
     </ItemGroup>
 

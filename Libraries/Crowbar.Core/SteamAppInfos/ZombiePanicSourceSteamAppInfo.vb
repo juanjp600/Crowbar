@@ -13,7 +13,6 @@ Public Class ZombiePanicSourceSteamAppInfo
 		Me.UsesSteamUGC = True
 		Me.CanUseContentFolderOrFile = False
 		'Me.ContentFileExtensionsAndDescriptions.Add("vpk", "Source Engine VPK Files")
-		Me.TagsControlType = GetType(ZombiePanicSourceTagsUserControl)
 	End Sub
 
 	Public Enum ZombiePanicSourceTypeTags

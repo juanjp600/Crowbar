@@ -3,6 +3,8 @@
 Public Class BackgroundWorkerEx
 	Inherits BackgroundWorker
 
+	Public Shared DoEvents As Action = Nothing
+
 #Region "Create and Destroy"
 
 	Public Shared Function RunBackgroundWorker(ByVal bw As BackgroundWorkerEx, ByVal bw_DoWork As DoWorkEventHandler, ByVal bw_ProgressChanged As ProgressChangedEventHandler, ByVal bw_RunWorkerCompleted As RunWorkerCompletedEventHandler, ByVal bw_argument As Object) As BackgroundWorkerEx
@@ -13,7 +15,7 @@ Public Class BackgroundWorkerEx
 		Else
 			While bw.IsBusy
 				bw.CancelAsync()
-				Application.DoEvents()
+				DoEvents()
 			End While
 		End If
 

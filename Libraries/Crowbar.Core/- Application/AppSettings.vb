@@ -1,9 +1,13 @@
 Imports System.ComponentModel
+Imports System.Drawing
+Imports System.IO
 Imports System.Xml.Serialization
 
 ' Purpose: Stores application-related settings, such as UI widget locations and auto-recover data.
 Public Class AppSettings
 	Implements INotifyPropertyChanged
+
+	Public Shared Instance As AppSettings = Nothing
 
 #Region "Create and Destroy"
 
@@ -179,10 +183,30 @@ Public Class AppSettings
 		End Set
 	End Property
 
+	Public Function GetProcessedPathFileName(ByVal pathFileName As String) As String
+		Dim result As String
+		Dim aMacro As String
+
+		result = pathFileName
+
+		For Each aSteamLibraryPath As SteamLibraryPath In SteamLibraryPaths
+			aMacro = aSteamLibraryPath.Macro
+			If pathFileName.StartsWith(aMacro) Then
+				pathFileName = pathFileName.Remove(0, aMacro.Length)
+				If pathFileName.StartsWith("\") Then
+					pathFileName = pathFileName.Remove(0, 1)
+				End If
+				result = Path.Combine(aSteamLibraryPath.LibraryPath, pathFileName)
+			End If
+		Next
+
+		Return result
+	End Function
+	
 	<XmlIgnore()>
 	Public ReadOnly Property SteamAppPathFileName() As String
 		Get
-			Return TheApp.GetProcessedPathFileName(Me.theSteamAppPathFileName)
+			Return GetProcessedPathFileName(Me.theSteamAppPathFileName)
 		End Get
 		'Set(ByVal value As String)
 		'	Me.theSteamAppPathFileName = value
@@ -1686,7 +1710,7 @@ Public Class AppSettings
 
 	Public Sub SetDefaultUnpackOutputSubfolderName()
 		'NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-		Me.UnpackOutputSubfolderName = "unpacked " + My.Application.Info.Version.ToString(2)
+		Me.UnpackOutputSubfolderName = "unpacked " + AppConstants.EntryAssembly.GetName().Version.ToString(2)
 	End Sub
 
 	Public Sub SetDefaultUnpackOptions()
@@ -1698,7 +1722,7 @@ Public Class AppSettings
 
 	Public Sub SetDefaultDecompileOutputSubfolderName()
 		'NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-		Me.DecompileOutputSubfolderName = "decompiled " + My.Application.Info.Version.ToString(2)
+		Me.DecompileOutputSubfolderName = "decompiled " + AppConstants.EntryAssembly.GetName().Version.ToString(2)
 	End Sub
 
 	Public Sub SetDefaultDecompileReCreateFilesOptions()
@@ -1726,7 +1750,7 @@ Public Class AppSettings
 
 	Public Sub SetDefaultCompileOutputSubfolderName()
 		'NOTE: Call the properties so the NotifyPropertyChanged events are raised.
-		Me.CompileOutputSubfolderName = "compiled " + My.Application.Info.Version.ToString(2)
+		Me.CompileOutputSubfolderName = "compiled " + AppConstants.EntryAssembly.GetName().Version.ToString(2)
 	End Sub
 
 	Public Sub SetDefaultCompileOptions()

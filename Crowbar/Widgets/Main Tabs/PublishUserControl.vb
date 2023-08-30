@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.IO.Pipes
 Imports System.Linq
+Imports System.Reflection
 Imports System.Text
 Imports System.Threading
 Imports System.Threading.Tasks
@@ -72,7 +73,7 @@ Public Class PublishUserControl
 #Region "Init and Free"
 
 	Protected Overrides Sub Init()
-		TheApp.InitAppInfo()
+		SteamAppInfoBase.InitAppInfo()
 
 		If TheApp.Settings.PublishGameSelectedIndex >= TheApp.SteamAppInfos.Count Then
 			TheApp.Settings.PublishGameSelectedIndex = 0
@@ -846,7 +847,7 @@ Public Class PublishUserControl
 
 		Me.theSteamAppInfo = TheApp.SteamAppInfos(TheApp.Settings.PublishGameSelectedIndex)
 		Me.theSteamAppId = Me.theSteamAppInfo.ID
-		TheApp.SetSteamAppId(Me.theSteamAppId.m_AppId)
+		EnvVars.SetSteamAppId(Me.theSteamAppId.m_AppId)
 
 		Me.theSteamAppUserInfo = Nothing
 		Try
@@ -899,6 +900,13 @@ Public Class PublishUserControl
 		Me.theBackgroundSteamPipe.GetPublishedItems(AddressOf Me.GetPublishedItems_ProgressChanged, AddressOf Me.GetPublishedItems_RunWorkerCompleted, Me.theSteamAppId.ToString())
 	End Sub
 
+	Private Function GetTagsControlTypeForInfo(info As SteamAppInfoBase) As Type
+		Dim infoType = info.GetType()
+		Dim tagControlTypeName = infoType.Name.Substring(0, infoType.Name.Length - "SteamAppInfo".Length)
+		tagControlTypeName += "TagsUserControl"
+		Return Type.GetType(tagControlTypeName)
+	End Function
+
 	Private Sub SwapSteamAppTagsWidget()
 		If Me.theTagsWidget IsNot Nothing Then
 			RemoveHandler Me.theTagsWidget.TagsPropertyChanged, AddressOf Me.TagsWidget_TagsPropertyChanged
@@ -907,7 +915,7 @@ Public Class PublishUserControl
 		'Me.theTagsWidget = CType(Me.AppIdComboBox.SelectedItem, SteamAppInfo).TagsWidget
 		'Dim info As SteamAppInfo = CType(Me.AppIdComboBox.SelectedItem, SteamAppInfo)
 		Dim info As SteamAppInfoBase = TheApp.SteamAppInfos(TheApp.Settings.PublishGameSelectedIndex)
-		Dim t As Type = info.TagsControlType
+		Dim t As Type = GetTagsControlTypeForInfo(info)
 		Me.theTagsWidget = CType(t.GetConstructor(New System.Type() {}).Invoke(New Object() {}), Base_TagsUserControl)
 		If Me.ItemTagsGroupBox.Controls.Count > 0 Then
 			Me.ItemTagsGroupBox.Controls.RemoveAt(0)
@@ -1447,7 +1455,7 @@ Public Class PublishUserControl
 	Private Function GetPreviewImagePathFileName(ByVal sourcePathFileName As String, ByVal itemID As String, ByVal previewIndex As Integer) As String
 		Dim extension As String = Path.GetExtension(sourcePathFileName)
 		Dim targetFileName As String = itemID + "_" + previewIndex.ToString("00") + extension
-		Dim previewsPath As String = TheApp.GetPreviewsPath()
+		Dim previewsPath As String = Paths.GetPreviewsPath()
 		Dim targetPathFileName As String
 		If previewsPath <> "" Then
 			Try

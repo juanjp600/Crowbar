@@ -47,7 +47,7 @@ Public Class App
 	Public Sub Init()
 		Me.theAppPath = Application.StartupPath
 		'NOTE: Needed for using DLLs placed in folder separate from main EXE file.
-		Environment.SetEnvironmentVariable("path", Me.GetCustomDataPath(), EnvironmentVariableTarget.Process)
+		Environment.SetEnvironmentVariable("path", Paths.GetCustomDataPath(), EnvironmentVariableTarget.Process)
 		Me.WriteRequiredFiles()
 		Me.LoadAppSettings()
 
@@ -72,7 +72,7 @@ Public Class App
 	End Sub
 
 	Private Sub Free()
-		If Me.theSettings IsNot Nothing Then
+		If AppSettings.Instance IsNot Nothing Then
 			Me.SaveAppSettings()
 		End If
 		'If Me.theCompiler IsNot Nothing Then
@@ -85,19 +85,19 @@ Public Class App
 
 	Public ReadOnly Property Settings() As AppSettings
 		Get
-			Return Me.theSettings
+			Return AppSettings.Instance
+		End Get
+	End Property
+
+	Public ReadOnly Property SteamAppInfos() As List(Of SteamAppInfoBase)
+		Get
+			Return SteamAppInfoBase.SteamAppInfos
 		End Get
 	End Property
 
 	Public ReadOnly Property CommandLineOption_Settings_IsEnabled() As Boolean
 		Get
 			Return Me.theCommandLineOption_Settings_IsEnabled
-		End Get
-	End Property
-
-	Public ReadOnly Property ErrorPathFileName() As String
-		Get
-			Return Path.Combine(Me.GetCustomDataPath(), Me.ErrorFileName)
 		End Get
 	End Property
 
@@ -158,27 +158,21 @@ Public Class App
 	End Function
 
 	Public Sub WriteRequiredFiles()
-		Dim steamAPIDLLPathFileName As String = Path.Combine(Me.GetCustomDataPath(), App.theSteamAPIDLLFileName)
-		Me.WriteResourceToFileIfDifferent(My.Resources.steam_api, steamAPIDLLPathFileName)
+		Me.WriteResourceToFileIfDifferent(My.Resources.steam_api, Paths.SteamAPIDLLFilePath)
 
 		'NOTE: Although Crowbar itself does not need the DLL file extracted, CrowbarSteamPipe needs it extracted.
-		Dim steamworksDotNetPathFileName As String = Path.Combine(Me.GetCustomDataPath(), App.theSteamworksDotNetDLLFileName)
-		Me.WriteResourceToFileIfDifferent(My.Resources.Steamworks_NET, steamworksDotNetPathFileName)
+		Me.WriteResourceToFileIfDifferent(My.Resources.Steamworks_NET, Paths.SteamworksDotNetFilePath)
 
-		Dim crowbarSteamPipePathFileName As String = Path.Combine(Me.GetCustomDataPath(), App.CrowbarSteamPipeFileName)
-		Me.WriteResourceToFileIfDifferent(My.Resources.CrowbarSteamPipe, crowbarSteamPipePathFileName)
+		Me.WriteResourceToFileIfDifferent(My.Resources.CrowbarSteamPipe, Paths.CrowbarSteamPipeFilePath)
 
-		Me.LzmaExePathFileName = Path.Combine(Me.GetCustomDataPath(), App.theLzmaExeFileName)
-		Me.WriteResourceToFileIfDifferent(My.Resources.lzma, Me.LzmaExePathFileName)
+		Me.WriteResourceToFileIfDifferent(My.Resources.lzma, Paths.LzmaExeFilePath)
 
-		Dim lzhamAPIDLLPathFileName As String = Path.Combine(Me.GetCustomDataPath(), App.theLzhamDLLFileName)
-		Me.WriteResourceToFileIfDifferent(My.Resources.lzham_x86, lzhamAPIDLLPathFileName)
+		Me.WriteResourceToFileIfDifferent(My.Resources.lzham_x86, Paths.LzhamAPIDLLFilePath)
 
 		'NOTE: Only write settings file if it does not exist.
-		Dim appSettingsPathFileName As String = Path.Combine(Me.GetCustomDataPath(), App.theAppSettingsFileName)
 		Try
-			If Not File.Exists(appSettingsPathFileName) Then
-				File.WriteAllText(appSettingsPathFileName, My.Resources.Crowbar_Settings)
+			If Not File.Exists(Paths.AppSettingsFilePath) Then
+				File.WriteAllText(Paths.AppSettingsFilePath, My.Resources.Crowbar_Settings)
 			End If
 		Catch ex As Exception
 			Console.WriteLine("EXCEPTION: " + ex.Message)
@@ -189,40 +183,27 @@ Public Class App
 	End Sub
 
 	Public Sub WriteUpdaterFiles()
-		Me.SevenZrExePathFileName = Path.Combine(Me.GetCustomDataPath(), App.theSevenZrEXEFileName)
-		Me.WriteResourceToFileIfDifferent(My.Resources.SevenZr, Me.SevenZrExePathFileName)
+		Me.WriteResourceToFileIfDifferent(My.Resources.SevenZr, Paths.SevenZrExeFilePath)
 
-		Me.CrowbarLauncherExePathFileName = Path.Combine(Me.GetCustomDataPath(), App.theCrowbarLauncherEXEFileName)
-		Me.WriteResourceToFileIfDifferent(My.Resources.CrowbarLauncher, Me.CrowbarLauncherExePathFileName)
+		Me.WriteResourceToFileIfDifferent(My.Resources.CrowbarLauncher, Paths.CrowbarLauncherExeFilePath)
 	End Sub
 
 	Public Sub DeleteUpdaterFiles()
-		Me.SevenZrExePathFileName = Path.Combine(Me.GetCustomDataPath(), App.theSevenZrEXEFileName)
 		Try
-			If File.Exists(Me.SevenZrExePathFileName) Then
-				File.Delete(Me.SevenZrExePathFileName)
+			If File.Exists(Paths.SevenZrExeFilePath) Then
+				File.Delete(Paths.SevenZrExeFilePath)
 			End If
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		End Try
 
-		Me.CrowbarLauncherExePathFileName = Path.Combine(Me.GetCustomDataPath(), App.theCrowbarLauncherEXEFileName)
 		Try
-			If File.Exists(Me.CrowbarLauncherExePathFileName) Then
-				File.Delete(Me.CrowbarLauncherExePathFileName)
+			If File.Exists(Paths.CrowbarLauncherExeFilePath) Then
+				File.Delete(Paths.CrowbarLauncherExeFilePath)
 			End If
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		End Try
-	End Sub
-
-	Public Sub SetSteamAppId(ByVal appID As UInteger)
-		Me.SetSteamAppId(appID.ToString())
-	End Sub
-
-	Public Sub SetSteamAppId(ByVal appID_text As String)
-		Environment.SetEnvironmentVariable("SteamAppId", appID_text)
-		Environment.SetEnvironmentVariable("SteamGameId", appID_text)
 	End Sub
 
 	Public Function GetDebugPath(ByVal outputPath As String, ByVal modelName As String) As String
@@ -235,69 +216,18 @@ Public Class App
 	End Function
 
 	Public Sub SaveAppSettings()
-		Dim appSettingsPath As String
-		Dim appSettingsPathFileName As String
-
-		appSettingsPathFileName = Me.GetAppSettingsPathFileName()
-		appSettingsPath = FileManager.GetPath(appSettingsPathFileName)
+		Dim appSettingsPath As String = FileManager.GetPath(Paths.AppSettingsFilePath)
 
 		If FileManager.PathExistsAfterTryToCreate(appSettingsPath) Then
-			FileManager.WriteXml(Me.theSettings, appSettingsPathFileName)
+			FileManager.WriteXml(AppSettings.Instance, Paths.AppSettingsFilePath)
 		End If
 	End Sub
-
-	Public Sub InitAppInfo()
-		If Me.SteamAppInfos Is Nothing Then
-			Me.SteamAppInfos = SteamAppInfoBase.GetSteamAppInfos()
-		End If
-	End Sub
-
-	'TODO: [GetCustomDataPath] Have location option where custom data and settings is saved.
-	Public Function GetCustomDataPath() As String
-		Dim customDataPath As String
-		'Dim appDataPath As String
-
-		'' If the settings file exists in the app's Data folder, then load it.
-		'appDataPath = Me.GetAppDataPath()
-		'If appDataPath <> "" Then
-		'	customDataPath = appDataPath
-		'Else
-		'NOTE: Use "standard Windows location for app data".
-		'NOTE: Using Path.Combine in case theStartupFolder is a root folder, like "C:\".
-		customDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ZeqMacaw")
-		customDataPath += Path.DirectorySeparatorChar
-		'customDataPath += "Crowbar"
-		customDataPath += My.Application.Info.ProductName
-		customDataPath += " "
-		customDataPath += My.Application.Info.Version.ToString(2)
-
-		FileManager.CreatePath(customDataPath)
-		'End If
-
-		Return customDataPath
-	End Function
-
-	Public Function GetPreviewsPath() As String
-		Dim customDataPath As String = TheApp.GetCustomDataPath()
-		Dim previewsPath As String = Path.Combine(customDataPath, App.PreviewsRelativePath)
-		If FileManager.PathExistsAfterTryToCreate(previewsPath) Then
-			Return previewsPath
-		Else
-			Return ""
-		End If
-	End Function
-
-	Public Function GetAppSettingsPathFileName() As String
-		Return Path.Combine(Me.GetCustomDataPath(), App.theAppSettingsFileName)
-	End Function
 
 #End Region
 
 #Region "Private Methods"
 
 	Private Sub LoadAppSettings()
-		Dim appSettingsPathFileName As String
-		appSettingsPathFileName = Me.GetAppSettingsPathFileName()
 
 		Dim commandLineOption_Settings_IsEnabled As Boolean = False
 		Dim commandLineValues As New ReadOnlyCollection(Of String)(System.Environment.GetCommandLineArgs())
@@ -308,15 +238,15 @@ Public Class App
 				Dim oldAppSettingsPathFileName As String = command.Replace(App.SettingsParameter, "")
 				oldAppSettingsPathFileName = oldAppSettingsPathFileName.Replace("""", "")
 				If File.Exists(oldAppSettingsPathFileName) Then
-					File.Copy(oldAppSettingsPathFileName, appSettingsPathFileName, True)
+					File.Copy(oldAppSettingsPathFileName, Paths.AppSettingsFilePath, True)
 				End If
 			End If
 		End If
 
-		If File.Exists(appSettingsPathFileName) Then
+		If File.Exists(Paths.AppSettingsFilePath) Then
 			Try
-				VersionModule.ConvertSettingsFile(appSettingsPathFileName)
-				Me.theSettings = CType(FileManager.ReadXml(GetType(AppSettings), appSettingsPathFileName), AppSettings)
+				VersionModule.ConvertSettingsFile(Paths.AppSettingsFilePath)
+				AppSettings.Instance = CType(FileManager.ReadXml(GetType(AppSettings), Paths.AppSettingsFilePath), AppSettings)
 			Catch ex As Exception
 				Me.CreateAppSettings()
 			End Try
@@ -327,13 +257,13 @@ Public Class App
 	End Sub
 
 	Private Sub CreateAppSettings()
-		Me.theSettings = New AppSettings()
+		AppSettings.Instance = New AppSettings()
 
 		Dim gameSetup As New GameSetup()
-		Me.theSettings.GameSetups.Add(gameSetup)
+		AppSettings.Instance.GameSetups.Add(gameSetup)
 
 		Dim aPath As New SteamLibraryPath()
-		Me.theSettings.SteamLibraryPaths.Add(aPath)
+		AppSettings.Instance.SteamLibraryPaths.Add(aPath)
 
 		Me.SaveAppSettings()
 	End Sub
@@ -403,33 +333,12 @@ Public Class App
 		Return result
 	End Function
 
-	Public Function GetProcessedPathFileName(ByVal pathFileName As String) As String
-		Dim result As String
-		Dim aMacro As String
-
-		result = pathFileName
-
-		For Each aSteamLibraryPath As SteamLibraryPath In Me.Settings.SteamLibraryPaths
-			aMacro = aSteamLibraryPath.Macro
-			If pathFileName.StartsWith(aMacro) Then
-				pathFileName = pathFileName.Remove(0, aMacro.Length)
-				If pathFileName.StartsWith("\") Then
-					pathFileName = pathFileName.Remove(0, 1)
-				End If
-				result = Path.Combine(aSteamLibraryPath.LibraryPath, pathFileName)
-			End If
-		Next
-
-		Return result
-	End Function
-
 #End Region
 
 #Region "Data"
 
 	Private IsDisposed As Boolean
 
-	Private theSettings As AppSettings
 	'NOTE: Use slash at start to avoid confusing with a pathFileName that Windows Explorer might use with auto-open.
 	Public Const SettingsParameter As String = "/settings="
 	Private theCommandLineOption_Settings_IsEnabled As Boolean
@@ -437,34 +346,12 @@ Public Class App
 	' Location of the exe.
 	Private theAppPath As String
 
-	Private Const theSteamAPIDLLFileName As String = "steam_api.dll"
-	Private Const theSteamworksDotNetDLLFileName As String = "Steamworks.NET.dll"
-	Private Const theSevenZrEXEFileName As String = "7zr.exe"
-	Private Const theCrowbarLauncherEXEFileName As String = "CrowbarLauncher.exe"
-	Private Const theLzmaExeFileName As String = "lzma.exe"
-	Private Const theLzhamDLLFileName As String = "lzham_x86.dll"
-	Public SevenZrExePathFileName As String
-	Public CrowbarLauncherExePathFileName As String
-	Public LzmaExePathFileName As String
-	Public SteamAppInfos As List(Of SteamAppInfoBase)
-
-	Private Const PreviewsRelativePath As String = "previews"
-	Public Const CrowbarSteamPipeFileName As String = "CrowbarSteamPipe.exe"
-	Private Const theSteamAppIDFileName As String = "steam_appid.txt"
-	'Private Const theDataFolderName As String = "Data"
-	Private Const theAppSettingsFileName As String = "Crowbar Settings.xml"
-
-	Public Const AnimsSubFolderName As String = "anims"
-	Public Const LogsSubFolderName As String = "logs"
-
-	Private ErrorFileName As String = "unhandled_exception_error.txt"
-
 	Private theUnpacker As Unpacker
 	Private theDecompiler As Decompiler
 	Private theCompiler As Compiler
 	Private thePacker As Packer
 	'Private theModelViewer As Viewer
-	Private theModelRelativePathFileName As String
+	'Private theModelRelativePathFileName As String
 
 	Private theSmdFilesWritten As List(Of String)
 

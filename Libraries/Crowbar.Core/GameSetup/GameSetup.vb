@@ -75,7 +75,7 @@ Public Class GameSetup
 	<XmlIgnore()> _
 	Public ReadOnly Property GamePathFileName() As String
 		Get
-			Return TheApp.GetProcessedPathFileName(Me.theGamePathFileName)
+			Return AppSettings.Instance.GetProcessedPathFileName(Me.theGamePathFileName)
 		End Get
 		'Set(ByVal value As String)
 		'	Me.theGamePathFileName = value
@@ -98,7 +98,7 @@ Public Class GameSetup
 	<XmlIgnore()> _
 	Public ReadOnly Property GameAppPathFileName() As String
 		Get
-			Return TheApp.GetProcessedPathFileName(Me.theGameAppPathFileName)
+			Return AppSettings.Instance.GetProcessedPathFileName(Me.theGameAppPathFileName)
 		End Get
 		'Set(ByVal value As String)
 		'	Me.theGameAppPathFileName = value
@@ -131,7 +131,7 @@ Public Class GameSetup
 	<XmlIgnore()> _
 	Public ReadOnly Property CompilerPathFileName() As String
 		Get
-			Return TheApp.GetProcessedPathFileName(Me.theCompilerPathFileName)
+			Return AppSettings.Instance.GetProcessedPathFileName(Me.theCompilerPathFileName)
 		End Get
 		'Set(ByVal value As String)
 		'	Me.theCompilerPathFileName = value
@@ -154,7 +154,7 @@ Public Class GameSetup
 	<XmlIgnore()> _
 	Public ReadOnly Property ViewerPathFileName() As String
 		Get
-			Return TheApp.GetProcessedPathFileName(Me.theViewerPathFileName)
+			Return AppSettings.Instance.GetProcessedPathFileName(Me.theViewerPathFileName)
 		End Get
 		'Set(ByVal value As String)
 		'	Me.theViewerPathFileName = value
@@ -177,7 +177,7 @@ Public Class GameSetup
 	<XmlIgnore()> _
 	Public ReadOnly Property MappingToolPathFileName() As String
 		Get
-			Return TheApp.GetProcessedPathFileName(Me.theMappingToolPathFileName)
+			Return AppSettings.Instance.GetProcessedPathFileName(Me.theMappingToolPathFileName)
 		End Get
 		'Set(ByVal value As String)
 		'	Me.theMappingToolPathFileName = value
@@ -200,7 +200,7 @@ Public Class GameSetup
 	<XmlIgnore()> _
 	Public ReadOnly Property PackerPathFileName() As String
 		Get
-			Return TheApp.GetProcessedPathFileName(Me.thePackerPathFileName)
+			Return AppSettings.Instance.GetProcessedPathFileName(Me.thePackerPathFileName)
 		End Get
 		'Set(ByVal value As String)
 		'	Me.theUnpackerPathFileName = value

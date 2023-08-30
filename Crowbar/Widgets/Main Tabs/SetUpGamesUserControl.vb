@@ -451,7 +451,7 @@ Public Class SetUpGamesUserControl
 
 	Private Function ParsePathFileName(ByVal iPathFileName As String) As String
 		Dim originalText As String = iPathFileName
-		iPathFileName = TheApp.GetProcessedPathFileName(iPathFileName)
+		iPathFileName = AppSettings.Instance.GetProcessedPathFileName(iPathFileName)
 		If iPathFileName <> "" Then
 			iPathFileName = FileManager.GetCleanPathFileName(iPathFileName, True)
 		End If
