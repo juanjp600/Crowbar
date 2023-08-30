@@ -43,5 +43,19 @@
       <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Compile Remove="My Project\Resources.Designer.vb" />
+        <Compile Remove="My Project\Settings.Designer.vb" />
+        <Compile Include="My Project\Resources.Designer.vb">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <Compile Include="My Project\Settings.Designer.vb">
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        </Compile>
+    </ItemGroup>
 
 </Project>
