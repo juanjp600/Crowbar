@@ -904,7 +904,9 @@ Public Class PublishUserControl
 		Dim infoType = info.GetType()
 		Dim tagControlTypeName = infoType.Name.Substring(0, infoType.Name.Length - "SteamAppInfo".Length)
 		tagControlTypeName += "TagsUserControl"
-		Return Type.GetType(tagControlTypeName)
+		Dim assembly = GetType(Base_TagsUserControl).Assembly
+		Dim ns = GetType(Base_TagsUserControl).Namespace
+		Return assembly.GetType(ns + "." + tagControlTypeName)
 	End Function
 
 	Private Sub SwapSteamAppTagsWidget()
