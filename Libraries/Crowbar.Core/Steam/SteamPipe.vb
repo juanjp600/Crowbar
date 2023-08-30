@@ -20,6 +20,10 @@ Public Class SteamPipe
 
 #Region "Methods"
 
+	Private Sub HandlePipeConnect(ar as IAsyncResult)
+		
+	End Sub
+	
 	'NOTE: Start a process that does the steamworks stuff, so that when that process ends, 
 	'      Steam will stop showing the game as status and the AppID can be changed.
 	'NOTE: Use Named Pipes to send info between the processes.
@@ -52,15 +56,20 @@ Public Class SteamPipe
 
 		Me.theCrowbarSteamPipeServer = New NamedPipeServerStream("CrowbarSteamPipe" + pipeNameSuffix, PipeDirection.InOut, 1)
 		Console.WriteLine("Waiting for client to connect to pipe ...")
-		While Not Me.theCrowbarSteamPipeServer.IsConnected()
-			Thread.Sleep(200)
-			If Me.theCrowbarSteamPipeProcess Is Nothing Then
-				Throw New Exception("CrowbarSteamPipe process is null")
-			End If
-			If Me.theCrowbarSteamPipeProcess.HasExited Then
-				Throw New Exception("CrowbarSteamPipe process exited with code " + Me.theCrowbarSteamPipeProcess.ExitCode.ToString() + " before pipe could be connected")
-			End If
-		End While
+		Dim connectionAsyncResult = Me.theCrowbarSteamPipeServer.BeginWaitForConnection(AddressOf Me.HandlePipeConnect, Nothing)
+		Try
+			While Not Me.theCrowbarSteamPipeServer.IsConnected()
+				Thread.Sleep(200)
+				If Me.theCrowbarSteamPipeProcess Is Nothing Then
+					Throw New Exception("CrowbarSteamPipe process is null")
+				End If
+				If Me.theCrowbarSteamPipeProcess.HasExited Then
+					Throw New Exception("CrowbarSteamPipe process exited with code " + Me.theCrowbarSteamPipeProcess.ExitCode.ToString() + " before pipe could be connected")
+				End If
+			End While
+		Finally
+			Me.theCrowbarSteamPipeServer.EndWaitForConnection(connectionAsyncResult)
+		End Try
 		Console.WriteLine("... Client connected to pipe.")
 
 		Me.theStreamWriter = New StreamWriter(Me.theCrowbarSteamPipeServer)

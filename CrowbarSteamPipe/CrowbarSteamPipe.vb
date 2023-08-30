@@ -6,17 +6,17 @@ Imports Steamworks
 
 Public Module CrowbarSteamPipe
 
-	Public Sub Main()
+	Public Sub Main(args As String())
 		Dim pipeNameSuffix As String = ""
-		If My.Application.CommandLineArgs.Count > 0 Then
-			pipeNameSuffix = My.Application.CommandLineArgs(0)
+		If args.Count > 0 Then
+			pipeNameSuffix = args(0)
 		End If
 		Dim pipeClient As New NamedPipeClientStream(".", "CrowbarSteamPipe" + pipeNameSuffix, PipeDirection.InOut, PipeOptions.WriteThrough)
 
 		' Connect to the pipe or wait until the pipe is available.
 		Console.WriteLine("Attempting to connect to the pipe ...")
 		pipeClient.Connect(10000)
-		Console.WriteLine("... Connected to pipe.")
+		Console.WriteLine("... Connected to pipe. " + pipeNameSuffix)
 
 		Console.WriteLine("Current folder: " + Directory.GetCurrentDirectory())
 
@@ -129,6 +129,7 @@ Public Module CrowbarSteamPipe
 
 #If DEBUG Then
 			'For debugging, keep console open until Enter Is pressed.
+			Console.WriteLine("Press any key to continue...")
 			Console.ReadLine()
 #End If
         End Try
