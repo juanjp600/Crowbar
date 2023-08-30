@@ -85,16 +85,16 @@ Public Class Decompiler
 	Private Function GetOutputPath() As String
 		Dim outputPath As String
 
-		If TheApp.Settings.DecompileOutputFolderOption = DecompileOutputPathOptions.Subfolder Then
-			If File.Exists(TheApp.Settings.DecompileMdlPathFileName) Then
-				outputPath = Path.Combine(FileManager.GetPath(TheApp.Settings.DecompileMdlPathFileName), TheApp.Settings.DecompileOutputSubfolderName)
-			ElseIf Directory.Exists(TheApp.Settings.DecompileMdlPathFileName) Then
-				outputPath = Path.GetFullPath(Path.Combine(TheApp.Settings.DecompileMdlPathFileName, TheApp.Settings.DecompileOutputSubfolderName))
+		If AppSettings.Instance.DecompileOutputFolderOption = DecompileOutputPathOptions.Subfolder Then
+			If File.Exists(AppSettings.Instance.DecompileMdlPathFileName) Then
+				outputPath = Path.Combine(FileManager.GetPath(AppSettings.Instance.DecompileMdlPathFileName), AppSettings.Instance.DecompileOutputSubfolderName)
+			ElseIf Directory.Exists(AppSettings.Instance.DecompileMdlPathFileName) Then
+				outputPath = Path.GetFullPath(Path.Combine(AppSettings.Instance.DecompileMdlPathFileName, AppSettings.Instance.DecompileOutputSubfolderName))
 			Else
 				outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 			End If
 		Else
-			outputPath = TheApp.Settings.DecompileOutputFullPath
+			outputPath = AppSettings.Instance.DecompileOutputFullPath
 		End If
 
 		Return outputPath
@@ -103,7 +103,7 @@ Public Class Decompiler
 	Private Function DecompilerInputsAreValid() As Boolean
 		Dim inputsAreValid As Boolean
 
-		If String.IsNullOrEmpty(TheApp.Settings.DecompileMdlPathFileName) Then
+		If String.IsNullOrEmpty(AppSettings.Instance.DecompileMdlPathFileName) Then
 			inputsAreValid = False
 		Else
 			inputsAreValid = FileManager.PathExistsAfterTryToCreate(Me.theOutputPath)
@@ -117,25 +117,25 @@ Public Class Decompiler
 
 		decompileResultInfo.theStatus = status
 
-		If TheApp.Settings.DecompileQcFileIsChecked Then
+		If AppSettings.Instance.DecompileQcFileIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledQcFiles
-		ElseIf TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked Then
+		ElseIf AppSettings.Instance.DecompileReferenceMeshSmdFileIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledFirstRefSmdFiles
-		ElseIf TheApp.Settings.DecompileLodMeshSmdFilesIsChecked Then
+		ElseIf AppSettings.Instance.DecompileLodMeshSmdFilesIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledFirstLodSmdFiles
-		ElseIf TheApp.Settings.DecompilePhysicsMeshSmdFileIsChecked Then
+		ElseIf AppSettings.Instance.DecompilePhysicsMeshSmdFileIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledPhysicsFiles
-		ElseIf TheApp.Settings.DecompileVertexAnimationVtaFileIsChecked Then
+		ElseIf AppSettings.Instance.DecompileVertexAnimationVtaFileIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledVtaFiles
-		ElseIf TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked Then
+		ElseIf AppSettings.Instance.DecompileBoneAnimationSmdFilesIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledFirstBoneAnimSmdFiles
-		ElseIf TheApp.Settings.DecompileProceduralBonesVrdFileIsChecked Then
+		ElseIf AppSettings.Instance.DecompileProceduralBonesVrdFileIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledVrdFiles
-		ElseIf TheApp.Settings.DecompileDeclareSequenceQciFileIsChecked Then
+		ElseIf AppSettings.Instance.DecompileDeclareSequenceQciFileIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledDeclareSequenceQciFiles
-		ElseIf TheApp.Settings.DecompileTextureBmpFilesIsChecked Then
+		ElseIf AppSettings.Instance.DecompileTextureBmpFilesIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledFirstTextureBmpFiles
-		ElseIf TheApp.Settings.DecompileLogFileIsChecked Then
+		ElseIf AppSettings.Instance.DecompileLogFileIsChecked Then
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledLogFiles
 		Else
 			decompileResultInfo.theDecompiledRelativePathFileNames = Me.theDecompiledFirstDebugFiles
@@ -170,7 +170,7 @@ Public Class Decompiler
 		Me.theDecompiledFirstDebugFiles.Clear()
 
 		Dim mdlPathFileName As String
-		mdlPathFileName = TheApp.Settings.DecompileMdlPathFileName
+		mdlPathFileName = AppSettings.Instance.DecompileMdlPathFileName
 		If File.Exists(mdlPathFileName) Then
 			Me.theInputMdlPathName = FileManager.GetPath(mdlPathFileName)
 		ElseIf Directory.Exists(mdlPathFileName) Then
@@ -189,7 +189,7 @@ Public Class Decompiler
 				Me.UpdateProgress()
 				Me.UpdateProgress(1, "ERROR: Failed because actual path is too long.")
 				status = StatusMessage.Error
-			ElseIf TheApp.Settings.DecompileMode = InputOptions.FolderRecursion Then
+			ElseIf AppSettings.Instance.DecompileMode = InputOptions.FolderRecursion Then
 				progressDescriptionText += """" + Me.theInputMdlPathName + """ (folder + subfolders)"
 				Me.UpdateProgressStart(progressDescriptionText + " ...")
 
@@ -199,7 +199,7 @@ Public Class Decompiler
 				'End If
 
 				Me.DecompileModelsInFolderRecursively(Me.theInputMdlPathName)
-			ElseIf TheApp.Settings.DecompileMode = InputOptions.Folder Then
+			ElseIf AppSettings.Instance.DecompileMode = InputOptions.Folder Then
 				progressDescriptionText += """" + Me.theInputMdlPathName + """ (folder)"
 				Me.UpdateProgressStart(progressDescriptionText + " ...")
 
@@ -279,7 +279,7 @@ Public Class Decompiler
 
 			Me.theModelOutputPath = Path.Combine(Me.theOutputPath, mdlRelativePathName)
 			Me.theModelOutputPath = Path.GetFullPath(Me.theModelOutputPath)
-			If TheApp.Settings.DecompileFolderForEachModelIsChecked Then
+			If AppSettings.Instance.DecompileFolderForEachModelIsChecked Then
 				Me.theModelOutputPath = Path.Combine(Me.theModelOutputPath, modelName)
 			End If
 
@@ -293,7 +293,7 @@ Public Class Decompiler
 			'	status = StatusMessage.Error
 			'	Return status
 			'End Try
-			If TheApp.Settings.DecompileMode = InputOptions.File Then
+			If AppSettings.Instance.DecompileMode = InputOptions.File Then
 				status = Me.CreateLogTextFile(mdlPathFileName)
 				'If status = StatusMessage.Error Then
 				'	Return status
@@ -306,9 +306,9 @@ Public Class Decompiler
 			Dim model As SourceModel = Nothing
 			Dim version As Integer
 			Try
-				model = SourceModel.Create(mdlPathFileName, TheApp.Settings.DecompileOverrideMdlVersion, version)
+				model = SourceModel.Create(mdlPathFileName, AppSettings.Instance.DecompileOverrideMdlVersion, version)
 				If model IsNot Nothing Then
-					If TheApp.Settings.DecompileOverrideMdlVersion = SupportedMdlVersion.DoNotOverride Then
+					If AppSettings.Instance.DecompileOverrideMdlVersion = SupportedMdlVersion.DoNotOverride Then
 						Me.UpdateProgress(2, "Model version " + CStr(model.Version) + " detected.")
 					Else
 						Me.UpdateProgress(2, "Model version overridden to be " + CStr(model.Version) + ".")
@@ -427,7 +427,7 @@ Public Class Decompiler
 			'Me.UpdateProgress(2, "... Processinging data finished.")
 
 			'NOTE: Write log files before data files, in case something goes wrong with writing data files.
-			If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
+			If AppSettings.Instance.DecompileDebugInfoFilesIsChecked Then
 				Me.UpdateProgress(2, "Writing decompile-info files ...")
 				Me.WriteDebugFiles(model)
 				If Me.CancellationPending Then
@@ -473,7 +473,7 @@ Public Class Decompiler
 	Private Function CreateLogTextFile(ByVal mdlPathFileName As String) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileLogFileIsChecked Then
+		If AppSettings.Instance.DecompileLogFileIsChecked Then
 			Dim mdlFileName As String
 			Dim logPath As String
 			Dim logFileName As String
@@ -483,10 +483,10 @@ Public Class Decompiler
 				If mdlPathFileName <> "" Then
 					logPath = Me.theModelOutputPath
 					mdlFileName = Path.GetFileNameWithoutExtension(mdlPathFileName)
-					logFileName = mdlFileName + " " + My.Resources.Decompile_LogFileNameSuffix
+					logFileName = mdlFileName + " " + ResourceStrings.GetString(ResourceStrings.Entry.Decompile_LogFileNameSuffix)
 				Else
 					logPath = Me.theOutputPath
-					logFileName = My.Resources.Decompile_LogFileNameSuffix
+					logFileName = ResourceStrings.GetString(ResourceStrings.Entry.Decompile_LogFileNameSuffix)
 				End If
 				FileManager.CreatePath(logPath)
 				logPathFileName = Path.Combine(logPath, logFileName)
@@ -566,7 +566,7 @@ Public Class Decompiler
 			End If
 		End If
 
-		If model.AniFileIsUsed AndAlso TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked Then
+		If model.AniFileIsUsed AndAlso AppSettings.Instance.DecompileBoneAnimationSmdFilesIsChecked Then
 			Me.UpdateProgress(3, "Reading ANI file ...")
 			status = model.ReadAniFile()
 			If status = StatusMessage.Success Then
@@ -602,7 +602,7 @@ Public Class Decompiler
 	Private Function WriteDecompiledFiles(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		TheApp.SmdFileNames.Clear()
+		SourceFileNamesModule.SmdFileNames.Clear()
 
 		'TEST:
 		'Me.TestWriteDmx()
@@ -686,8 +686,8 @@ Public Class Decompiler
 	Private Function WriteQcFile(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileQcFileIsChecked Then
-			If TheApp.Settings.DecompileGroupIntoQciFilesIsChecked Then
+		If AppSettings.Instance.DecompileQcFileIsChecked Then
+			If AppSettings.Instance.DecompileGroupIntoQciFilesIsChecked Then
 				'Me.UpdateProgress(3, "Writing QC and QCI files ...")
 				Me.UpdateProgress(3, "QC and QCI files: ")
 			Else
@@ -708,7 +708,7 @@ Public Class Decompiler
 			End If
 
 			RemoveHandler model.SourceModelProgress, AddressOf Me.Model_SourceModelProgress
-			'If TheApp.Settings.DecompileGroupIntoQciFilesIsChecked Then
+			'If AppSettings.Instance.DecompileGroupIntoQciFilesIsChecked Then
 			'	Me.UpdateProgress(3, "... Writing QC and QCI files finished.")
 			'Else
 			'	Me.UpdateProgress(3, "... Writing QC file finished.")
@@ -727,7 +727,7 @@ Public Class Decompiler
 	Private Function WriteReferenceMeshFiles(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileReferenceMeshSmdFileIsChecked Then
+		If AppSettings.Instance.DecompileReferenceMeshSmdFileIsChecked Then
 			If model.HasMeshData Then
 				'Me.UpdateProgress(3, "Writing reference mesh files ...")
 				Me.UpdateProgress(3, "Reference mesh files: ")
@@ -748,7 +748,7 @@ Public Class Decompiler
 	Private Function WriteLodMeshFiles(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileLodMeshSmdFilesIsChecked Then
+		If AppSettings.Instance.DecompileLodMeshSmdFilesIsChecked Then
 			If model.HasLodMeshData Then
 				'Me.UpdateProgress(3, "Writing LOD mesh files ...")
 				Me.UpdateProgress(3, "LOD mesh files: ")
@@ -769,7 +769,7 @@ Public Class Decompiler
 	Private Function WritePhysicsMeshFile(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompilePhysicsMeshSmdFileIsChecked Then
+		If AppSettings.Instance.DecompilePhysicsMeshSmdFileIsChecked Then
 			If model.HasPhysicsMeshData Then
 				'Me.UpdateProgress(3, "Writing physics mesh file ...")
 				Me.UpdateProgress(3, "Physics mesh file: ")
@@ -796,7 +796,7 @@ Public Class Decompiler
 	Private Function WriteVertexAnimationFiles(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileVertexAnimationVtaFileIsChecked Then
+		If AppSettings.Instance.DecompileVertexAnimationVtaFileIsChecked Then
 			If model.HasVertexAnimationData Then
 				'Me.UpdateProgress(3, "Writing VTA file ...")
 				Me.UpdateProgress(3, "Vertex animation files: ")
@@ -831,7 +831,7 @@ Public Class Decompiler
 	Private Function WriteBoneAnimationFiles(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileBoneAnimationSmdFilesIsChecked Then
+		If AppSettings.Instance.DecompileBoneAnimationSmdFilesIsChecked Then
 			If model.HasBoneAnimationData Then
 				Dim outputPath As String
 				outputPath = Path.Combine(Me.theModelOutputPath, SourceFileNamesModule.GetAnimationSmdRelativePath(model.Name))
@@ -858,7 +858,7 @@ Public Class Decompiler
 	Private Function WriteProceduralBonesFile(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileProceduralBonesVrdFileIsChecked Then
+		If AppSettings.Instance.DecompileProceduralBonesVrdFileIsChecked Then
 			If model.HasProceduralBonesData Then
 				'Me.UpdateProgress(3, "Writing VRD file ...")
 				Me.UpdateProgress(3, "Procedural bones file: ")
@@ -892,7 +892,7 @@ Public Class Decompiler
 	Private Function WriteDeclareSequenceQciFile(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileDeclareSequenceQciFileIsChecked Then
+		If AppSettings.Instance.DecompileDeclareSequenceQciFileIsChecked Then
 			If model.HasBoneAnimationData Then
 				Me.UpdateProgress(3, "DeclareSequence QCI file: ")
 				Me.theDecompiledFileType = DecompiledFileType.DeclareSequenceQci
@@ -924,7 +924,7 @@ Public Class Decompiler
 	Private Function WriteTextureFiles(ByVal model As SourceModel) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		If TheApp.Settings.DecompileTextureBmpFilesIsChecked Then
+		If AppSettings.Instance.DecompileTextureBmpFilesIsChecked Then
 			If model.HasTextureFileData Then
 				'Me.UpdateProgress(3, "Writing texture files ...")
 				Me.UpdateProgress(3, "Texture files: ")
@@ -945,7 +945,7 @@ Public Class Decompiler
 	Private Sub WriteDebugFiles(ByVal model As SourceModel)
 		Dim debugPath As String
 
-		debugPath = TheApp.GetDebugPath(Me.theModelOutputPath, model.Name)
+		debugPath = Paths.GetDebugPath(Me.theModelOutputPath, model.Name)
 		FileManager.CreatePath(debugPath)
 
 		Me.theDecompiledFileType = DecompiledFileType.Debug

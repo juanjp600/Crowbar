@@ -210,15 +210,6 @@ Public Class App
 		End Try
 	End Sub
 
-	Public Function GetDebugPath(ByVal outputPath As String, ByVal modelName As String) As String
-		'Dim logsPath As String
-
-		'logsPath = Path.Combine(outputPath, modelName + "_" + App.LogsSubFolderName)
-
-		'Return logsPath
-		Return outputPath
-	End Function
-
 	Public Sub SaveAppSettings()
 		Dim appSettingsPath As String = FileManager.GetPath(Paths.AppSettingsFilePath)
 

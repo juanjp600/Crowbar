@@ -73,6 +73,15 @@ Public Module Paths
         End Get
     End Property
 
+    Public Function GetDebugPath(ByVal outputPath As String, ByVal modelName As String) As String
+        'Dim logsPath As String
+
+        'logsPath = Path.Combine(outputPath, modelName + "_" + App.LogsSubFolderName)
+
+        'Return logsPath
+        Return outputPath
+    End Function
+
     'TODO: [GetCustomDataPath] Have location option where custom data and settings is saved.
     Public Function GetCustomDataPath() As String
         Dim customDataPath As String

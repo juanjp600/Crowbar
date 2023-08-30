@@ -74,7 +74,7 @@ Public Class Compiler
 		Dim gameCompilerPathFileName As String
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 		gameCompilerPathFileName = gameSetup.CompilerPathFileName
 
 		Return gameCompilerPathFileName
@@ -84,7 +84,7 @@ Public Class Compiler
 		Dim gamePath As String
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 		gamePath = FileManager.GetPath(gameSetup.GamePathFileName)
 
 		Return gamePath
@@ -101,17 +101,17 @@ Public Class Compiler
 	'Private Function GetOutputPath() As String
 	'	Dim outputPath As String
 
-	'	If TheApp.Settings.CompileOutputFolderIsChecked Then
-	'		If TheApp.Settings.CompileOutputFolderOption = OutputFolderOptions.SubfolderName Then
-	'			If File.Exists(TheApp.Settings.CompileQcPathFileName) Then
-	'				outputPath = Path.Combine(FileManager.GetPath(TheApp.Settings.CompileQcPathFileName), TheApp.Settings.CompileOutputSubfolderName)
-	'			ElseIf Directory.Exists(TheApp.Settings.CompileQcPathFileName) Then
-	'				outputPath = Path.Combine(TheApp.Settings.CompileQcPathFileName, TheApp.Settings.CompileOutputSubfolderName)
+	'	If AppSettings.Instance.CompileOutputFolderIsChecked Then
+	'		If AppSettings.Instance.CompileOutputFolderOption = OutputFolderOptions.SubfolderName Then
+	'			If File.Exists(AppSettings.Instance.CompileQcPathFileName) Then
+	'				outputPath = Path.Combine(FileManager.GetPath(AppSettings.Instance.CompileQcPathFileName), AppSettings.Instance.CompileOutputSubfolderName)
+	'			ElseIf Directory.Exists(AppSettings.Instance.CompileQcPathFileName) Then
+	'				outputPath = Path.Combine(AppSettings.Instance.CompileQcPathFileName, AppSettings.Instance.CompileOutputSubfolderName)
 	'			Else
 	'				outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 	'			End If
 	'		Else
-	'			outputPath = TheApp.Settings.CompileOutputFullPath
+	'			outputPath = AppSettings.Instance.CompileOutputFullPath
 	'		End If
 	'	Else
 	'		outputPath = Me.GetGameModelsPath()
@@ -125,17 +125,17 @@ Public Class Compiler
 	Private Function GetOutputPath() As String
 		Dim outputPath As String
 
-		If TheApp.Settings.CompileOutputFolderOption <> CompileOutputPathOptions.GameModelsFolder Then
-			If TheApp.Settings.CompileOutputFolderOption = CompileOutputPathOptions.Subfolder Then
-				If File.Exists(TheApp.Settings.CompileQcPathFileName) Then
-					outputPath = Path.Combine(FileManager.GetPath(TheApp.Settings.CompileQcPathFileName), TheApp.Settings.CompileOutputSubfolderName)
-				ElseIf Directory.Exists(TheApp.Settings.CompileQcPathFileName) Then
-					outputPath = Path.Combine(TheApp.Settings.CompileQcPathFileName, TheApp.Settings.CompileOutputSubfolderName)
+		If AppSettings.Instance.CompileOutputFolderOption <> CompileOutputPathOptions.GameModelsFolder Then
+			If AppSettings.Instance.CompileOutputFolderOption = CompileOutputPathOptions.Subfolder Then
+				If File.Exists(AppSettings.Instance.CompileQcPathFileName) Then
+					outputPath = Path.Combine(FileManager.GetPath(AppSettings.Instance.CompileQcPathFileName), AppSettings.Instance.CompileOutputSubfolderName)
+				ElseIf Directory.Exists(AppSettings.Instance.CompileQcPathFileName) Then
+					outputPath = Path.Combine(AppSettings.Instance.CompileQcPathFileName, AppSettings.Instance.CompileOutputSubfolderName)
 				Else
 					outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
 				End If
 			Else
-				outputPath = TheApp.Settings.CompileOutputFullPath
+				outputPath = AppSettings.Instance.CompileOutputFullPath
 			End If
 		Else
 			outputPath = Me.GetGameModelsPath()
@@ -170,40 +170,40 @@ Public Class Compiler
 		gameCompilerPathFileName = Me.GetGameCompilerPathFileName()
 		Dim gameSetup As GameSetup
 		Dim gamePathFileName As String
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 		gamePathFileName = gameSetup.GamePathFileName
 
 		If Not File.Exists(gameCompilerPathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage(1, "The model compiler, """ + gameCompilerPathFileName + """, does not exist.")
-			Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
+			Me.UpdateProgress(1, ResourceStrings.GetString(ResourceStrings.Entry.ErrorMessageSDKMissingCause))
 		End If
 		'TODO: [CompilerInputsAreValid] If GoldSource, then only check for liblist.gam if output is for game's "models" folder.
 		'TODO: [CompilerInputsAreValid] Change error message to include "liblist.gam" or "gameinfo.txt" as appropriate.
 		If Not File.Exists(gamePathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage(1, "The game's """ + gamePathFileName + """ file does not exist.")
-			Me.UpdateProgress(1, My.Resources.ErrorMessageSDKMissingCause)
+			Me.UpdateProgress(1, ResourceStrings.GetString(ResourceStrings.Entry.ErrorMessageSDKMissingCause))
 		End If
-		If String.IsNullOrEmpty(TheApp.Settings.CompileQcPathFileName) Then
+		If String.IsNullOrEmpty(AppSettings.Instance.CompileQcPathFileName) Then
 			inputsAreValid = False
 			Me.WriteErrorMessage(1, "QC file or folder has not been selected.")
-		ElseIf TheApp.Settings.CompileMode = InputOptions.File AndAlso Not File.Exists(TheApp.Settings.CompileQcPathFileName) Then
+		ElseIf AppSettings.Instance.CompileMode = InputOptions.File AndAlso Not File.Exists(AppSettings.Instance.CompileQcPathFileName) Then
 			inputsAreValid = False
-			Me.WriteErrorMessage(1, "The QC file, """ + TheApp.Settings.CompileQcPathFileName + """, does not exist.")
+			Me.WriteErrorMessage(1, "The QC file, """ + AppSettings.Instance.CompileQcPathFileName + """, does not exist.")
 		End If
-		If gameSetup.GameEngine = GameEngine.Source AndAlso TheApp.Settings.CompileOptionDefineBonesIsChecked Then
-			If TheApp.Settings.CompileOptionDefineBonesCreateFileIsChecked Then
+		If gameSetup.GameEngine = GameEngine.Source AndAlso AppSettings.Instance.CompileOptionDefineBonesIsChecked Then
+			If AppSettings.Instance.CompileOptionDefineBonesCreateFileIsChecked Then
 				Dim defineBonesPathFileName As String
 				defineBonesPathFileName = Me.GetDefineBonesPathFileName()
-				If File.Exists(defineBonesPathFileName) AndAlso Not TheApp.Settings.CompileOptionDefineBonesOverwriteQciFileIsChecked Then
+				If File.Exists(defineBonesPathFileName) AndAlso Not AppSettings.Instance.CompileOptionDefineBonesOverwriteQciFileIsChecked Then
 					inputsAreValid = False
 					Me.WriteErrorMessage(1, "The DefineBones file, """ + defineBonesPathFileName + """, already exists.")
 				End If
 			End If
 		End If
-		'If TheApp.Settings.CompileOutputFolderIsChecked Then
-		If TheApp.Settings.CompileOutputFolderOption <> CompileOutputPathOptions.GameModelsFolder Then
+		'If AppSettings.Instance.CompileOutputFolderIsChecked Then
+		If AppSettings.Instance.CompileOutputFolderOption <> CompileOutputPathOptions.GameModelsFolder Then
 			If Not FileManager.PathExistsAfterTryToCreate(Me.theOutputPath) Then
 				inputsAreValid = False
 				Me.WriteErrorMessage(1, "The Output Folder, """ + Me.theOutputPath + """ could not be created.")
@@ -219,13 +219,13 @@ Public Class Compiler
 		compileResultInfo.theStatus = status
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 
 		If Me.theCompiledMdlFiles.Count > 0 Then
 			compileResultInfo.theCompiledRelativePathFileNames = Me.theCompiledMdlFiles
-		ElseIf gameSetup.GameEngine = GameEngine.GoldSource AndAlso TheApp.Settings.CompileGoldSourceLogFileIsChecked Then
+		ElseIf gameSetup.GameEngine = GameEngine.GoldSource AndAlso AppSettings.Instance.CompileGoldSourceLogFileIsChecked Then
 			compileResultInfo.theCompiledRelativePathFileNames = Me.theCompiledLogFiles
-		ElseIf gameSetup.GameEngine = GameEngine.Source AndAlso TheApp.Settings.CompileSourceLogFileIsChecked Then
+		ElseIf gameSetup.GameEngine = GameEngine.Source AndAlso AppSettings.Instance.CompileSourceLogFileIsChecked Then
 			compileResultInfo.theCompiledRelativePathFileNames = Me.theCompiledLogFiles
 		End If
 
@@ -241,7 +241,7 @@ Public Class Compiler
 		Me.theCompiledMdlFiles.Clear()
 
 		Dim qcPathFileName As String
-		qcPathFileName = TheApp.Settings.CompileQcPathFileName
+		qcPathFileName = AppSettings.Instance.CompileQcPathFileName
 		If File.Exists(qcPathFileName) Then
 			Me.theInputQcPath = FileManager.GetPath(qcPathFileName)
 		ElseIf Directory.Exists(qcPathFileName) Then
@@ -249,18 +249,18 @@ Public Class Compiler
 		End If
 
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 
 		'Dim info As New CompilerInputInfo()
 		'info.compilerPathFileName = gameSetup.CompilerPathFileName
-		'info.compilerOptions = TheApp.Settings.CompileOptionsText
+		'info.compilerOptions = AppSettings.Instance.CompileOptionsText
 		'info.gamePathFileName = gameSetup.GamePathFileName
-		'info.qcPathFileName = TheApp.Settings.CompileQcPathFileName
-		'info.customModelFolder = TheApp.Settings.CompileOutputSubfolderName
-		'info.theCompileMode = TheApp.Settings.CompileMode
+		'info.qcPathFileName = AppSettings.Instance.CompileQcPathFileName
+		'info.customModelFolder = AppSettings.Instance.CompileOutputSubfolderName
+		'info.theCompileMode = AppSettings.Instance.CompileMode
 
 		Dim defineBonesText As String = ""
-		If gameSetup.GameEngine = GameEngine.Source AndAlso TheApp.Settings.CompileOptionDefineBonesIsChecked Then
+		If gameSetup.GameEngine = GameEngine.Source AndAlso AppSettings.Instance.CompileOptionDefineBonesIsChecked Then
 			defineBonesText = "Define Bones "
 		End If
 
@@ -268,7 +268,7 @@ Public Class Compiler
 		progressDescriptionText = "Compiling " + defineBonesText + "with " + AppConstants.GetProductNameAndVersion() + ": "
 
 		Try
-			If TheApp.Settings.CompileMode = InputOptions.FolderRecursion Then
+			If AppSettings.Instance.CompileMode = InputOptions.FolderRecursion Then
 				progressDescriptionText += """" + Me.theInputQcPath + """ (folder + subfolders)"
 				Me.UpdateProgressStart(progressDescriptionText + " ...")
 
@@ -278,7 +278,7 @@ Public Class Compiler
 				'End If
 
 				Me.CompileModelsInFolderRecursively(Me.theInputQcPath)
-			ElseIf TheApp.Settings.CompileMode = InputOptions.Folder Then
+			ElseIf AppSettings.Instance.CompileMode = InputOptions.Folder Then
 				progressDescriptionText += """" + Me.theInputQcPath + """ (folder)"
 				Me.UpdateProgressStart(progressDescriptionText + " ...")
 
@@ -357,14 +357,14 @@ Public Class Compiler
 			'Dim gameSetup As GameSetup
 			'Dim gamePath As String
 			'Dim gameModelsPath As String
-			'gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+			'gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 			'gamePath = FileManager.GetPath(gameSetup.GamePathFileName)
 			'gameModelsPath = Path.Combine(gamePath, "models")
 			Dim gameModelsPath As String
 			gameModelsPath = Me.GetGameModelsPath()
 
 			Dim gameSetup As GameSetup
-			gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+			gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 
 			Dim qcFile As SourceQcFile
 			Dim qcModelName As String
@@ -414,7 +414,7 @@ Public Class Compiler
 
 			'Me.theModelOutputPath = Path.Combine(Me.theOutputPath, qcRelativePathName)
 			'Me.theModelOutputPath = Path.GetFullPath(Me.theModelOutputPath)
-			'If TheApp.Settings.CompileFolderForEachModelIsChecked Then
+			'If AppSettings.Instance.CompileFolderForEachModelIsChecked Then
 			'    Dim modelName As String
 			'    modelName = Path.GetFileNameWithoutExtension(modelRelativePathFileName)
 			'    Me.theModelOutputPath = Path.Combine(Me.theModelOutputPath, modelName)
@@ -424,7 +424,7 @@ Public Class Compiler
 			'FileManager.CreatePath(Me.theModelOutputPath)
 
 			'Me.CreateLogTextFile(qcPathFileName)
-			If TheApp.Settings.CompileMode = InputOptions.File Then
+			If AppSettings.Instance.CompileMode = InputOptions.File Then
 				status = Me.CreateLogTextFile(qcPathFileName)
 				'If status = StatusMessage.Error Then
 				'	Return status
@@ -432,7 +432,7 @@ Public Class Compiler
 			End If
 
 			Dim defineBonesText As String = ""
-			If gameSetup.GameEngine = GameEngine.Source AndAlso TheApp.Settings.CompileOptionDefineBonesIsChecked Then
+			If gameSetup.GameEngine = GameEngine.Source AndAlso AppSettings.Instance.CompileOptionDefineBonesIsChecked Then
 				defineBonesText = "Define Bones of "
 			End If
 
@@ -442,7 +442,7 @@ Public Class Compiler
 			Dim result As String
 			result = Me.CheckFiles()
 			If result = "success" Then
-				If gameSetup.GameEngine = GameEngine.Source AndAlso TheApp.Settings.CompileOptionDefineBonesIsChecked AndAlso TheApp.Settings.CompileOptionDefineBonesCreateFileIsChecked Then
+				If gameSetup.GameEngine = GameEngine.Source AndAlso AppSettings.Instance.CompileOptionDefineBonesIsChecked AndAlso AppSettings.Instance.CompileOptionDefineBonesCreateFileIsChecked Then
 					Me.OpenDefineBonesFile()
 				End If
 
@@ -453,7 +453,7 @@ Public Class Compiler
 					Me.UpdateProgress(2, "ERROR: The compiler did not return any status messages.")
 					Me.UpdateProgress(2, "CAUSE: The compiler is not the correct one for the selected game.")
 					Me.UpdateProgress(2, "SOLUTION: Verify integrity of game files via Steam so that the correct compiler is installed.")
-				ElseIf gameSetup.GameEngine = GameEngine.Source AndAlso TheApp.Settings.CompileOptionDefineBonesIsChecked Then
+				ElseIf gameSetup.GameEngine = GameEngine.Source AndAlso AppSettings.Instance.CompileOptionDefineBonesIsChecked Then
 					If Me.theDefineBonesFileStream IsNot Nothing Then
 						Dim qciPathFileName As String = CType(Me.theDefineBonesFileStream.BaseStream, FileStream).Name
 
@@ -473,7 +473,7 @@ Public Class Compiler
 							Else
 								Me.UpdateProgress(2, "CROWBAR: Wrote define bones into QCI file: """ + qciPathFileName + """")
 
-								If TheApp.Settings.CompileOptionDefineBonesModifyQcFileIsChecked Then
+								If AppSettings.Instance.CompileOptionDefineBonesModifyQcFileIsChecked Then
 									Dim line As String = Me.InsertAnIncludeDefineBonesFileCommandIntoQcFile(qciPathFileName)
 									Me.UpdateProgress(2, "CROWBAR: Wrote in the QC file this line: " + line)
 								End If
@@ -522,7 +522,7 @@ Public Class Compiler
 
 	Private Function CompilerOptionQuietIsEnabled() As Boolean
 		Dim quietIsEnabled As Boolean = False
-		Using parser As New TextFieldParser(New StringReader(TheApp.Settings.CompileOptionsText))
+		Using parser As New TextFieldParser(New StringReader(AppSettings.Instance.CompileOptionsText))
 			parser.TextFieldType = FieldType.Delimited
 			parser.Delimiters = New String() {" "}
 			parser.TrimWhiteSpace = True
@@ -563,7 +563,7 @@ Public Class Compiler
 
 		Dim arguments As String = ""
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 		If gameSetup.GameEngine = GameEngine.Source Then
 			arguments += "-game"
 			arguments += " "
@@ -572,7 +572,7 @@ Public Class Compiler
 			arguments += """"
 			arguments += " "
 		End If
-		arguments += TheApp.Settings.CompileOptionsText
+		arguments += AppSettings.Instance.CompileOptionsText
 		arguments += " "
 		arguments += """"
 		arguments += qcFileName
@@ -641,12 +641,12 @@ Public Class Compiler
 		Dim modelsSubpath As String
 		Dim targetPath As String
 
-		Dim gameSetup As GameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		Dim gameSetup As GameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 
 		sourcePath = FileManager.GetPath(compiledMdlPathFileName)
 		sourceFileNameWithoutExtension = Path.GetFileNameWithoutExtension(compiledMdlPathFileName)
 
-		If TheApp.Settings.CompileOutputFolderOption = CompileOutputPathOptions.GameModelsFolder Then
+		If AppSettings.Instance.CompileOutputFolderOption = CompileOutputPathOptions.GameModelsFolder Then
 			outputPathModelsFolder = Me.theOutputPath
 		Else
 			outputPathModelsFolder = Path.Combine(Me.theOutputPath, "models")
@@ -672,7 +672,7 @@ Public Class Compiler
 			targetPathFileName = Path.Combine(targetPath, Path.GetFileName(sourcePathFileName))
 
 			If String.Compare(sourcePathFileName, targetPathFileName, True) <> 0 Then
-				'If TheApp.Settings.CompileOutputFolderOption <> CompileOutputPathOptions.GameModelsFolder OrElse gameSetup.GameEngine = GameEngine.GoldSource Then
+				'If AppSettings.Instance.CompileOutputFolderOption <> CompileOutputPathOptions.GameModelsFolder OrElse gameSetup.GameEngine = GameEngine.GoldSource Then
 				Try
 					If File.Exists(targetPathFileName) Then
 						File.Delete(targetPathFileName)
@@ -821,9 +821,9 @@ Public Class Compiler
 	Private Function CreateLogTextFile(ByVal qcPathFileName As String) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 		Dim gameSetup As GameSetup
-		gameSetup = TheApp.Settings.GameSetups(TheApp.Settings.CompileGameSetupSelectedIndex)
+		gameSetup = AppSettings.Instance.GameSetups(AppSettings.Instance.CompileGameSetupSelectedIndex)
 
-		If (gameSetup.GameEngine = GameEngine.GoldSource AndAlso TheApp.Settings.CompileGoldSourceLogFileIsChecked) OrElse (gameSetup.GameEngine = GameEngine.Source AndAlso TheApp.Settings.CompileSourceLogFileIsChecked) Then
+		If (gameSetup.GameEngine = GameEngine.GoldSource AndAlso AppSettings.Instance.CompileGoldSourceLogFileIsChecked) OrElse (gameSetup.GameEngine = GameEngine.Source AndAlso AppSettings.Instance.CompileSourceLogFileIsChecked) Then
 			Dim qcFileName As String
 			Dim logPath As String
 			Dim logFileName As String
@@ -891,13 +891,13 @@ Public Class Compiler
 
 	Private Function GetDefineBonesPathFileName() As String
 		Dim fileName As String
-		If String.IsNullOrEmpty(Path.GetExtension(TheApp.Settings.CompileOptionDefineBonesQciFileName)) Then
-			fileName = TheApp.Settings.CompileOptionDefineBonesQciFileName + ".qci"
+		If String.IsNullOrEmpty(Path.GetExtension(AppSettings.Instance.CompileOptionDefineBonesQciFileName)) Then
+			fileName = AppSettings.Instance.CompileOptionDefineBonesQciFileName + ".qci"
 		Else
-			fileName = TheApp.Settings.CompileOptionDefineBonesQciFileName
+			fileName = AppSettings.Instance.CompileOptionDefineBonesQciFileName
 		End If
 		Dim qcPath As String
-		qcPath = FileManager.GetPath(TheApp.Settings.CompileQcPathFileName)
+		qcPath = FileManager.GetPath(AppSettings.Instance.CompileQcPathFileName)
 		Dim pathFileName As String
 		pathFileName = Path.Combine(qcPath, fileName)
 
@@ -921,7 +921,7 @@ Public Class Compiler
 	Private Function InsertAnIncludeDefineBonesFileCommandIntoQcFile(ByVal qciPathFileName As String) As String
 		Dim qcFile As SourceQcFile
 		qcFile = New SourceQcFile()
-		Return qcFile.InsertAnIncludeFileCommand(TheApp.Settings.CompileQcPathFileName, qciPathFileName)
+		Return qcFile.InsertAnIncludeFileCommand(AppSettings.Instance.CompileQcPathFileName, qciPathFileName)
 	End Function
 
 	Private Sub UpdateProgressInternal(ByVal progressValue As Integer, ByVal line As String)

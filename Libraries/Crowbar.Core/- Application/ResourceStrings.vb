@@ -8,6 +8,7 @@
         Decompile_DebugTextureMDLFileNameSuffix
         Decompile_DebugAniFileNameSuffix
         Decompile_DebugVvdFileNameSuffix
+        Decompile_LogFileNameSuffix
     End Enum
 
     Public ReadOnly Values As Dictionary(Of Entry, String) = New Dictionary(Of Entry,String)()
