@@ -15,7 +15,7 @@ Public Module CrowbarSteamPipe
 
 		' Connect to the pipe or wait until the pipe is available.
 		Console.WriteLine("Attempting to connect to the pipe ...")
-		pipeClient.Connect()
+		pipeClient.Connect(10000)
 		Console.WriteLine("... Connected to pipe.")
 
 		Console.WriteLine("Current folder: " + Directory.GetCurrentDirectory())

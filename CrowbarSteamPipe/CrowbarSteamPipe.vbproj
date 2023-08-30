@@ -9,6 +9,14 @@
         <MyType>WindowsFormsWithCustomSubMain</MyType>
         <OutputPath>..\Crowbar\Resources\</OutputPath>
     </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <OutputPath>bin\Debug\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <OutputPath>bin\Release\</OutputPath>
+    </PropertyGroup>
     
     <ItemGroup>
       <Import Include="System.Data"/>
