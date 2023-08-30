@@ -7,6 +7,7 @@
         <RootNamespace>Crowbar</RootNamespace>
         <UseWindowsForms>true</UseWindowsForms>
         <MyType>WindowsFormsWithCustomSubMain</MyType>
+        <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     </PropertyGroup>
 
     <ItemGroup>
@@ -41,6 +42,138 @@
     <ItemGroup>
       <ProjectReference Include="..\Libraries\TodoRemove\TodoRemove.csproj" />
       <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Widgets\- Application\AgreementRequiresAcceptanceForm.resx">
+        <DependentUpon>AgreementRequiresAcceptanceForm.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- Application\BaseForm.resx">
+        <DependentUpon>BaseForm.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- Application\DeleteItemForm.resx">
+        <DependentUpon>DeleteItemForm.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- Application\MainForm.de-DE.resx">
+        <DependentUpon>MainForm.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- Application\MacroDataGridView.resx">
+        <DependentUpon>MacroDataGridView.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- General\DataGridViewEx.resx">
+        <DependentUpon>DataGridViewEx.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- General\TreeViewEx.resx">
+        <DependentUpon>TreeViewEx.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\AboutUserControl.resx">
+        <SubType>Designer</SubType>
+        <DependentUpon>AboutUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\CompileUserControl.resx">
+        <SubType>Designer</SubType>
+        <DependentUpon>CompileUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\DownloadUserControl.resx">
+        <DependentUpon>DownloadUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\PublishUserControl.resx">
+        <DependentUpon>PublishUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\SetUpGamesUserControl.resx">
+        <DependentUpon>SetUpGamesUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\UnpackUserControl.resx">
+        <DependentUpon>UnpackUserControl.vb</DependentUpon>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\PackUserControl.resx">
+        <DependentUpon>PackUserControl.vb</DependentUpon>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\EditUserControl.resx">
+        <DependentUpon>EditUserControl.vb</DependentUpon>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\OptionsUserControl.resx">
+        <DependentUpon>OptionsUserControl.vb</DependentUpon>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\PatchUserControl.resx">
+        <DependentUpon>PatchUserControl.vb</DependentUpon>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\UpdateUserControl.resx">
+        <DependentUpon>UpdateUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\ViewUserControl.resx">
+        <DependentUpon>ViewUserControl.vb</DependentUpon>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\DecompileUserControl.resx">
+        <SubType>Designer</SubType>
+        <DependentUpon>DecompileUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Main Tabs\HelpUserControl.resx">
+        <SubType>Designer</SubType>
+        <DependentUpon>HelpUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- Application\MainForm.resx">
+        <SubType>Designer</SubType>
+        <DependentUpon>MainForm.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="My Project\Resources.resx">
+        <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+        <CustomToolNamespace>My.Resources</CustomToolNamespace>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\- Application\UnhandledExceptionWindow.resx">
+        <DependentUpon>UnhandledExceptionWindow.vb</DependentUpon>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\Base\Base_TagsUserControl.resx">
+        <DependentUpon>Base_TagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\FirefightReloadedTagsUserControl.resx">
+        <DependentUpon>FirefightReloadedTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\CodenameCureTagsUserControl.resx">
+        <DependentUpon>CodenameCureTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\HuntDownTheFreemanTagsUserControl.resx">
+        <DependentUpon>HuntDownTheFreemanTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\JBModTagsUserControl.resx">
+        <DependentUpon>JBModTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\MilitaryConflictVietnamTagsUserControl.resx">
+        <DependentUpon>MilitaryConflictVietnamTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\WilsonChroniclesTagsUserControl.resx">
+        <DependentUpon>WilsonChroniclesTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\BlackMesaTagsUserControl.resx">
+        <DependentUpon>BlackMesaTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\ContagionTagsUserControl.resx">
+        <DependentUpon>ContagionTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\GarrysModTagsUserControl.resx">
+        <DependentUpon>GarrysModTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\EntropyZero2TagsUserControl.resx">
+        <DependentUpon>EntropyZero2TagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\Left4Dead2TagsUserControl.resx">
+        <DependentUpon>Left4Dead2TagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\SourceFilmmakerTagsUserControl.resx">
+        <DependentUpon>SourceFilmmakerTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Widgets\Publish SteamApp Tags\ZombiePanicSourceTagsUserControl.resx">
+        <DependentUpon>ZombiePanicSourceTagsUserControl.vb</DependentUpon>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
