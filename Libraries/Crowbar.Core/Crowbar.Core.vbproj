@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\TodoRemove\TodoRemove.csproj" />
+      <ProjectReference Include="..\TodoRemove\TodoRemove.csproj" />
     </ItemGroup>
 
 </Project>

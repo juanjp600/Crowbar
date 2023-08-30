@@ -39,7 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\TodoRemove\TodoRemove.csproj" />
+      <ProjectReference Include="..\Libraries\TodoRemove\TodoRemove.csproj" />
       <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
     </ItemGroup>
 
