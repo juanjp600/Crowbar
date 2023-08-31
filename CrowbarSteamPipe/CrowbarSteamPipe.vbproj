@@ -5,23 +5,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <StartupObject>Sub Main</StartupObject>
         <RootNamespace>CrowbarSteamPipe</RootNamespace>
-        <OutputPath>..\Crowbar\Resources\</OutputPath>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>bin\Debug\</OutputPath>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <OutputPath>bin\Release\</OutputPath>
-    </PropertyGroup>
-    
-    <ItemGroup>
-      <Import Include="System.Data"/>
-      <Import Include="System.Drawing"/>
-      <Import Include="System.Windows.Forms"/>
-    </ItemGroup>
-    
     <ItemGroup>
       <PackageReference Include="Steamworks.NET" Version="20.1.0" />
     </ItemGroup>
