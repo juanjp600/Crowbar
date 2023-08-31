@@ -183,9 +183,16 @@ Public Class SourcePackageVpk
 			inputFileStream = New FileStream(pathFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
 			If inputFileStream IsNot Nothing Then
 				Try
-					' Using Text.Encoding.Default because Text.Encoding.ASCII does not correctly read in non-English letters.
-					' Using Text.Encoding.Default because it is likely what is used by packer tools.
-					Me.thePackageDirFileReader = New BufferedBinaryReader(inputFileStream, System.Text.Encoding.Default)
+					' Always set the encoding, to make explicit and not rely on default that could change.
+					' Never use Text.Encoding.Default because it depends on context.
+					' Text.Encoding.ASCII does not correctly read in non-English letters.
+					' Works for Windows system locale set to English or Japanese.
+					Me.thePackageDirFileReader = New BufferedBinaryReader(inputFileStream, System.Text.Encoding.GetEncoding(1252))
+					' Does not work.
+					'Me.thePackageDirFileReader = New BufferedBinaryReader(inputFileStream, System.Text.Encoding.UTF8)
+					' Other possibilities if GetEncoding(1252) does not work for something.
+					'Me.thePackageDirFileReader = New BufferedBinaryReader(inputFileStream, System.Text.Encoding.GetEncoding(437))
+					'Me.thePackageDirFileReader = New BufferedBinaryReader(inputFileStream, System.Text.Encoding.GetEncoding(28591))
 
 					readFileAction.Invoke()
 				Catch ex As Exception
