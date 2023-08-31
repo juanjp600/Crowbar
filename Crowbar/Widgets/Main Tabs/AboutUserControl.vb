@@ -1,3 +1,5 @@
+Imports BackwardsCompatibility
+
 Public Class AboutUserControl
 
 #Region "Creation and Destruction"
@@ -53,11 +55,11 @@ Public Class AboutUserControl
 #Region "Child Widget Event Handlers"
 
 	Private Sub ProductLogoButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProductLogoButton.Click
-		System.Diagnostics.Process.Start(My.Resources.About_ProductLink)
+		WebUtil.OpenUrl(My.Resources.About_ProductLink)
 	End Sub
 
 	Private Sub AuthorIconButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuthorIconButton.Click
-		System.Diagnostics.Process.Start(My.Resources.About_AuthorLink)
+		WebUtil.OpenUrl(My.Resources.About_AuthorLink)
 	End Sub
 
 	Private Sub LinkLabel_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles ProductNameLinkLabel.LinkClicked, AuthorLinkLabel.LinkClicked, GotoSteamGroupLinkLabel.LinkClicked, GotoSteamProfileLinkLabel.LinkClicked
@@ -74,7 +76,7 @@ Public Class AboutUserControl
 	End Sub
 
 	Private Sub PayPalPictureBox_Click(sender As Object, e As EventArgs) Handles PayPalPictureBox.Click
-		System.Diagnostics.Process.Start(My.Resources.About_PayPalLink)
+		WebUtil.OpenUrl(My.Resources.About_PayPalLink)
 	End Sub
 
 #End Region

@@ -1,4 +1,5 @@
 Imports System.IO
+Imports BackwardsCompatibility
 
 Public Class HelpUserControl
 
@@ -37,7 +38,7 @@ Public Class HelpUserControl
 #Region "Child Widget Event Handlers"
 
 	Private Sub CrowbarGuideButton_Click(sender As Object, e As EventArgs) Handles CrowbarGuideButton.Click
-		System.Diagnostics.Process.Start(My.Resources.Help_CrowbarGuideLink)
+		WebUtil.OpenUrl(My.Resources.Help_CrowbarGuideLink)
 	End Sub
 
     Private Sub LinkLabel_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles TutorialLinkLabel.LinkClicked, ContentsLinkLabel.LinkClicked, IndexLinkLabel.LinkClicked, TipsLinkLabel.LinkClicked

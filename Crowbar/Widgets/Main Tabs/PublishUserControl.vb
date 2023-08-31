@@ -6,6 +6,7 @@ Imports System.Reflection
 Imports System.Text
 Imports System.Threading
 Imports System.Threading.Tasks
+Imports BackwardsCompatibility
 
 Public Class PublishUserControl
 
@@ -1105,7 +1106,7 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub OpenSteamSubscriberAgreement()
-		System.Diagnostics.Process.Start(My.Resources.Link_SteamSubscriberAgreement)
+		WebUtil.OpenUrl(My.Resources.Link_SteamSubscriberAgreement)
 	End Sub
 
 	Private Sub UpdateItemListWidgets(ByVal isProgress As Boolean)
@@ -1685,7 +1686,7 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub OpenWorkshopPage()
-		System.Diagnostics.Process.Start(Me.theWorkshopPageLink)
+		WebUtil.OpenUrl(Me.theWorkshopPageLink)
 	End Sub
 
 	Private Sub SaveTemplate()

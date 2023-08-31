@@ -389,7 +389,7 @@ Public Class DownloadUserControl
 			itemlink = AppConstants.WorkshopLinkStart + itemIdOrLink
 		End If
 		Try
-			System.Diagnostics.Process.Start(itemlink)
+			WebUtil.OpenUrl(itemLink)
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		End Try
