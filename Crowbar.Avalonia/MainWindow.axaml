@@ -1,9 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:Crowbar.Avalonia"
-        mc:Ignorable="d" d:DesignWidth="780" d:DesignHeight="560"
+        xmlns:maintabs="using:Crowbar.Avalonia.MainTabs"
+        d:DesignWidth="780" d:DesignHeight="560"
         x:Class="Crowbar.Avalonia.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Title="Crowbar"
@@ -13,11 +13,12 @@
     <Window.Resources>
         <SolidColorBrush x:Key="WindowBackgroundColor">#0a1220</SolidColorBrush>
         <SolidColorBrush x:Key="ContentBackgroundColor">#15182f</SolidColorBrush>
-        <SolidColorBrush x:Key="TextColor">#e0e0e0</SolidColorBrush>
-        
+
         <SolidColorBrush x:Key="TabDefaultBackgroundColor">#3a4055</SolidColorBrush>
         <SolidColorBrush x:Key="TabHoverBackgroundColor">#44607a</SolidColorBrush>
         <SolidColorBrush x:Key="TabSelectedBackgroundColor">#5588aa</SolidColorBrush>
+
+        <SolidColorBrush x:Key="TextColor">#e0e0e0</SolidColorBrush>
     </Window.Resources>
 
     <Window.Styles>
@@ -62,19 +63,43 @@
 
     <TabControl Classes="MainTabControl">
         <TabItem Header="Set Up Games">
-            text
+            <maintabs:SetUpGamesUserControl />
         </TabItem>
-        <TabItem Header="Download"></TabItem>
-        <TabItem Header="Unpack"></TabItem>
-        <TabItem Header="Preview"></TabItem>
-        <TabItem Header="Decompile"></TabItem>
-        <TabItem Header="Compile"></TabItem>
-        <TabItem Header="View"></TabItem>
-        <TabItem Header="Pack"></TabItem>
-        <TabItem Header="Publish"></TabItem>
-        <TabItem Header="Options"></TabItem>
-        <TabItem Header="Help"></TabItem>
-        <TabItem Header="About"></TabItem>
-        <TabItem Header="Update"></TabItem>
+        <TabItem Header="Download">
+            <maintabs:DownloadUserControl />
+        </TabItem>
+        <TabItem Header="Unpack">
+            <maintabs:UnpackUserControl />
+        </TabItem>
+        <TabItem Header="Preview">
+            <maintabs:ViewUserControl />
+        </TabItem>
+        <TabItem Header="Decompile">
+            <maintabs:DecompileUserControl />
+        </TabItem>
+        <TabItem Header="Compile">
+            <maintabs:CompileUserControl />
+        </TabItem>
+        <TabItem Header="View">
+            <maintabs:ViewUserControl />
+        </TabItem>
+        <TabItem Header="Pack">
+            <maintabs:PackUserControl />
+        </TabItem>
+        <TabItem Header="Publish">
+            <maintabs:PublishUserControl />
+        </TabItem>
+        <TabItem Header="Options">
+            <maintabs:OptionsUserControl />
+        </TabItem>
+        <TabItem Header="Help">
+            <maintabs:HelpUserControl />
+        </TabItem>
+        <TabItem Header="About">
+            <maintabs:AboutUserControl />
+        </TabItem>
+        <TabItem Header="Update">
+            <maintabs:UpdateUserControl />
+        </TabItem>
     </TabControl>
 </Window>
