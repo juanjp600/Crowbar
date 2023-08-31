@@ -69,7 +69,7 @@ Public Class AboutUserControl
 		If e.Button = Windows.Forms.MouseButtons.Left Then
 			aLinkLabel.LinkVisited = True
 			Dim target As String = CType(e.Link.LinkData, String)
-			System.Diagnostics.Process.Start(target)
+			WebUtil.OpenUrl(target)
 		ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
 			'TODO: Show context menu with: Copy Link, Copy Text
 		End If

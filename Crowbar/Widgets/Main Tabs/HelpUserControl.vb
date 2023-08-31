@@ -49,7 +49,7 @@ Public Class HelpUserControl
             aLinkLabel.LinkVisited = True
             Dim target As String = CType(e.Link.LinkData, String)
             Try
-                System.Diagnostics.Process.Start(target)
+	            WebUtil.OpenUrl(target)
             Catch ex As Exception
                 'TODO: Tell user what went wrong.
             End Try
