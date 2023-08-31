@@ -4,7 +4,7 @@ Imports System.Text
 Imports System.Threading
 Imports Steamworks
 
-Public Module CrowbarSteamPipe
+Module CrowbarSteamPipe
 
 	Public Sub Main(args As String())
 		Dim pipeNameSuffix As String = ""

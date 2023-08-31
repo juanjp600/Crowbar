@@ -17,4 +17,10 @@
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.2"/>
     </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\CrowbarSteamPipe\CrowbarSteamPipe.vbproj" />
+      <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
+    </ItemGroup>
 </Project>
