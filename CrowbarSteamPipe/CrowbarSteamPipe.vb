@@ -10,6 +10,12 @@ Public Module CrowbarSteamPipe
 		Dim pipeNameSuffix As String = ""
 		If args.Count > 0 Then
 			pipeNameSuffix = args(0)
+		Else 
+			Console.WriteLine("No args passed, closing immediately. Do not run CrowbarSteamPipe directly, run Crowbar instead!")
+			Console.WriteLine("")
+			Console.WriteLine("Press Enter to continue...")
+			Console.ReadLine()
+			Return
 		End If
 		Dim pipeClient As New NamedPipeClientStream(".", "CrowbarSteamPipe" + pipeNameSuffix, PipeDirection.InOut, PipeOptions.WriteThrough)
 
@@ -129,7 +135,7 @@ Public Module CrowbarSteamPipe
 
 #If DEBUG Then
 			'For debugging, keep console open until Enter Is pressed.
-			Console.WriteLine("Press any key to continue...")
+			Console.WriteLine("Press Enter to continue...")
 			Console.ReadLine()
 #End If
         End Try
