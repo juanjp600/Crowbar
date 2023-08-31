@@ -491,10 +491,10 @@ Public Class SourceQcFile10
 			Me.theOutputFileStreamWriter.WriteLine()
 
 			For Each texture As SourceMdlTexture10 In Me.theMdlFileData.theTextures
-				If ((texture.flags And SourceMdlTexture10.STUDIO_NF_FLATSHADE) > 0) AndAlso (Not texture.theFileName.ToLower().Contains("chrome")) Then
+				If ((texture.flags And SourceMdlTexture10.STUDIO_NF_FLATSHADE) > 0) AndAlso (Not texture.theFileName.ToLowerInvariant().Contains("chrome")) Then
 					Me.WriteTexRenderModeLine(texture.theFileName, "flatshade", True)
 				End If
-				If ((texture.flags And SourceMdlTexture10.STUDIO_NF_CHROME) > 0) AndAlso (Not texture.theFileName.ToLower().Contains("chrome")) Then
+				If ((texture.flags And SourceMdlTexture10.STUDIO_NF_CHROME) > 0) AndAlso (Not texture.theFileName.ToLowerInvariant().Contains("chrome")) Then
 					Me.WriteTexRenderModeLine(texture.theFileName, "chrome", False)
 				End If
 				If (texture.flags And SourceMdlTexture10.STUDIO_NF_FULLBRIGHT) > 0 Then

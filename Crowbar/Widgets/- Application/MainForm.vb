@@ -330,7 +330,7 @@ Public Class MainForm
 	Private Sub SetDroppedPathFileName(ByVal setViaAutoOpen As Boolean, ByVal pathFileName As String)
 		Dim extension As String = ""
 
-		extension = Path.GetExtension(pathFileName).ToLower()
+		extension = Path.GetExtension(pathFileName).ToLowerInvariant()
 		If extension = ".url" Then
 			Dim fileLines() As String
 			fileLines = File.ReadAllLines(pathFileName)

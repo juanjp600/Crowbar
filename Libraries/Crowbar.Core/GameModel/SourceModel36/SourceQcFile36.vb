@@ -33,7 +33,7 @@ Public Class SourceQcFile36
 	'		While (Not (inputFileStream.EndOfStream))
 	'			inputLine = inputFileStream.ReadLine()
 
-	'			temp = inputLine.ToLower().TrimStart()
+	'			temp = inputLine.ToLowerInvariant().TrimStart()
 	'			If temp.StartsWith("$modelname") Then
 	'				temp = temp.Replace("$modelname", "")
 	'				temp = temp.Trim()

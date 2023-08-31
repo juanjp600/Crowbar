@@ -680,7 +680,7 @@ Public Module FileManager
 
 		Try
 			For Each reservedWord As String In ReservedWords
-				If fileName.ToLower() = reservedWord Then
+				If fileName.ToLowerInvariant() = reservedWord Then
 					fileName = "temp"
 				End If
 			Next

@@ -987,12 +987,12 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub SearchItemIDs()
-		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLower()
+		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLowerInvariant()
 		Dim itemHasBeenFound As Boolean = False
 
 		Me.theDisplayedItems.Clear()
 		For Each item As WorkshopItem In Me.theEntireListOfItems
-			If item.ID.ToLower().Contains(itemTextToFind) Then
+			If item.ID.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
 			End If
@@ -1010,12 +1010,12 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub SearchItemOwnerNames()
-		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLower()
+		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLowerInvariant()
 		Dim itemHasBeenFound As Boolean = False
 
 		Me.theDisplayedItems.Clear()
 		For Each item As WorkshopItem In Me.theEntireListOfItems
-			If item.OwnerName.ToLower().Contains(itemTextToFind) Then
+			If item.OwnerName.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
 			End If
@@ -1023,12 +1023,12 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub SearchItemTitles()
-		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLower()
+		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLowerInvariant()
 		Dim itemHasBeenFound As Boolean = False
 
 		Me.theDisplayedItems.Clear()
 		For Each item As WorkshopItem In Me.theEntireListOfItems
-			If item.Title.ToLower().Contains(itemTextToFind) Then
+			If item.Title.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
 			End If
@@ -1036,12 +1036,12 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub SearchItemDescriptions()
-		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLower()
+		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLowerInvariant()
 		Dim itemHasBeenFound As Boolean = False
 
 		Me.theDisplayedItems.Clear()
 		For Each item As WorkshopItem In Me.theEntireListOfItems
-			If item.Description.ToLower().Contains(itemTextToFind) Then
+			If item.Description.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
 			End If
@@ -1049,21 +1049,21 @@ Public Class PublishUserControl
 	End Sub
 
 	Private Sub SearchItemAllFields()
-		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLower()
+		Dim itemTextToFind As String = Me.SearchItemsToolStripTextBox.Text.ToLowerInvariant()
 		Dim itemHasBeenFound As Boolean = False
 
 		Me.theDisplayedItems.Clear()
 		For Each item As WorkshopItem In Me.theEntireListOfItems
-			If item.ID.ToLower().Contains(itemTextToFind) Then
+			If item.ID.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
-			ElseIf item.OwnerName.ToLower().Contains(itemTextToFind) Then
+			ElseIf item.OwnerName.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
-			ElseIf item.Title.ToLower().Contains(itemTextToFind) Then
+			ElseIf item.Title.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
-			ElseIf item.Description.ToLower().Contains(itemTextToFind) Then
+			ElseIf item.Description.ToLowerInvariant().Contains(itemTextToFind) Then
 				itemHasBeenFound = True
 				Me.theDisplayedItems.Add(item)
 			End If

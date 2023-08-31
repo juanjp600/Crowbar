@@ -69,7 +69,7 @@ Public NotInheritable Class EnumHelper
 		Dim index As Integer = -1
 		For pairIndex As Integer = 0 To list.Count - 1
 			Dim pair As KeyValuePair(Of System.Enum, String) = CType(list(pairIndex), KeyValuePair(Of [Enum], String))
-			If pair.Key.ToString().ToLower() = keyText.ToLower() Then
+			If pair.Key.ToString().ToLowerInvariant() = keyText.ToLowerInvariant() Then
 				index = pairIndex
 				Exit For
 			End If

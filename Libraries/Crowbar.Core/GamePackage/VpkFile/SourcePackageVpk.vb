@@ -113,7 +113,7 @@ Public Class SourcePackageVpk
 				' The version = 196610 is used by Titanfall and Titanfall 2.
 				If Me.theVpkFileData.version = 196610 Then
 					' Remove up to the word "client".
-					Dim lowercaseEntryPath As String = packageFileNamePrefix.ToLower()
+					Dim lowercaseEntryPath As String = packageFileNamePrefix.ToLowerInvariant()
 					Dim positionOfClientText As Integer = lowercaseEntryPath.IndexOf("client")
 					If positionOfClientText > -1 Then
 						packageFileNamePrefix = packageFileNamePrefix.Remove(0, positionOfClientText)

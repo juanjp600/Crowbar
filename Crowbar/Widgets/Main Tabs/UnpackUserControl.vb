@@ -1270,8 +1270,8 @@ Public Class UnpackUserControl
 			Dim nodeClone As TreeNode
 			For Each entry As SourcePackageDirectoryEntry In entries
 				If Not entry.IsFolder Then
-					entryName = entry.Name.ToLower()
-					If entryName.Contains(Me.theTextToFind.ToLower()) Then
+					entryName = entry.Name.ToLowerInvariant()
+					If entryName.Contains(Me.theTextToFind.ToLowerInvariant()) Then
 						If currentResultsTreeNodeList Is Nothing Then
 							currentResultsTreeNodeList = New List(Of SourcePackageDirectoryEntry)()
 							currentResultsTreeNode.Tag = currentResultsTreeNodeList
@@ -1282,8 +1282,8 @@ Public Class UnpackUserControl
 						Me.theSearchBackgroundWorker.ReportProgress(1)
 					End If
 				Else
-					entryName = entry.Name.ToLower()
-					If entryName.Contains(Me.theTextToFind.ToLower()) Then
+					entryName = entry.Name.ToLowerInvariant()
+					If entryName.Contains(Me.theTextToFind.ToLowerInvariant()) Then
 						If currentResultsFolderTreeNodeList Is Nothing Then
 							currentResultsFolderTreeNodeList = New List(Of SourcePackageDirectoryEntry)()
 							Me.theResultsFoldersTreeNode.Tag = currentResultsFolderTreeNodeList
@@ -1335,9 +1335,9 @@ Public Class UnpackUserControl
 						Else
 							For Each info As SourcePackageDirectoryEntry In entries
 								If info.IsFolder Then
-									entryName = info.Name.ToLower()
+									entryName = info.Name.ToLowerInvariant()
 
-									If entryName = nodeClone.Name.ToLower() Then
+									If entryName = nodeClone.Name.ToLowerInvariant() Then
 										If currentResultsTreeNodeList Is Nothing Then
 											currentResultsTreeNodeList = New List(Of SourcePackageDirectoryEntry)()
 											currentResultsTreeNode.Tag = currentResultsTreeNodeList

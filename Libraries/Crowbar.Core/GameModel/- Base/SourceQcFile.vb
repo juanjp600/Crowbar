@@ -17,7 +17,7 @@ Public Class SourceQcFile
 			While (Not (inputFileStream.EndOfStream))
 				inputLine = inputFileStream.ReadLine()
 
-				modifiedLine = inputLine.ToLower().TrimStart()
+				modifiedLine = inputLine.ToLowerInvariant().TrimStart()
 				If modifiedLine.StartsWith("""$modelname""") Then
 					modifiedLine = modifiedLine.Replace("""$modelname""", "$modelname")
 				End If

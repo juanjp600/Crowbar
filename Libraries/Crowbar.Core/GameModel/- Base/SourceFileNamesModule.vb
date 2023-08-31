@@ -294,14 +294,14 @@ Public Module SourceFileNamesModule
 	'	Dim texturePathsLowercase As List(Of String)
 	'	texturePathsLowercase = New List(Of String)(texturePaths.Count)
 	'	For Each aTexturePath As String In texturePaths
-	'		texturePathsLowercase.Add(aTexturePath.ToLower())
+	'		texturePathsLowercase.Add(aTexturePath.ToLowerInvariant())
 	'	Next
 
 	'	For texturePathFileNameIndex As Integer = 0 To texturePathFileNames.Count - 1
 	'		Dim aTexturePathFileName As String
 	'		Dim aTexturePathFileNameLowercase As String
 	'		aTexturePathFileName = texturePathFileNames(texturePathFileNameIndex)
-	'		aTexturePathFileNameLowercase = aTexturePathFileName.ToLower()
+	'		aTexturePathFileNameLowercase = aTexturePathFileName.ToLowerInvariant()
 
 	'		' If the texturePathFileName starts with a path that is in the texturePaths list, then remove the texturePath from the texturePathFileName.
 	'		For texturePathIndex As Integer = 0 To texturePathsLowercase.Count - 1
@@ -324,7 +324,7 @@ Public Module SourceFileNamesModule
 	'		Dim texturePathLowercase As String
 	'		Dim textureFileName As String
 	'		texturePath = FileManager.GetPath(aTexturePathFileName)
-	'		texturePathLowercase = texturePath.ToLower()
+	'		texturePathLowercase = texturePath.ToLowerInvariant()
 	'		textureFileName = Path.GetFileName(aTexturePathFileName)
 	'		If aTexturePathFileName <> textureFileName AndAlso Not texturePathsLowercase.Contains(texturePathLowercase) AndAlso Not texturePathsLowercase.Contains(texturePathLowercase + Path.DirectorySeparatorChar) AndAlso Not texturePathsLowercase.Contains(texturePathLowercase + Path.AltDirectorySeparatorChar) Then
 	'			'NOTE: Place first because it should override whatever is already in list.
@@ -339,7 +339,7 @@ Public Module SourceFileNamesModule
 		Dim texturePathsLowercase As List(Of String)
 		texturePathsLowercase = New List(Of String)(texturePaths.Count)
 		For Each aTexturePath As String In texturePaths
-			texturePathsLowercase.Add(aTexturePath.ToLower())
+			texturePathsLowercase.Add(aTexturePath.ToLowerInvariant())
 		Next
 
 		'NOTE: Use index so can modify the list member, not a copy of it.
@@ -355,7 +355,7 @@ Public Module SourceFileNamesModule
 
 			Dim aTexturePathFileNameLowercase As String
 			Dim aTexturePathLowercase As String
-			aTexturePathFileNameLowercase = aTexturePathFileName.ToLower()
+			aTexturePathFileNameLowercase = aTexturePathFileName.ToLowerInvariant()
 			aTexturePathLowercase = FileManager.GetPath(aTexturePathFileNameLowercase)
 
 			' If the texturePathFileName starts with a path, then ...

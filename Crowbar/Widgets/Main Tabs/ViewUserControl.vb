@@ -441,7 +441,7 @@ Public Class ViewUserControl
 		Me.AppSettingViewerIsRunning = modelViewerIsRunning
 
 		If String.IsNullOrEmpty(Me.AppSettingMdlPathFileName) _
-			OrElse Not (Path.GetExtension(Me.AppSettingMdlPathFileName).ToLower() = ".mdl") _
+			OrElse Not (Path.GetExtension(Me.AppSettingMdlPathFileName).ToLowerInvariant() = ".mdl") _
 			OrElse Not File.Exists(Me.AppSettingMdlPathFileName) Then
 			Me.ViewButton.Enabled = False
 			Me.ViewAsReplacementButton.Enabled = False

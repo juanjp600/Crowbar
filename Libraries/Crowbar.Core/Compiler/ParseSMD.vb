@@ -47,22 +47,22 @@ Module ParseSMD
 					Continue While
 				End If
 
-				If command.ToLower() = "version" Then
+				If command.ToLowerInvariant() = "version" Then
 					If commandOption <> 1 Then
 						info.messages.Add("ERROR: Incorrect version on line " + info.lineCount.ToString() + ". Must be: version 1")
 						Exit While
 					End If
 					commandsRemaining.Remove("version")
 
-				ElseIf command.ToLower() = "nodes" Then
+				ElseIf command.ToLowerInvariant() = "nodes" Then
 					info.boneCount = GrabNodes()
 					commandsRemaining.Remove("nodes")
 
-				ElseIf command.ToLower() = "skeleton" Then
+				ElseIf command.ToLowerInvariant() = "skeleton" Then
 					'			Grab_Animation( psource, "BindPose" );
 					commandsRemaining.Remove("skeleton")
 
-				ElseIf command.ToLower() = "triangles" Then
+				ElseIf command.ToLowerInvariant() = "triangles" Then
 					'			Grab_Triangles( psource );
 					commandsRemaining.Remove("triangles")
 
@@ -320,7 +320,7 @@ Module ParseSMD
 				Continue While
 			End If
 
-			If command.ToLower() = "time" Then
+			If command.ToLowerInvariant() = "time" Then
 				'			t = index;
 				'			if ( pAnim->startframe == -1 )
 				'			{
@@ -361,7 +361,7 @@ Module ParseSMD
 				Continue While
 			End If
 
-			If command.ToLower() = "end" Then
+			If command.ToLowerInvariant() = "end" Then
 				'			pAnim->numframes = pAnim->endframe - pAnim->startframe + 1;
 				'
 				'			for ( t = 0; t < pAnim->numframes; t++ )

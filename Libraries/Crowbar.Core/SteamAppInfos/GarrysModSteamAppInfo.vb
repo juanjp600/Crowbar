@@ -334,7 +334,7 @@ Public Class GarrysModSteamAppInfo
 		Next
 		For tagIndex As Integer = 0 To tags.Count - 1
 			If tags(tagIndex) <> "ServerContent" AndAlso tags(tagIndex) <> "Addon" Then
-				tags(tagIndex) = tags(tagIndex).ToLower()
+				tags(tagIndex) = tags(tagIndex).ToLowerInvariant()
 			End If
 		Next
 		'NOTE: Not sure how this became empty for me in testing, so let's make sure there is a tag so Crowbar does not show exception window.
