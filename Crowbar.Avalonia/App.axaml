@@ -1,10 +1,62 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              x:Class="Crowbar.Avalonia.App"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <Application.Resources>
+        <SolidColorBrush x:Key="WindowBackgroundColor">#0a1220</SolidColorBrush>
+        <SolidColorBrush x:Key="ContentBackgroundColor">#15182f</SolidColorBrush>
 
+        <SolidColorBrush x:Key="TabDefaultBackgroundColor">#3a4055</SolidColorBrush>
+        <SolidColorBrush x:Key="TabHoverBackgroundColor">#44607a</SolidColorBrush>
+        <SolidColorBrush x:Key="TabSelectedBackgroundColor">#5588aa</SolidColorBrush>
+        <system:Int32 x:Key="TabDefaultHeight">20</system:Int32>
+        <system:Int32 x:Key="TabSelectedHeight">24</system:Int32>
+
+        <SolidColorBrush x:Key="TextColor">#e0e0e0</SolidColorBrush>
+
+        <system:Int32 x:Key="FontDefaultSize">12</system:Int32>
+    </Application.Resources>
     <Application.Styles>
         <FluentTheme />
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        </Style>
+        <Style Selector="TabControl TabItem /template/ Border#PART_SelectedPipe">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="TabControl /template/ ItemsPresenter#PART_ItemsPresenter">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="TabControl /template/ ContentPresenter#PART_SelectedContentHost">
+            <Setter Property="Background" Value="{DynamicResource ContentBackgroundColor}" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style Selector=":is(TemplatedControl)">
+            <Setter Property="FontSize" Value="{DynamicResource FontDefaultSize}" />
+        </Style>
+        <Style Selector="TabControl TabItem">
+            <Setter Property="BorderThickness" Value="1 0 0 0" />
+            <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Background" Value="{DynamicResource TabDefaultBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="5 0"/>
+        </Style>
+        <Style Selector="TabControl TabItem:pointerover /template/ Border#PART_LayoutRoot">
+            <Setter Property="Background" Value="{DynamicResource TabHoverBackgroundColor}"/>
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextColor}"/>
+        </Style>
+        <Style Selector="TabControl TabItem:pointerover:selected /template/ Border#PART_LayoutRoot">
+            <Setter Property="Background" Value="{DynamicResource TabSelectedBackgroundColor}"/>
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextColor}"/>
+        </Style>
+        <Style Selector="TabControl TabItem:selected">
+            <Setter Property="Height" Value="{DynamicResource TabSelectedHeight}" />
+            <Setter Property="Background" Value="{DynamicResource TabSelectedBackgroundColor}"/>
+        </Style>
     </Application.Styles>
 </Application>

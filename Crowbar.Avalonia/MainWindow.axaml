@@ -10,54 +10,13 @@
         Background="{DynamicResource WindowBackgroundColor}"
         MinWidth="780"
         MinHeight="560">
-    <Window.Resources>
-        <SolidColorBrush x:Key="WindowBackgroundColor">#0a1220</SolidColorBrush>
-        <SolidColorBrush x:Key="ContentBackgroundColor">#15182f</SolidColorBrush>
-
-        <SolidColorBrush x:Key="TabDefaultBackgroundColor">#3a4055</SolidColorBrush>
-        <SolidColorBrush x:Key="TabHoverBackgroundColor">#44607a</SolidColorBrush>
-        <SolidColorBrush x:Key="TabSelectedBackgroundColor">#5588aa</SolidColorBrush>
-
-        <SolidColorBrush x:Key="TextColor">#e0e0e0</SolidColorBrush>
-    </Window.Resources>
-
     <Window.Styles>
-        <Style Selector="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <!-- TODO: find a better way of making these selectors more specific while also being broader than this -->
+        <Style Selector="TabControl.MainTabControl /template/ ContentPresenter#PART_SelectedContentHost">
+            <Setter Property="Margin" Value="0" />
         </Style>
         <Style Selector="TabControl.MainTabControl TabItem /template/ Border#PART_SelectedPipe">
             <Setter Property="IsVisible" Value="False" />
-        </Style>
-        <Style Selector="TabControl.MainTabControl /template/ ItemsPresenter#PART_ItemsPresenter">
-            <Setter Property="Margin" Value="0" />
-        </Style>
-        <Style Selector="TabControl.MainTabControl /template/ ContentPresenter#PART_SelectedContentHost">
-            <Setter Property="Background" Value="{DynamicResource ContentBackgroundColor}" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="3" />
-        </Style>
-        <Style Selector="TabControl.MainTabControl TabItem">
-            <Setter Property="BorderThickness" Value="1 0 0 0" />
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="Height" Value="20" />
-            <Setter Property="MinHeight" Value="0" />
-            <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="Background" Value="{DynamicResource TabDefaultBackgroundColor}"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="5 0"/>
-        </Style>
-        <Style Selector="TabControl.MainTabControl TabItem:pointerover /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource TabHoverBackgroundColor}"/>
-            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextColor}"/>
-        </Style>
-        <Style Selector="TabControl.MainTabControl TabItem:pointerover:selected /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource TabSelectedBackgroundColor}"/>
-            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextColor}"/>
-        </Style>
-        <Style Selector="TabControl.MainTabControl TabItem:selected">
-            <Setter Property="Height" Value="24" />
-            <Setter Property="Background" Value="{DynamicResource TabSelectedBackgroundColor}"/>
         </Style>
     </Window.Styles>
 

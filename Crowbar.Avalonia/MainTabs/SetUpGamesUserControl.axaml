@@ -1,8 +1,21 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.SetUpGamesUserControl">
-    SetUpGamesUserControl
+    <UserControl.Styles>
+        <Style Selector="Grid ComboBox, Grid Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+    </UserControl.Styles>
+    <Grid ColumnDefinitions="1*,100" RowDefinitions="Auto">
+        <ComboBox x:Name="GameList" Grid.Row="0" Grid.Column="0" SelectedItem="0">
+            <ComboBoxItem>Item0</ComboBoxItem>
+            <ComboBoxItem>Item1</ComboBoxItem>
+            <ComboBoxItem>Item2</ComboBoxItem>
+        </ComboBox>
+        <Button Grid.Row="0" Grid.Column="1">
+            <TextBlock HorizontalAlignment="Center">Add</TextBlock>
+        </Button>
+    </Grid>
 </UserControl>
