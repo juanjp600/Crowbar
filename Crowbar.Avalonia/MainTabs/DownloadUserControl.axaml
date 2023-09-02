@@ -4,5 +4,55 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.DownloadUserControl">
-    DownloadUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,Auto,1*" ColumnDefinitions="1*">
+        <Grid Grid.Row="0" ColumnDefinitions="100,150,1*,50,30,40" RowDefinitions="Auto,Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0">Item ID or link:</TextBlock>
+            <TextBox x:Name="ItemIdOrLinkTextBox" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
+            <Button x:Name="OpenButton" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2">Open</Button>
+
+            <TextBlock Grid.Row="1" Grid.Column="0">Output to:</TextBlock>
+            <ComboBox x:Name="OutputFolderCategoryComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                <ComboBoxItem>Documents folder</ComboBoxItem>
+                <ComboBoxItem>Work folder</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="OutputPathTextBox" Grid.Row="1" Grid.Column="2" />
+            <Button x:Name="BrowseButton" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2">Browse...</Button>
+            <Button x:Name="GotoOutputButton" Grid.Row="1" Grid.Column="5">Goto</Button>
+        </Grid>
+        
+        <HeaderedContentControl Grid.Row="1" Theme="{DynamicResource GroupBox}"
+                                Header="Output File Name Options">
+            <Grid ColumnDefinitions="120,140,260,1*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                <CheckBox x:Name="UseItemIdInNameCheckBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Use item ID instead of given name</CheckBox>
+                <CheckBox x:Name="PrependItemTitleCheckBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">Prepend item title</CheckBox>
+                <CheckBox x:Name="AppendUpdateTimeCheckBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">Append the item update date-time</CheckBox>
+                <CheckBox x:Name="ReplaceSpacesWithUnderscoresCheckBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">Replace spaces with underscores</CheckBox>
+                <CheckBox x:Name="ConvertToExpectedPathCheckBox" Grid.Row="0" Grid.Column="2">Convert to expected file or folder</CheckBox>
+                
+                <Button x:Name="UseDefaultsButton" Grid.Row="4" Grid.Column="0">Use Defaults</Button>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Classes="Heading">Example output file name:</TextBlock>
+                <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" IsReadOnly="True" />
+            </Grid>
+        </HeaderedContentControl>
+        
+        <Grid Grid.Row="2" ColumnDefinitions="90,30,120,1*,100,40" RowDefinitions="Auto,1*,Auto" VerticalAlignment="Stretch">
+            <Button x:Name="DownloadButton" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Download</Button>
+            <Button x:Name="CancelDownloadButton" Grid.Row="0" Grid.Column="2">Cancel Download</Button>
+            <ProgressBar x:Name="DownloadProgressBar" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" />
+            
+            <TextBox x:Name="DownloadLogTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
+                     TextWrapping="Wrap" IsReadOnly="True"
+                     Height="NaN"
+                     VerticalAlignment="Stretch" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0">Downloaded:</TextBlock>
+            <TextBox x:Name="DownloadedResultTextBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" IsReadOnly="True" />
+            <Button x:Name="UseInUnpackButton" Grid.Row="2" Grid.Column="4">Use in Unpack</Button>
+            <Button x:Name="GotoDownloadButton" Grid.Row="2" Grid.Column="5">Goto</Button>
+        </Grid>
+    </Grid>
 </UserControl>

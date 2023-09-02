@@ -4,5 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.UnpackUserControl">
-    UnpackUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,3*,1*" ColumnDefinitions="*">
+        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="70,150,1*,80,40">
+            <TextBlock Grid.Row="0" Grid.Column="0">Packages:</TextBlock>
+            <ComboBox x:Name="PackageSourceComboBox" Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+                <ComboBoxItem>Folder</ComboBoxItem>
+                <ComboBoxItem>Folder and subfolders</ComboBoxItem>
+                <ComboBoxItem>------</ComboBoxItem>
+                <ComboBoxItem>GAMES</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="PackageSourcePathTextBox" Grid.Row="0" Grid.Column="2" />
+            <Button x:Name="BrowsePackageSourceButton" Grid.Row="0" Grid.Column="3">Browse...</Button>
+            <Button x:Name="GotoPackageSourceButton" Grid.Row="0" Grid.Column="4">Goto</Button>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0">Output to:</TextBlock>
+            <ComboBox x:Name="OutputLocationComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                <ComboBoxItem>Same folder (as Package)</ComboBoxItem>
+                <ComboBoxItem>Subfolder (of Package)</ComboBoxItem>
+                <ComboBoxItem>Work folder</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="OutputLocationPathTextBox" Grid.Row="1" Grid.Column="2" />
+            <Button x:Name="BrowseOutputLocationButton" Grid.Row="1" Grid.Column="3">Browse...</Button>
+            <Button x:Name="GotoOutputLocationButton" Grid.Row="1" Grid.Column="4">Goto</Button>
+        </Grid>
+    </Grid>
 </UserControl>

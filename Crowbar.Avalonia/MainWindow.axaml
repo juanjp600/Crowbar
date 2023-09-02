@@ -15,12 +15,16 @@
         <Style Selector="TabControl.MainTabControl /template/ ContentPresenter#PART_SelectedContentHost">
             <Setter Property="Margin" Value="0" />
         </Style>
-        <!--<Style Selector="TabControl.MainTabControl TabItem /template/ Border#PART_SelectedPipe">
-            <Setter Property="IsVisible" Value="False" />
-        </Style>-->
+        <Style Selector="TabControl.MainTabControl CheckBox /template/ Grid#RootGrid Grid">
+            <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+        </Style>
+        <Style Selector="TabControl.MainTabControl CheckBox /template/ Grid#RootGrid Grid Border#NormalRectangle">
+            <Setter Property="Height" Value="16" />
+            <Setter Property="Width" Value="16" />
+        </Style>
     </Window.Styles>
 
-    <TabControl Classes="MainTabControl">
+    <TabControl Classes="MainTabControl" SelectedIndex="1">
         <TabItem Header="Set Up Games">
             <maintabs:SetUpGamesUserControl />
         </TabItem>

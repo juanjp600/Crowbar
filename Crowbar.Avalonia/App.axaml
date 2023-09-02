@@ -97,18 +97,26 @@
             <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
             <Setter Property="Padding" Value="2" />
         </Style>
-        <Style Selector="Button">
+        <Style Selector="Button,ProgressBar">
             <Setter Property="MinHeight" Value="0" />
             <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
             <Setter Property="Padding" Value="2" />
+        </Style>
+        <Style Selector="Button">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
-        <Style Selector="DataGridCell,DataGridColumnHeader">
+        <Style Selector="DataGridCell,DataGridColumnHeader,CheckBox">
             <Setter Property="MinHeight" Value="0" />
             <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
         </Style>
-
+        <Style Selector="DataGrid">
+            <Setter Property="Background" Value="#11ffffff" />
+            <Setter Property="BorderBrush" Value="#66ffffff" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+        
         <!-- DataGrid -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
