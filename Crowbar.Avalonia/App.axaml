@@ -8,21 +8,56 @@
         <SolidColorBrush x:Key="WindowBackgroundColor">#0a1220</SolidColorBrush>
         <SolidColorBrush x:Key="ContentBackgroundColor">#15182f</SolidColorBrush>
 
-        <SolidColorBrush x:Key="TabDefaultBackgroundColor">#3a4055</SolidColorBrush>
-        <SolidColorBrush x:Key="TabHoverBackgroundColor">#44607a</SolidColorBrush>
-        <SolidColorBrush x:Key="TabSelectedBackgroundColor">#5588aa</SolidColorBrush>
         <system:Int32 x:Key="TabDefaultHeight">20</system:Int32>
         <system:Int32 x:Key="TabSelectedHeight">24</system:Int32>
 
-        <SolidColorBrush x:Key="TextColor">#e0e0e0</SolidColorBrush>
+        <system:Double x:Key="FontDefaultSize">10.5</system:Double>
 
-        <system:Int32 x:Key="FontDefaultSize">12</system:Int32>
+        <ControlTheme x:Key="GroupBox" TargetType="HeaderedContentControl">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#55e0e0e0" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <Border
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid RowDefinitions="Auto,Auto,Auto">
+                            <ContentPresenter
+                                Grid.Row="0"
+                                FontWeight="Bold"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Stretch"
+                                Content="{TemplateBinding Header}"
+                                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                Margin="4" />
+                            <Rectangle
+                                Grid.Row="1"
+                                Fill="{TemplateBinding BorderBrush}"
+                                Height="1" />
+                            <ContentPresenter
+                                Grid.Row="2"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Margin="4" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </ControlTheme>
     </Application.Resources>
     <Application.Styles>
         <FluentTheme />
-        <Style Selector="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
-        </Style>
         <Style Selector="TabControl TabItem /template/ Border#PART_SelectedPipe">
             <Setter Property="IsVisible" Value="False" />
         </Style>
@@ -41,22 +76,40 @@
             <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
             <Setter Property="MinHeight" Value="0" />
             <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="Background" Value="{DynamicResource TabDefaultBackgroundColor}"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
             <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="5 0"/>
         </Style>
-        <Style Selector="TabControl TabItem:pointerover /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource TabHoverBackgroundColor}"/>
-            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextColor}"/>
-        </Style>
-        <Style Selector="TabControl TabItem:pointerover:selected /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource TabSelectedBackgroundColor}"/>
-            <Setter Property="TextElement.Foreground" Value="{DynamicResource TextColor}"/>
-        </Style>
         <Style Selector="TabControl TabItem:selected">
             <Setter Property="Height" Value="{DynamicResource TabSelectedHeight}" />
-            <Setter Property="Background" Value="{DynamicResource TabSelectedBackgroundColor}"/>
         </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
+        <Style Selector="ComboBoxItem">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="DataGridCell,DataGridColumnHeader">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+        </Style>
+
+        <!-- DataGrid -->
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
 </Application>

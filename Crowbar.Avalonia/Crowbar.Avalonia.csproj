@@ -23,4 +23,9 @@
       <ProjectReference Include="..\CrowbarSteamPipe\CrowbarSteamPipe.vbproj" />
       <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
     </ItemGroup>
+
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Themes\Semi.Avalonia.GroupBox.axaml" />
+    </ItemGroup>
 </Project>

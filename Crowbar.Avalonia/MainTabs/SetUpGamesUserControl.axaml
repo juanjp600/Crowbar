@@ -4,18 +4,101 @@
              d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.SetUpGamesUserControl">
     <UserControl.Styles>
-        <Style Selector="Grid ComboBox, Grid Button">
+        <Style Selector="Grid > ComboBox, Grid > Button, Grid > HeaderedContentControl, Grid > DataGrid">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="2 3 2 3" />
+        </Style>
+        <Style Selector="Grid > TextBlock">
+            <Setter Property="Margin" Value="2 3 2 3" />
+        </Style>
+        <Style Selector="Grid TextBlock.Heading">
+            <Setter Property="Margin" Value="2 12 2 3" />
         </Style>
     </UserControl.Styles>
-    <Grid ColumnDefinitions="1*,100" RowDefinitions="Auto">
-        <ComboBox x:Name="GameList" Grid.Row="0" Grid.Column="0" SelectedItem="0">
+    <Grid ColumnDefinitions="1*,100,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+        <ComboBox x:Name="GameList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" SelectedIndex="0">
             <ComboBoxItem>Item0</ComboBoxItem>
             <ComboBoxItem>Item1</ComboBoxItem>
             <ComboBoxItem>Item2</ComboBoxItem>
         </ComboBox>
-        <Button Grid.Row="0" Grid.Column="1">
-            <TextBlock HorizontalAlignment="Center">Add</TextBlock>
-        </Button>
+        <Button Grid.Row="0" Grid.Column="2">Add</Button>
+        
+        <HeaderedContentControl Theme="{DynamicResource GroupBox}"
+                                Grid.Row="1"
+                                Grid.Column="0" Grid.ColumnSpan="3"
+                                Header="Game Setup">
+            <Grid ColumnDefinitions="120,1*,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                <Grid.Styles>
+                    <Style Selector="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                    <Style Selector="TextBlock.HeaderText">
+                        <Setter Property="HorizontalAlignment" Value="Right" />
+                        <Setter Property="Padding" Value="0 0 2 0" />
+                    </Style>
+                </Grid.Styles>
+                <TextBlock Grid.Row="0" Grid.Column="0" Classes="HeaderText">Name:</TextBlock>
+                <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Classes="HeaderText">Engine:</TextBlock>
+                <ComboBox x:Name="EngineList" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectedIndex="0">
+                    <ComboBoxItem>GoldSource</ComboBoxItem>
+                    <ComboBoxItem>Source</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Classes="HeaderText">Executable (*.exe):</TextBlock>
+                <TextBox x:Name="ExecutableTextBox" Grid.Row="2" Grid.Column="1" />
+                <Button x:Name="ExecutableBrowseButton" Grid.Row="2" Grid.Column="2">Browse...</Button>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Classes="HeaderText">Executable options:</TextBlock>
+                <TextBox x:Name="ExecutableOptions" Grid.Row="3" Grid.Column="1" />
+                <Button x:Name="ExecutableOptionsClearButton" Grid.Row="3" Grid.Column="2">Clear</Button>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Classes="HeaderText">GameInfo.txt:</TextBlock>
+                <TextBox x:Name="GameInfoTxtTextBox" Grid.Row="4" Grid.Column="1" />
+                <Button x:Name="GameInfoTxtBrowseButton" Grid.Row="4" Grid.Column="2">Browse...</Button>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Classes="HeaderText">Model compiler:</TextBlock>
+                <TextBox x:Name="ModelCompilerTextBox" Grid.Row="5" Grid.Column="1" />
+                <Button x:Name="ModelCompilerBrowseButton" Grid.Row="5" Grid.Column="2">Browse...</Button>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Classes="HeaderText">Model viewer:</TextBlock>
+                <TextBox x:Name="ModelViewerTextBox" Grid.Row="6" Grid.Column="1" />
+                <Button x:Name="ModelViewerBrowseButton" Grid.Row="6" Grid.Column="2">Browse...</Button>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Classes="HeaderText">Mapping tool:</TextBlock>
+                <TextBox x:Name="MappingToolTextBox" Grid.Row="7" Grid.Column="1" />
+                <Button x:Name="MappingToolBrowseButton" Grid.Row="7" Grid.Column="2">Browse...</Button>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Classes="HeaderText">Packer tool:</TextBlock>
+                <TextBox x:Name="PackerToolTextBox" Grid.Row="8" Grid.Column="1" />
+                <Button x:Name="PackerToolBrowseButton" Grid.Row="8" Grid.Column="2">Browse...</Button>
+                
+                <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" ColumnDefinitions="1*,1*,1*,1*,1*,1*,1*,1*,1*" RowDefinitions="Auto">
+                    <Button x:Name="CloneButton" Grid.Row="0" Grid.Column="0">Clone</Button>
+                    <Button x:Name="DeleteButton" Grid.Row="0" Grid.Column="1">Delete</Button>
+                    <Button x:Name="CreateModelsFolderTreeButton" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="4">Create "models" folder tree from this game's VPKs</Button>
+                </Grid>
+            </Grid>
+        </HeaderedContentControl>
+        
+        <TextBlock Grid.Row="2" Grid.Column="0" Classes="Heading">Steam executable (steam.exe) [Used for "Run Game" button]:</TextBlock>
+        <TextBox x:Name="SteamExeTextBox" Grid.Row="3" Grid.Column="0" />
+        <Button Grid.Row="3" Grid.Column="1">Browse...</Button>
+        
+        <TextBlock Grid.Row="4" Grid.Column="0" Classes="Heading">Steam library macros (&lt;library#&gt; macros for placing at start of field above; right-click a macro for commands):</TextBlock>
+        <DataGrid Grid.Row="5" Grid.Column="0" Grid.RowSpan="3" Name="SteamLibraryMacros" CanUserResizeColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Macro" />
+                <DataGridTextColumn Header="Library path" />
+                <DataGridTextColumn Header="Browse" />
+                <DataGridTextColumn Header="Use count" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button Grid.Row="5" Grid.Column="1">Add Macro</Button>
+        <Button Grid.Row="6" Grid.Column="1" Height="55"><TextBlock>Delete Last<LineBreak />Macro If<LineBreak />Not Used</TextBlock></Button>
+
+        <Button Grid.Row="7" Grid.Column="2">Go Back</Button>
     </Grid>
 </UserControl>
