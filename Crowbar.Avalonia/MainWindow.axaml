@@ -15,9 +15,9 @@
         <Style Selector="TabControl.MainTabControl /template/ ContentPresenter#PART_SelectedContentHost">
             <Setter Property="Margin" Value="0" />
         </Style>
-        <Style Selector="TabControl.MainTabControl TabItem /template/ Border#PART_SelectedPipe">
+        <!--<Style Selector="TabControl.MainTabControl TabItem /template/ Border#PART_SelectedPipe">
             <Setter Property="IsVisible" Value="False" />
-        </Style>
+        </Style>-->
     </Window.Styles>
 
     <TabControl Classes="MainTabControl">
