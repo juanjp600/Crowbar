@@ -15,7 +15,7 @@
             <Setter Property="Margin" Value="2 12 2 3" />
         </Style>
     </UserControl.Styles>
-    <Grid ColumnDefinitions="1*,100,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+    <Grid ColumnDefinitions="1*,100,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,1*">
         <ComboBox x:Name="GameList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" SelectedIndex="0">
             <ComboBoxItem>Item0</ComboBoxItem>
             <ComboBoxItem>Item1</ComboBoxItem>
@@ -73,11 +73,11 @@
                 <TextBlock Grid.Row="8" Grid.Column="0" Classes="HeaderText">Packer tool:</TextBlock>
                 <TextBox x:Name="PackerToolTextBox" Grid.Row="8" Grid.Column="1" />
                 <Button x:Name="PackerToolBrowseButton" Grid.Row="8" Grid.Column="2">Browse...</Button>
-                
-                <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" ColumnDefinitions="1*,1*,1*,1*,1*,1*,1*,1*,1*" RowDefinitions="Auto">
+
+                <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" ColumnDefinitions="100,100,1*,320" RowDefinitions="Auto">
                     <Button x:Name="CloneButton" Grid.Row="0" Grid.Column="0">Clone</Button>
                     <Button x:Name="DeleteButton" Grid.Row="0" Grid.Column="1">Delete</Button>
-                    <Button x:Name="CreateModelsFolderTreeButton" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="4">Create "models" folder tree from this game's VPKs</Button>
+                    <Button x:Name="CreateModelsFolderTreeButton" Grid.Row="0" Grid.Column="3">Create "models" folder tree from this game's VPKs</Button>
                 </Grid>
             </Grid>
         </HeaderedContentControl>
@@ -99,6 +99,6 @@
         <Button Grid.Row="5" Grid.Column="1">Add Macro</Button>
         <Button Grid.Row="6" Grid.Column="1" Height="55"><TextBlock>Delete Last<LineBreak />Macro If<LineBreak />Not Used</TextBlock></Button>
 
-        <Button Grid.Row="7" Grid.Column="2">Go Back</Button>
+        <Button Grid.Row="7" Grid.Column="2" VerticalAlignment="Bottom">Go Back</Button>
     </Grid>
 </UserControl>
