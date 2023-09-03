@@ -30,10 +30,10 @@
             <Button x:Name="BrowseOutputLocationButton" Grid.Row="1" Grid.Column="3">Browse...</Button>
             <Button x:Name="GotoOutputLocationButton" Grid.Row="1" Grid.Column="4">Goto</Button>
         </Grid>
-        
+
         <Grid Grid.Row="1" RowDefinitions="*" ColumnDefinitions="1*,200">
             <HeaderedContentControl Grid.Column="0" Theme="{DynamicResource GroupBox}" Header="Contents of X packages" VerticalContentAlignment="Stretch">
-                <Grid RowDefinitions="Auto,1*,Auto" ColumnDefinitions="200,1*,25,200,25" VerticalAlignment="Stretch">
+                <Grid RowDefinitions="Auto,1*,Auto" ColumnDefinitions="200,1*,25,Auto,25" VerticalAlignment="Stretch">
                     <TextBox x:Name="ContentPathTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" />
 
                     <TreeView Height="NaN" x:Name="ContentTreeView" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">

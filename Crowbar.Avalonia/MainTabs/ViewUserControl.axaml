@@ -4,5 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.ViewUserControl">
-    ViewUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+    </UserControl.Styles>
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto,7*,2*">
+        <Grid Grid.Row="0" RowDefinitions="Auto,Auto" ColumnDefinitions="60,60,120,1*,80,40">
+            <TextBlock Grid.Row="0" Grid.Column="0">MDL file:</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" />
+            <Button x:Name="BrowseButton" Grid.Row="0" Grid.Column="4">Browse...</Button>
+            <Button x:Name="GotoButton" Grid.Row="0" Grid.Column="5">Goto</Button>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">Override MDL version:</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="2" SelectedIndex="0">
+                <ComboBoxItem>Do not override</ComboBoxItem>
+                <ComboBoxItem>ALL THE VERSIONS!!!</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+
+        <HeaderedContentControl Theme="{DynamicResource GroupBox}" Grid.Row="1"
+                                Header="Info"
+                                VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <TextBox x:Name="MdlInfoTextBox" Height="NaN" VerticalAlignment="Stretch" IsReadOnly="True">ERROR: MDL file is blank.</TextBox>
+        </HeaderedContentControl>
+
+        <Grid Grid.Row="2" RowDefinitions="Auto,Auto,1*" ColumnDefinitions="60,120,120,1*,100,100,100">
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Game that has the model viewer:</TextBlock>
+            <ComboBox x:Name="GameWithModelViewerComboBox" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="4" SelectedIndex="0">
+                <ComboBoxItem>GAMES</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="SetUpGamesButton" Grid.Row="0" Grid.Column="6">Set Up Games</Button>
+
+            <Button x:Name="ViewButton" Grid.Row="1" Grid.Column="0">View</Button>
+            <Button x:Name="ViewAsReplacementButton" Grid.Row="1" Grid.Column="1">View as replacement</Button>
+            <Button x:Name="UseInDecompileButton" Grid.Row="1" Grid.Column="2">Use in Decompile</Button>
+            
+            <Button x:Name="OpenViewerButton" Grid.Row="1" Grid.Column="4">Open Viewer</Button>
+            <Button x:Name="OpenMapperButton" Grid.Row="1" Grid.Column="5">Open Mapper</Button>
+            <Button x:Name="RunGameButton" Grid.Row="1" Grid.Column="6">Run Game</Button>
+
+            <TextBox x:Name="MessageTextBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7"
+                     Height="NaN" VerticalAlignment="Stretch" IsReadOnly="True" />
+        </Grid>
+    </Grid>
 </UserControl>
