@@ -4,5 +4,98 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.CompileUserControl">
-    CompileUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,250,1*" ColumnDefinitions="*">
+        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="70,150,1*,80,40">
+            <TextBlock Grid.Row="0" Grid.Column="0">QC input:</TextBlock>
+            <ComboBox x:Name="QcInputComboBox" Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+                <ComboBoxItem>File</ComboBoxItem>
+                <ComboBoxItem>Folder</ComboBoxItem>
+                <ComboBoxItem>Folder and subfolders</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="QcInputPathTextBox" Grid.Row="0" Grid.Column="2" />
+            <Button x:Name="BrowseQcInputButton" Grid.Row="0" Grid.Column="3">Browse...</Button>
+            <Button x:Name="GotoQcInputButton" Grid.Row="0" Grid.Column="4">Goto</Button>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0">Output to:</TextBlock>
+            <ComboBox x:Name="OutputLocationComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                <ComboBoxItem>Game's "models" folder</ComboBoxItem>
+                <ComboBoxItem>Work folder</ComboBoxItem>
+                <ComboBoxItem>Subfolder (of QC input)</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="OutputLocationPathTextBox" Grid.Row="1" Grid.Column="2" />
+            <Button x:Name="BrowseOutputLocationButton" Grid.Row="1" Grid.Column="3">Browse...</Button>
+            <Button x:Name="GotoOutputLocationButton" Grid.Row="1" Grid.Column="4">Goto</Button>
+        </Grid>
+
+        <HeaderedContentControl Grid.Row="1" Theme="{DynamicResource GroupBox}" Header="Options">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,1*" ColumnDefinitions="180,270,1*,120">
+                <TextBlock Grid.Row="0" Grid.Column="0">Game that has the model compiler:</TextBlock>
+                <ComboBox x:Name="GameWithModelCompilerComboBox" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" SelectedIndex="0">
+                    <ComboBoxItem>GAMES</ComboBoxItem>
+                </ComboBox>
+                <Button x:Name="SetUpGamesButton" Grid.Row="0" Grid.Column="3">Set Up Games</Button>
+
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <CheckBox x:Name="WriteLogCheckBox">Write log to a file</CheckBox>
+                    <CheckBox x:Name="NoP4CheckBox">No P4</CheckBox>
+                    <CheckBox x:Name="VerboseCheckBox">Verbose</CheckBox>
+                </StackPanel>
+                <Border Grid.Row="1" Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="{DynamicResource DefaultBorderColor}"
+                        CornerRadius="{DynamicResource DefaultCornerRadius}"
+                        BorderThickness="1">
+                    <Grid RowDefinitions="Auto,Auto,1*" HorizontalAlignment="Stretch">
+                        <CheckBox Grid.Row="0"
+                            FontWeight="Bold"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="4"
+                            x:Name="DefineBonesCheckBox">DefineBones</CheckBox>
+                        <Rectangle
+                            Grid.Row="1"
+                            Fill="{DynamicResource DefaultBorderColor}"
+                            Height="1" />
+                        <StackPanel Grid.Row="2" HorizontalAlignment="Stretch">
+                            <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,1*">
+                                <CheckBox Grid.Column="0" x:Name="WriteQciFileCheckBox">Write QCI file:</CheckBox>
+                                <TextBox Grid.Column="1" x:Name="QciFileTextBox">DefineBones</TextBox>
+                            </Grid>
+                            <CheckBox x:Name="OverwriteQciFileCheckBox" Classes="Indented">Overwrite QCI file</CheckBox>
+                            <CheckBox x:Name="PutInQciFileCheckBox" Classes="Indented">Put in QC file: $include "&lt;QCI file name&gt;"</CheckBox>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Button Grid.Row="1" Grid.Column="3" x:Name="UseDefaultsButton" VerticalAlignment="Bottom">Use Defaults</Button>
+                
+                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4">Direct entry of command-line options (in case they are not included above):</TextBlock>
+
+                <TextBox x:Name="ExtraCommandLineOptionsTextBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" />
+
+                <TextBox x:Name="ResultCommandLineOptionsTextBox" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                         IsReadOnly="True" VerticalAlignment="Stretch" Height="NaN" TextWrapping="Wrap" />
+            </Grid>
+        </HeaderedContentControl>
+
+        <Grid Grid.Row="2" RowDefinitions="Auto,1*,Auto" ColumnDefinitions="120,120,120,140,1*,95,105,40">
+            <Button x:Name="CompileDefineBonesButton" Grid.Row="0" Grid.Column="0">Compile DefineBones</Button>
+            <Button x:Name="SkipCurrentButton" Grid.Row="0" Grid.Column="1">Skip Current Model</Button>
+            <Button x:Name="CancelCompileButton" Grid.Row="0" Grid.Column="2">Cancel Compile</Button>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="8"
+                     TextWrapping="Wrap" IsReadOnly="True"
+                     Height="NaN"
+                     VerticalAlignment="Stretch"/>
+
+            <ComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5"></ComboBox>
+            <Button x:Name="UseInViewButton" Grid.Row="2" Grid.Column="5">Use in View</Button>
+            <Button x:Name="RecompileButton" Grid.Row="2" Grid.Column="6">Recompile</Button>
+            <Button x:Name="GotoButton" Grid.Row="2" Grid.Column="7">Goto</Button>
+        </Grid>
+    </Grid>
 </UserControl>

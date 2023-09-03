@@ -7,17 +7,20 @@
     <Application.Resources>
         <SolidColorBrush x:Key="WindowBackgroundColor">#0a1220</SolidColorBrush>
         <SolidColorBrush x:Key="ContentBackgroundColor">#15182f</SolidColorBrush>
+        <SolidColorBrush x:Key="DefaultBorderColor">#55e0e0e0</SolidColorBrush>
 
         <system:Int32 x:Key="TabDefaultHeight">20</system:Int32>
         <system:Int32 x:Key="TabSelectedHeight">24</system:Int32>
 
+        <CornerRadius x:Key="DefaultCornerRadius">4</CornerRadius>
+        
         <system:Double x:Key="FontDefaultSize">10.5</system:Double>
 
         <ControlTheme x:Key="GroupBox" TargetType="HeaderedContentControl">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush" Value="#55e0e0e0" />
-            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorderColor}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -114,12 +117,13 @@
         </Style>
         <Style Selector="DataGrid">
             <Setter Property="Background" Value="#11ffffff" />
-            <Setter Property="BorderBrush" Value="#66ffffff" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorderColor}" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="CornerRadius" Value="{DynamicResource DefaultCornerRadius}" />
         </Style>
-        
-        <!-- DataGrid -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <Style Selector="CheckBox.Indented">
+            <Setter Property="Margin" Value="20 0 0 0" />
+        </Style>
     </Application.Styles>
 </Application>
