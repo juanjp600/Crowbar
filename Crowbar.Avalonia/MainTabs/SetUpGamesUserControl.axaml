@@ -86,7 +86,7 @@
                 <DataGridTextColumn Header="Use count" />
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <Button Grid.Row="5" Grid.Column="1">Add Macro</Button>
         <Button Grid.Row="6" Grid.Column="1" Height="55"><TextBlock>Delete Last<LineBreak />Macro If<LineBreak />Not Used</TextBlock></Button>
 

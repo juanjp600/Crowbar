@@ -30,5 +30,76 @@
             <Button x:Name="BrowseOutputLocationButton" Grid.Row="1" Grid.Column="3">Browse...</Button>
             <Button x:Name="GotoOutputLocationButton" Grid.Row="1" Grid.Column="4">Goto</Button>
         </Grid>
+        
+        <Grid Grid.Row="1" RowDefinitions="*" ColumnDefinitions="1*,200">
+            <HeaderedContentControl Grid.Column="0" Theme="{DynamicResource GroupBox}" Header="Contents of 2 packages" VerticalContentAlignment="Stretch">
+                <Grid RowDefinitions="Auto,1*,Auto" ColumnDefinitions="200,1*,25,200,25" VerticalAlignment="Stretch">
+                    <TextBox x:Name="ContentPathTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" />
+
+                    <TreeView Height="NaN" x:Name="ContentTreeView" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
+                        <TreeViewItem Header="&lt;root&gt;">
+                            <TreeViewItem Header="Item0"></TreeViewItem>
+                            <TreeViewItem Header="Item1"></TreeViewItem>
+                        </TreeViewItem>
+                    </TreeView>
+                    <DataGrid Height="NaN" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Name="CurrentlyOpenFolderDataGrid" CanUserResizeColumns="True" VerticalAlignment="Stretch">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" />
+                            <DataGridTextColumn Header="Count" />
+                            <DataGridTextColumn Header="Type" />
+                            <DataGridTextColumn Header="Size (bytes)" />
+                            <DataGridTextColumn Header="Extension" />
+                            <DataGridTextColumn Header="Package File" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <TextBox x:Name="SearchTextBox" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Button Grid.Row="2" Grid.Column="2" x:Name="SearchButton"> q <!-- TODO: replace with magnifying glass icon --></Button>
+                    <Grid Grid.Row="2" Grid.Column="3" RowDefinitions="*" ColumnDefinitions="1,1*,1,1*,1">
+                        <Grid.Styles>
+                            <Style Selector="Separator">
+                                <Setter Property="Width" Value="1" />
+                                <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+                            </Style>
+                            <Style Selector="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </Grid.Styles>
+                        <Separator Grid.Column="0" Margin="0" />
+                        <TextBlock Grid.Column="1" x:Name="ItemCountTextBlock">000 / 000</TextBlock>
+                        <Separator Grid.Column="2" Margin="0" />
+                        <TextBlock Grid.Column="3" x:Name="SizeInBytesTextBlock">000</TextBlock>
+                        <Separator Grid.Column="4" Margin="0" />
+                    </Grid>
+                    <Button Grid.Row="2" Grid.Column="4" x:Name="RefreshButton"> w <!-- TODO: replace with dual arrow icon --></Button>
+                </Grid>
+            </HeaderedContentControl>
+            <HeaderedContentControl Grid.Column="1" Theme="{DynamicResource GroupBox}" Header="Options">
+                <StackPanel>
+                    <CheckBox x:Name="FolderForEachPackageCheckBox">Folder for each package</CheckBox>
+                    <CheckBox x:Name="KeepFullPathCheckBox">Keep full path</CheckBox>
+                    <Rectangle Width="1" Height="{DynamicResource TabDefaultHeight}" />
+                    <CheckBox x:Name="WriteLogCheckBox">Write log to a file</CheckBox>
+                </StackPanel>
+            </HeaderedContentControl>
+        </Grid>
+        
+        <Grid Grid.Row="2" RowDefinitions="Auto,1*,Auto" ColumnDefinitions="120,120,120,140,1*,95,105,40">
+            <Button x:Name="UnpackButton" Grid.Row="0" Grid.Column="0">Unpack</Button>
+            <Button x:Name="SkipCurrentButton" Grid.Row="0" Grid.Column="1">Skip Current</Button>
+            <Button x:Name="CancelUnpackButton" Grid.Row="0" Grid.Column="2">Cancel Unpack</Button>
+            <Button x:Name="UseAllInDecompileButton" Grid.Row="0" Grid.Column="3">Use All in Decompile</Button>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="8"
+                     TextWrapping="Wrap" IsReadOnly="True"
+                     Height="NaN"
+                     VerticalAlignment="Stretch"/>
+
+            <ComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5"></ComboBox>
+            <Button x:Name="UseInPreviewButton" Grid.Row="2" Grid.Column="5">Use in Preview</Button>
+            <Button x:Name="UseInDecompileButton" Grid.Row="2" Grid.Column="6">Use in Decompile</Button>
+            <Button x:Name="GotoButton" Grid.Row="2" Grid.Column="7">Goto</Button>
+        </Grid>
     </Grid>
 </UserControl>

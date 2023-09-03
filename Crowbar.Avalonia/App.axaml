@@ -32,12 +32,12 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid RowDefinitions="Auto,Auto,Auto">
+                        <Grid RowDefinitions="Auto,Auto,1*">
                             <ContentPresenter
                                 Grid.Row="0"
                                 FontWeight="Bold"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Stretch"
+                                VerticalAlignment="Top"
                                 Content="{TemplateBinding Header}"
                                 ContentTemplate="{TemplateBinding HeaderTemplate}"
                                 Margin="4" />
@@ -47,6 +47,8 @@
                                 Height="1" />
                             <ContentPresenter
                                 Grid.Row="2"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
                                 Content="{TemplateBinding Content}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
                                 Margin="4" />

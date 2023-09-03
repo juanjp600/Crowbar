@@ -24,7 +24,7 @@
         </Style>
     </Window.Styles>
 
-    <TabControl Classes="MainTabControl" SelectedIndex="1">
+    <TabControl Classes="MainTabControl" SelectedIndex="2">
         <TabItem Header="Set Up Games">
             <maintabs:SetUpGamesUserControl />
         </TabItem>
