@@ -4,5 +4,96 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.DecompileUserControl">
-    DecompileUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,250,1*" ColumnDefinitions="*">
+        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="70,150,1*,80,40">
+            <TextBlock Grid.Row="0" Grid.Column="0">MDL input:</TextBlock>
+            <ComboBox x:Name="MdlInputComboBox" Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+                <ComboBoxItem>File</ComboBoxItem>
+                <ComboBoxItem>Folder</ComboBoxItem>
+                <ComboBoxItem>Folder and subfolders</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="MdlInputPathTextBox" Grid.Row="0" Grid.Column="2" />
+            <Button x:Name="BrowseMdlInputButton" Grid.Row="0" Grid.Column="3">Browse...</Button>
+            <Button x:Name="GotoMdlInputButton" Grid.Row="0" Grid.Column="4">Goto</Button>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0">Output to:</TextBlock>
+            <ComboBox x:Name="OutputLocationComboBox" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                <ComboBoxItem>Work folder</ComboBoxItem>
+                <ComboBoxItem>Subfolder (of MDL input)</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="OutputLocationPathTextBox" Grid.Row="1" Grid.Column="2" />
+            <Button x:Name="BrowseOutputLocationButton" Grid.Row="1" Grid.Column="3">Browse...</Button>
+            <Button x:Name="GotoOutputLocationButton" Grid.Row="1" Grid.Column="4">Goto</Button>
+        </Grid>
+        <Grid Grid.Row="1" RowDefinitions="*" ColumnDefinitions="530,1*">
+            <HeaderedContentControl Grid.Column="0" Theme="{DynamicResource GroupBox}" Header="Re-Create Files">
+                <HeaderedContentControl.Styles>
+                    <Style Selector="CheckBox.Indented">
+                        <Setter Property="Margin" Value="20 0 0 0" />
+                    </Style>
+                </HeaderedContentControl.Styles>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="3*,2*">
+                    <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto" ColumnDefinitions="1*,3*">
+                        <CheckBox x:Name="QcFileCheckBox" Grid.Column="0">QC file</CheckBox>
+                        <CheckBox x:Name="GroupIntoQciFilesCheckBox" Grid.Column="1">Group into QCI files</CheckBox>
+                    </Grid>
+                    <CheckBox x:Name="TexGroupOnSingleLineCheckBox" Classes="Indented" Grid.Row="1" Grid.Column="0">Each $texturegroup skin-family on single line</CheckBox>
+                    <CheckBox x:Name="OnlyChangedMaterialsCheckBox" Classes="Indented" Grid.Row="2" Grid.Column="0">Only changed materials in $texturegroup lines</CheckBox>
+                    <CheckBox x:Name="IncludeDefineboneLinesCheckBox" Classes="Indented" Grid.Row="3" Grid.Column="0">Include $definebone lines (typical for view models)</CheckBox>
+                    <CheckBox x:Name="UseMixedCaseCheckBox" Classes="Indented" Grid.Row="4" Grid.Column="0">Use MixedCase for keywords (Source)</CheckBox>
+                    <CheckBox x:Name="ReferenceMeshSmdCheckBox" Grid.Row="5" Grid.Column="0">Reference mesh SMD file</CheckBox>
+                    <CheckBox x:Name="RemovePathFromMaterialFileNamesCheckBox" Classes="Indented" Grid.Row="6" Grid.Column="0">Remove path from material file names</CheckBox>
+                    <CheckBox x:Name="UseNonValueUvCheckBox" Classes="Indented" Grid.Row="7" Grid.Column="0">Use non-Valve UV conversion (GoldSource)</CheckBox>
+
+                    <CheckBox x:Name="TextureBmpFilesCheckBox" Grid.Row="0" Grid.Column="1">Texture BMP files (GoldSource)</CheckBox>
+                    <CheckBox x:Name="LodMeshSmdFilesCheckBox" Grid.Row="1" Grid.Column="1">LOD mesh SMD files</CheckBox>
+                    <CheckBox x:Name="PhysicsMeshSmdFileCheckBox" Grid.Row="2" Grid.Column="1">Physics mesh SMD file</CheckBox>
+                    <CheckBox x:Name="VertexAnimVtaFileCheckBox" Grid.Row="3" Grid.Column="1">Vertex animation VTA file (flexes)</CheckBox>
+                    <CheckBox x:Name="ProceduralBonesVrdCheckBox" Grid.Row="4" Grid.Column="1">Procedural bones VRD file</CheckBox>
+                    <CheckBox x:Name="BoneAnimSmdFilesCheckBox" Grid.Row="5" Grid.Column="1">Bone animation SMD files</CheckBox>
+                    <CheckBox x:Name="PlaceInAnimsSubfolderCheckBox" Classes="Indented" Grid.Row="6" Grid.Column="1">Place in "anims" subfolder</CheckBox>
+                    
+                    <Button x:Name="UseDefaultsButton" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Use Defaults</Button>
+                </Grid>
+            </HeaderedContentControl>
+            <HeaderedContentControl Grid.Column="1" Theme="{DynamicResource GroupBox}" Header="Options">
+                <StackPanel>
+                    <CheckBox x:Name="FolderForEachModelCheckBox">Folder for each model</CheckBox>
+                    <CheckBox x:Name="PrefixMeshFileNamesCheckBox">Prefix mesh file names with model name</CheckBox>
+                    <CheckBox x:Name="FormatForStrictImportersCheckBox">Format for stricter importers</CheckBox>
+                    <Rectangle Width="1" Height="{DynamicResource TabDefaultHeight}" />
+                    <CheckBox x:Name="WriteLogCheckBox">Write log to a file</CheckBox>
+                    <CheckBox x:Name="DecompileInfoCommentsCheckBox">Decompile-info comments and files</CheckBox>
+                    <Rectangle Width="1" Height="{DynamicResource TabDefaultHeight}" />
+                    <CheckBox x:Name="DeclareSequenceQciFileCheckBox">$DeclareSequence QCI file</CheckBox>
+                    <Rectangle Width="1" Height="{DynamicResource TabDefaultHeight}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center">Override MDL version:</TextBlock>
+                        <ComboBox SelectedIndex="0">
+                            <ComboBoxItem>Do not override</ComboBoxItem>
+                            <ComboBoxItem>ALL THE VERSIONS!!!</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </HeaderedContentControl>
+        </Grid>
+        <Grid Grid.Row="2" RowDefinitions="Auto,1*,Auto" ColumnDefinitions="120,120,120,140,1*,95,105,40">
+            <Button x:Name="DecompileButton" Grid.Row="0" Grid.Column="0">Decompile</Button>
+            <Button x:Name="SkipCurrentButton" Grid.Row="0" Grid.Column="1">Skip Current Model</Button>
+            <Button x:Name="CancelDecompileButton" Grid.Row="0" Grid.Column="2">Cancel Decompile</Button>
+            <Button x:Name="UseAllInCompileButton" Grid.Row="0" Grid.Column="3">Use All in Compile</Button>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="8"
+                     TextWrapping="Wrap" IsReadOnly="True"
+                     Height="NaN"
+                     VerticalAlignment="Stretch"/>
+
+            <ComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6"></ComboBox>
+            <Button x:Name="UseInCompileButton" Grid.Row="2" Grid.Column="6">Use in Compile</Button>
+            <Button x:Name="GotoButton" Grid.Row="2" Grid.Column="7">Goto</Button>
+        </Grid>
+    </Grid>
 </UserControl>
