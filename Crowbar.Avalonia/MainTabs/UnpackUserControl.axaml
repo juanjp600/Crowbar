@@ -32,7 +32,7 @@
         </Grid>
         
         <Grid Grid.Row="1" RowDefinitions="*" ColumnDefinitions="1*,200">
-            <HeaderedContentControl Grid.Column="0" Theme="{DynamicResource GroupBox}" Header="Contents of 2 packages" VerticalContentAlignment="Stretch">
+            <HeaderedContentControl Grid.Column="0" Theme="{DynamicResource GroupBox}" Header="Contents of X packages" VerticalContentAlignment="Stretch">
                 <Grid RowDefinitions="Auto,1*,Auto" ColumnDefinitions="200,1*,25,200,25" VerticalAlignment="Stretch">
                     <TextBox x:Name="ContentPathTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" />
 
