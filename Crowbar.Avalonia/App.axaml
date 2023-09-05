@@ -103,6 +103,7 @@
             <Setter Property="Padding" Value="2" />
         </Style>
         <Style Selector="Button,ProgressBar">
+            <Setter Property="MinWidth" Value="0" />
             <Setter Property="MinHeight" Value="0" />
             <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
             <Setter Property="Padding" Value="2" />

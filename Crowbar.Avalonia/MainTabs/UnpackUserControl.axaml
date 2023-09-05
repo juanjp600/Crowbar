@@ -59,6 +59,7 @@
                         <Grid.Styles>
                             <Style Selector="Separator">
                                 <Setter Property="Width" Value="1" />
+                                <Setter Property="Margin" Value="0" />
                                 <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
                             </Style>
                             <Style Selector="TextBlock">
@@ -66,11 +67,11 @@
                                 <Setter Property="HorizontalAlignment" Value="Center" />
                             </Style>
                         </Grid.Styles>
-                        <Separator Grid.Column="0" Margin="0" />
+                        <Separator Grid.Column="0" />
                         <TextBlock Grid.Column="1" x:Name="ItemCountTextBlock">000 / 000</TextBlock>
-                        <Separator Grid.Column="2" Margin="0" />
+                        <Separator Grid.Column="2" />
                         <TextBlock Grid.Column="3" x:Name="SizeInBytesTextBlock">000</TextBlock>
-                        <Separator Grid.Column="4" Margin="0" />
+                        <Separator Grid.Column="4" />
                     </Grid>
                     <Button Grid.Row="2" Grid.Column="4" x:Name="RefreshButton"> w <!-- TODO: replace with dual arrow icon --></Button>
                 </Grid>

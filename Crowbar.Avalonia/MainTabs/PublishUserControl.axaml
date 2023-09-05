@@ -4,5 +4,115 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.PublishUserControl">
-    PublishUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,3*,Auto,12*,2*" ColumnDefinitions="*">
+        <Grid Grid.Row="0" RowDefinitions="Auto" ColumnDefinitions="45,1*,Auto,140,200">
+            <TextBlock Grid.Column="0">Game:</TextBlock>
+            <ComboBox x:Name="GameComboBox" Grid.Column="1">
+                <ComboBoxItem>GAMES</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="RefreshListButton" Grid.Column="2"> w </Button>
+            <TextBox Grid.Column="3" IsEnabled="False" HorizontalContentAlignment="Center">Publish requires Steam</TextBox>
+            <Button Grid.Column="4" x:Name="OpenSteamSubscriberAgreementButton">Open Steam Subscriber Agreement</Button>
+        </Grid>
+
+        <DataGrid Grid.Row="1" CanUserResizeColumns="True" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="*" />
+                <DataGridTextColumn Header="Item ID" />
+                <DataGridTextColumn Header="Title" />
+                <DataGridTextColumn Header="Posted" />
+                <DataGridTextColumn Header="Updated" />
+                <DataGridTextColumn Header="Visibility" />
+                <DataGridTextColumn Header="Owner" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowDefinitions="Auto">
+            <Grid.Styles>
+                <Style Selector="Separator">
+                    <Setter Property="Width" Value="1" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Height" Value="{DynamicResource TabDefaultHeight}" />
+                </Style>
+                <Style Selector="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </Grid.Styles>
+            <Button x:Name="AddItemButton" Grid.Column="0">Add Item</Button>
+            <Separator Grid.Column="1" />
+            <ComboBox x:Name="FieldComboBox" Grid.Column="2" SelectedIndex="4">
+                <ComboBoxItem>ID</ComboBoxItem>
+                <ComboBoxItem>Owner</ComboBoxItem>
+                <ComboBoxItem>Title</ComboBoxItem>
+                <ComboBoxItem>Description</ComboBoxItem>
+                <ComboBoxItem>[All fields]</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="FilterTextBox" Grid.Column="3" Width="150" />
+            <Button x:Name="SearchButton" Grid.Column="4"> q </Button>
+            <Separator Grid.Column="5" />
+            <TextBlock Grid.Column="6">0 draft + 0 template + 0 changed + 0 published = 0 total</TextBlock>
+        </Grid>
+
+        <HeaderedContentControl Grid.Row="3" Theme="{DynamicResource GroupBox}" Header="Item">
+            <Grid RowDefinitions="*" ColumnDefinitions="1*,160">
+                <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,1*,Auto" ColumnDefinitions="*">
+                    <Grid Grid.Row="0" RowDefinitions="Auto" ColumnDefinitions="Auto,120,Auto,120,120,120">
+                        <TextBlock Grid.Column="0">ID:</TextBlock>
+                        <TextBox x:Name="IdTextBox" Grid.Column="1" IsReadOnly="True" />
+                        <TextBlock Grid.Column="2">Owner:</TextBlock>
+                        <TextBox x:Name="OwnerTextBox" Grid.Column="3" IsReadOnly="True" />
+                        <TextBox x:Name="PostedDateTimeTextBox" Grid.Column="4" IsReadOnly="True" />
+                        <TextBox x:Name="UpdatedDateTimeTextBox" Grid.Column="5" IsReadOnly="True" />
+                    </Grid>
+                    <TextBlock Grid.Row="1">Title (0 / 129 characters max):</TextBlock>
+                    <TextBox x:Name="TitleTextBox" Grid.Row="2" />
+                    <Grid Grid.Row="3" RowDefinitions="Auto,1*" ColumnDefinitions="1*,1*">
+                        <TextBlock Grid.Column="0" Grid.Row="0">Description (0 / 8000 characters max):</TextBlock>
+                        <TextBox x:Name="DescriptionTextBox" Grid.Column="0" Grid.Row="1"
+                                 TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch" Height="NaN" />
+                        <TextBlock Grid.Column="1" Grid.Row="0">Change Note (0 / 8000 characters max):</TextBlock>
+                        <TextBox x:Name="ChangeNoteTextBox" Grid.Column="1" Grid.Row="1"
+                                 TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch" Height="NaN" />
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="1*,80,80">
+                        <TextBlock Grid.Row="0" Grid.Column="0">Content Folder or File:</TextBlock>
+                        <TextBox x:Name="ContentPathTextBox" Grid.Row="1" Grid.Column="0" />
+                        <Button x:Name="ContentPathBrowseButton" Grid.Row="1" Grid.Column="1">Browse...</Button>
+                        
+                        <TextBlock Grid.Row="2" Grid.Column="0">Preview Image:</TextBlock>
+                        <TextBox x:Name="PreviewImageTextBox" Grid.Row="3" Grid.Column="0" />
+                        <Button x:Name="PreviewImageBrowseButton" Grid.Row="3" Grid.Column="1">Browse...</Button>
+                        
+                        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" RowDefinitions="Auto" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto">
+                            <TextBlock Grid.Column="0">Visibility:</TextBlock>
+                            <ComboBox x:Name="VisibilityComboBox" Grid.Column="1" SelectedIndex="0">
+                                <ComboBoxItem>Public</ComboBoxItem>
+                                <ComboBoxItem>Friends-Only</ComboBoxItem>
+                                <ComboBoxItem>Hidden</ComboBoxItem>
+                                <ComboBoxItem>Unlisted</ComboBoxItem>
+                            </ComboBox>
+                            <Button x:Name="SaveAsTemplateButton" Grid.Column="2">Save as template</Button>
+                            <Button x:Name="RefreshItemButton" Grid.Column="3">Refresh</Button>
+                            <Button x:Name="OpenWorkshopPageButton" Grid.Column="4">Open Workshop Page</Button>
+                        </Grid>
+                        <Button Grid.Row="4" Grid.Column="2" x:Name="DeleteButton">Delete</Button>
+                    </Grid>
+                </Grid>
+
+                <HeaderedContentControl Grid.Column="1" Theme="{DynamicResource GroupBox}" Header="Tags"></HeaderedContentControl>
+            </Grid>
+        </HeaderedContentControl>
+        
+        <Grid Grid.Row="4" ColumnDefinitions="120,1*" RowDefinitions="Auto,Auto,1*">
+            <Button x:Name="PublishButton" Grid.Row="0" Grid.Column="0">Publish</Button>
+            <ProgressBar x:Name="PublishProgressBar" Grid.Row="1" Grid.Column="0" MinWidth="0" />
+
+            <TextBox x:Name="ProgressLogTextBox" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" IsReadOnly="True"
+                     TextWrapping="Wrap" VerticalAlignment="Stretch" Height="NaN" />
+        </Grid>
+    </Grid>
 </UserControl>
