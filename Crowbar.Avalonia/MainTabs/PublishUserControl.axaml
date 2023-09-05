@@ -78,7 +78,7 @@
                         <TextBox x:Name="ChangeNoteTextBox" Grid.Column="1" Grid.Row="1"
                                  TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Stretch" Height="NaN" />
                     </Grid>
-                    <Grid Grid.Row="4" Grid.RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="1*,80,80">
+                    <Grid Grid.Row="4" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="1*,80,80">
                         <TextBlock Grid.Row="0" Grid.Column="0">Content Folder or File:</TextBlock>
                         <TextBox x:Name="ContentPathTextBox" Grid.Row="1" Grid.Column="0" />
                         <Button x:Name="ContentPathBrowseButton" Grid.Row="1" Grid.Column="1">Browse...</Button>
