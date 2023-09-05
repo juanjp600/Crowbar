@@ -58,7 +58,7 @@
         </Grid>
 
         <HeaderedContentControl Grid.Row="3" Theme="{DynamicResource GroupBox}" Header="Item">
-            <Grid RowDefinitions="*" ColumnDefinitions="1*,160">
+            <Grid RowDefinitions="*" ColumnDefinitions="4*,1*">
                 <Grid Grid.Column="0" RowDefinitions="Auto,Auto,Auto,1*,Auto" ColumnDefinitions="*">
                     <Grid Grid.Row="0" RowDefinitions="Auto" ColumnDefinitions="Auto,120,Auto,120,120,120">
                         <TextBlock Grid.Column="0">ID:</TextBlock>
