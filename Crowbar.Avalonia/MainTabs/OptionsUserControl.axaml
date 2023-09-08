@@ -4,5 +4,113 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.OptionsUserControl">
-    OptionsUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+        <Style Selector="
+                HeaderedContentControl > StackPanel > TextBlock,
+                HeaderedContentControl > StackPanel > CheckBox,
+                HeaderedContentControl > StackPanel > StackPanel,
+                HeaderedContentControl > StackPanel > Grid">
+            <Setter Property="Margin" Value="0 5 0 0" />
+        </Style>
+    </UserControl.Styles>
+    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="200,200,200">
+        <CheckBox x:Name="RestrictToSingleInstanceCheckBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">Restrict to single instance (only one Crowbar open at a time)</CheckBox>
+        <HeaderedContentControl Grid.Row="1" Grid.Column="0" Theme="{DynamicResource GroupBox}" Header="File Explorer Auto-Open">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap">Change the default program to Crowbar for the following file extensions and which tab to set up. This includes when files are dragged onto the "Crowbar.exe" file.</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="VpkFileAutoOpenCheckBox" VerticalAlignment="Top">VPK file:</CheckBox>
+                    <StackPanel>
+                        <RadioButton GroupName="VpkFileAutoOpenRadioButtonGroup">Unpack</RadioButton>
+                        <RadioButton GroupName="VpkFileAutoOpenRadioButtonGroup">Publish</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="GmaFileAutoOpenCheckBox" VerticalAlignment="Top">GMA file:</CheckBox>
+                    <StackPanel>
+                        <RadioButton GroupName="GmaFileAutoOpenRadioButtonGroup">Unpack</RadioButton>
+                        <RadioButton GroupName="GmaFileAutoOpenRadioButtonGroup">Publish</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="FpxFileAutoOpenCheckBox" VerticalAlignment="Top">FPX file:</CheckBox>
+                    <TextBlock VerticalAlignment="Center">Unpack</TextBlock>
+                </StackPanel>
+                <CheckBox x:Name="MdlFileAutoOpenCheckBox" VerticalAlignment="Top">MDL file:</CheckBox>
+                <Grid Classes="Indented" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto">
+                    <TextBlock Grid.Row="0" Grid.Column="0">Set Up:</TextBlock>
+                    <CheckBox x:Name="MdlFileAutoOpenPreviewCheckBox" Grid.Row="1" Grid.Column="0">Preview</CheckBox>
+                    <CheckBox x:Name="MdlFileAutoOpenDecompileCheckBox" Grid.Row="2" Grid.Column="0">Decompile</CheckBox>
+                    <CheckBox x:Name="MdlFileAutoOpenViewCheckBox" Grid.Row="3" Grid.Column="0">View</CheckBox>
+
+                    <TextBlock Grid.Row="0" Grid.Column="1">Open:</TextBlock>
+                    <RadioButton GroupName="MdlFileAutoOpenRadioButtonGroup" Grid.Row="1" Grid.Column="1" />
+                    <RadioButton GroupName="MdlFileAutoOpenRadioButtonGroup" Grid.Row="2" Grid.Column="1" />
+                    <RadioButton GroupName="MdlFileAutoOpenRadioButtonGroup" Grid.Row="3" Grid.Column="1" />
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="QcFileAutoOpenCheckBox" VerticalAlignment="Top">QC file:</CheckBox>
+                    <TextBlock VerticalAlignment="Center">Compile</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Top">Folder:</TextBlock>
+                    <StackPanel>
+                        <RadioButton GroupName="FolderAutoOpenRadioButtonGroup">Unpack</RadioButton>
+                        <RadioButton GroupName="FolderAutoOpenRadioButtonGroup">Decompile</RadioButton>
+                        <RadioButton GroupName="FolderAutoOpenRadioButtonGroup">Compile</RadioButton>
+                        <RadioButton GroupName="FolderAutoOpenRadioButtonGroup">Pack</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <Rectangle Width="0" Height="16" Fill="Transparent" />
+                <Button x:Name="UseDefaultAutoOpenButton" HorizontalAlignment="Center">Use Defaults</Button>
+            </StackPanel>
+        </HeaderedContentControl>
+        <HeaderedContentControl Grid.Row="1" Grid.Column="1" Theme="{DynamicResource GroupBox}" Header="File Explorer Drag-and-Drop">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap">Choose which tabs Crowbar sets up and which tab opens when a file or folder is dropped on Crowbar. Dropping on any tab left unset below will only set up that tab.</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="VpkFileDragAndDropCheckBox" VerticalAlignment="Top">VPK file:</CheckBox>
+                    <StackPanel>
+                        <RadioButton GroupName="VpkFileDragAndDropRadioButtonGroup">Unpack</RadioButton>
+                        <RadioButton GroupName="VpkFileDragAndDropRadioButtonGroup">Publish</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox x:Name="GmaFileDragAndDropCheckBox" VerticalAlignment="Top">GMA file:</CheckBox>
+                    <StackPanel>
+                        <RadioButton GroupName="GmaFileDragAndDropRadioButtonGroup">Unpack</RadioButton>
+                        <RadioButton GroupName="GmaFileDragAndDropRadioButtonGroup">Publish</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <CheckBox x:Name="MdlFileDragAndDropCheckBox" VerticalAlignment="Top">MDL file:</CheckBox>
+                <Grid Classes="Indented" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto">
+                    <TextBlock Grid.Row="0" Grid.Column="0">Set Up:</TextBlock>
+                    <CheckBox x:Name="MdlFileDragAndDropPreviewCheckBox" Grid.Row="1" Grid.Column="0">Preview</CheckBox>
+                    <CheckBox x:Name="MdlFileDragAndDropDecompileCheckBox" Grid.Row="2" Grid.Column="0">Decompile</CheckBox>
+                    <CheckBox x:Name="MdlFileDragAndDropViewCheckBox" Grid.Row="3" Grid.Column="0">View</CheckBox>
+
+                    <TextBlock Grid.Row="0" Grid.Column="1">Open:</TextBlock>
+                    <RadioButton GroupName="MdlFileDragAndDropRadioButtonGroup" Grid.Row="1" Grid.Column="1" />
+                    <RadioButton GroupName="MdlFileDragAndDropRadioButtonGroup" Grid.Row="2" Grid.Column="1" />
+                    <RadioButton GroupName="MdlFileDragAndDropRadioButtonGroup" Grid.Row="3" Grid.Column="1" />
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Top">Folder:</TextBlock>
+                    <StackPanel>
+                        <RadioButton GroupName="FolderDragAndDropRadioButtonGroup">Unpack</RadioButton>
+                        <RadioButton GroupName="FolderDragAndDropRadioButtonGroup">Decompile</RadioButton>
+                        <RadioButton GroupName="FolderDragAndDropRadioButtonGroup">Compile</RadioButton>
+                        <RadioButton GroupName="FolderDragAndDropRadioButtonGroup">Pack</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <Rectangle Width="0" Height="16" Fill="Transparent" />
+                <Button x:Name="UseDefaultDragAndDropButton" HorizontalAlignment="Center">Use Defaults</Button>
+            </StackPanel>
+        </HeaderedContentControl>
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center">The File Explorer is not using what is specified above. Click the Apply button to apply the options above: </TextBlock>
+            <Button x:Name="ApplyButton">Apply</Button>
+        </StackPanel>
+    </Grid>
 </UserControl>
