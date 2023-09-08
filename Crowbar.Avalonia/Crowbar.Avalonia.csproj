@@ -7,7 +7,11 @@
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
-
+    <ItemGroup>
+		<None Include="Resources\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.0.4" />
@@ -19,14 +23,8 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.4" />
     </ItemGroup>
 
-
     <ItemGroup>
-      <ProjectReference Include="..\CrowbarSteamPipe\CrowbarSteamPipe.vbproj" />
-      <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-      <UpToDateCheckInput Remove="Themes\Semi.Avalonia.GroupBox.axaml" />
+        <ProjectReference Include="..\CrowbarSteamPipe\CrowbarSteamPipe.vbproj" />
+        <ProjectReference Include="..\Libraries\Crowbar.Core\Crowbar.Core.vbproj" />
     </ItemGroup>
 </Project>
