@@ -29,45 +29,45 @@
         </Style>
     </Window.Styles>
 
-    <TabControl Classes="MainTabControl" SelectedIndex="2">
+    <TabControl x:Name="MainTabControl" Classes="MainTabControl" SelectedIndex="2">
         <TabItem Header="Set Up Games">
-            <maintabs:SetUpGamesUserControl />
+            <maintabs:SetUpGamesUserControl x:Name="SetUpGamesTab" />
         </TabItem>
         <TabItem Header="Download">
-            <maintabs:DownloadUserControl />
+            <maintabs:DownloadUserControl x:Name="DownloadTab" />
         </TabItem>
         <TabItem Header="Unpack">
-            <maintabs:UnpackUserControl />
+            <maintabs:UnpackUserControl x:Name="UnpackTab" />
         </TabItem>
         <TabItem Header="Preview">
-            <maintabs:ViewUserControl />
+            <maintabs:ViewUserControl x:Name="PreviewTab" />
         </TabItem>
         <TabItem Header="Decompile">
-            <maintabs:DecompileUserControl />
+            <maintabs:DecompileUserControl x:Name="DecompileTab" />
         </TabItem>
         <TabItem Header="Compile">
-            <maintabs:CompileUserControl />
+            <maintabs:CompileUserControl x:Name="CompileTab" />
         </TabItem>
         <TabItem Header="View">
-            <maintabs:ViewUserControl />
+            <maintabs:ViewUserControl x:Name="ViewTab" />
         </TabItem>
         <TabItem Header="Pack">
-            <maintabs:PackUserControl />
+            <maintabs:PackUserControl x:Name="PackTab" />
         </TabItem>
         <TabItem Header="Publish">
-            <maintabs:PublishUserControl />
+            <maintabs:PublishUserControl x:Name="PublishTab" />
         </TabItem>
         <TabItem Header="Options">
-            <maintabs:OptionsUserControl />
+            <maintabs:OptionsUserControl x:Name="OptionsTab" />
         </TabItem>
         <TabItem Header="Help">
-            <maintabs:HelpUserControl />
+            <maintabs:HelpUserControl x:Name="HelpTab" />
         </TabItem>
         <TabItem Header="About">
-            <maintabs:AboutUserControl />
+            <maintabs:AboutUserControl x:Name="AboutTab" />
         </TabItem>
         <TabItem Header="Update">
-            <maintabs:UpdateUserControl />
+            <maintabs:UpdateUserControl x:Name="UpdateTab" />
         </TabItem>
     </TabControl>
 </Window>

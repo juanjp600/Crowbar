@@ -11,7 +11,7 @@
             </x:Arguments>
         </Bitmap>
     </UserControl.Resources>
-    <Button x:Name="LearnToUseCrowbarButton" Width="NaN" Height="NaN" VerticalAlignment="Top">
+    <Button x:Name="LearnToUseCrowbarButton" Width="NaN" Height="NaN" VerticalAlignment="Top" Click="LearnToUseCrowbarButtonClicked">
         <Image Source="{DynamicResource LearnToUseCrowbar}" Width="524" Height="141" />
     </Button>
 </UserControl>
