@@ -4,5 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Crowbar.Avalonia.MainTabs.UpdateUserControl">
-    UpdateUserControl
+    <UserControl.Styles>
+        <StyleInclude Source="/MainTabs/MainTabStyles.axaml" />
+    </UserControl.Styles>
+    <Grid RowDefinitions="1*,Auto,Auto" ColumnDefinitions="*">
+        <Border Grid.Row="0" Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Transparent"
+                BorderBrush="{DynamicResource DefaultBorderColor}"
+                CornerRadius="{DynamicResource DefaultCornerRadius}"
+                BorderThickness="1">
+            <Grid RowDefinitions="Auto,Auto,1*" HorizontalAlignment="Stretch">
+                <Grid Grid.Row="0" RowDefinitions="Auto" ColumnDefinitions="Auto,1*,Auto">
+                    <TextBlock Grid.Column="0">Check for update - get latest version and changelog</TextBlock>
+                    <TextBlock Grid.Column="2">Current version: x.xx</TextBlock>
+                </Grid>
+                <Rectangle
+                    Grid.Row="1"
+                    Fill="{DynamicResource DefaultBorderColor}"
+                    Height="1" />
+                <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      RowDefinitions="Auto,1*" ColumnDefinitions="70,1*,70">
+                    <Button x:Name="CheckButton" Grid.Row="0" Grid.Column="0">Check</Button>
+                    <TextBox x:Name="StatusTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True">Crowbar is up to date. Last checked: ???</TextBox>
+                    <Button x:Name="CancelCheckButton" Grid.Row="0" Grid.Column="2">Cancel</Button>
+
+                    <TextBox x:Name="UpdateInfoTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                             IsReadOnly="True" Height="NaN" VerticalAlignment="Stretch"></TextBox>
+                </Grid>
+            </Grid>
+        </Border>
+        
+        <HeaderedContentControl Grid.Row="1" Theme="{DynamicResource GroupBox}" Header="Download - Download the new version (compressed file) for manually updating">
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="100,1*,70,70">
+                <TextBlock Grid.Row="0" Grid.Column="0">Download folder:</TextBlock>
+                <TextBox x:Name="DownloadFolderTextBox" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" />
+                <Button x:Name="BrowseDownloadFolderButton" Grid.Row="0" Grid.Column="3">Browse...</Button>
+                
+                <Button x:Name="DownloadButton" Grid.Row="1" Grid.Column="0">Download</Button>
+                <ProgressBar x:Name="DownloadProgressBar" Grid.Row="1" Grid.Column="1" />
+                <Button x:Name="CancelDownloadButton" Grid.Row="1" Grid.Column="2">Cancel</Button>
+                <Button x:Name="GotoDownloadFolderButton" Grid.Row="1" Grid.Column="3">Goto</Button>
+            </Grid>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl Grid.Row="2" Theme="{DynamicResource GroupBox}" Header="Update - Update current version to latest version - Crowbar will close and reopen">
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="100,150,1*,70">
+                <CheckBox x:Name="UpdateToNewFolderCheckBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Update to new folder (keep current version):</CheckBox>
+                <TextBox x:Name="UpdateFolderTextBox" Grid.Row="0" Grid.Column="2" />
+                <Button x:Name="UpdateDownloadFolderButton" Grid.Row="0" Grid.Column="3">Browse...</Button>
+
+                <CheckBox x:Name="CopySettingsCheckBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">Copy settings from current version to new version</CheckBox>
+
+                <Button x:Name="UpdateButton" Grid.Row="2" Grid.Column="0">Update</Button>
+                <ProgressBar x:Name="UpdateProgressBar" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
+                <Button x:Name="CancelUpdateButton" Grid.Row="2" Grid.Column="3">Cancel</Button>
+            </Grid>
+        </HeaderedContentControl>
+    </Grid>
 </UserControl>
